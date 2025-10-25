@@ -267,3 +267,58 @@ footer .social-icon a {
 footer .social-icon a:hover {
     background-color: #2563eb;
 }
+/* =================================== */
+/* Blog Page Styles                    */
+/* =================================== */
+
+.blog-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* =================================== */
+/* Full Post Page Styles               */
+/* =================================== */
+.post-content h1, .post-content h2, .post-content h3 {
+    font-weight: 700;
+    color: #1e293b; /* dark color */
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.post-content h1 { font-size: 2.25rem; }
+.post-content h2 { font-size: 1.875rem; }
+.post-content h3 { font-size: 1.5rem; }
+
+.post-content p {
+    margin-bottom: 1.25em;
+    line-height: 1.7;
+    color: #4b5563; /* gray-600 */
+}
+
+.post-content a {
+    color: #2563eb; /* primary color */
+    text-decoration: underline;
+}
+
+.post-content ul, .post-content ol {
+    margin-left: 1.5em;
+    margin-bottom: 1.25em;
+    color: #4b5563;
+}
+
+.post-content li {
+    margin-bottom: 0.5em;
+}
+
+.post-content blockquote {
+    border-left: 4px solid #2563eb;
+    padding-left: 1em;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #6b7280; /* gray-500 */
+}
