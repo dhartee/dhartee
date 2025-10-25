@@ -4,11 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="post-title-head">Blog Post | DharTee Services</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { theme: { extend: { colors: { primary: '#2563eb', secondary: '#0ea5e9', accent: '#f97316', dark: '#1e293b', light: '#f8fafc' } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
     </script>
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-light">
@@ -22,13 +39,13 @@
                 <a href="/"><span class="ml-2 text-xl font-bold text-dark">DharTee</span></a>
             </div>
             <nav class="hidden md:flex space-x-8">
-                <a class="text-dark hover:text-primary font-medium" href="#home">Home</a>
-                <a class="text-dark hover:text-primary font-medium" href="#services">Services</a>
-                <a class="text-dark hover:text-primary font-medium" href="#about">About</a>
-                <a class="text-dark hover:text-primary font-medium" href="#process">Process</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#home">Home</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#services">Services</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#about">About</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#process">Process</a>
                 <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-                <a class="text-dark hover:text-primary font-medium" href="#testimonials">Testimonials</a>
-                <a class="text-dark hover:text-primary font-medium" href="#contact">Contact</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
             </nav>
             <div class="flex items-center space-x-4">
                 <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
@@ -44,33 +61,117 @@
         </div>
         <div class="hidden md:hidden bg-white py-4 px-4 shadow-lg" id="mobile-menu">
             <div class="flex flex-col space-y-3">
-                <a class="text-dark hover:text-primary font-medium" href="#home">Home</a>
-                <a class="text-dark hover:text-primary font-medium" href="#services">Services</a>
-                <a class="text-dark hover:text-primary font-medium" href="#about">About</a>
-                <a class="text-dark hover:text-primary font-medium" href="#process">Process</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#home">Home</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#services">Services</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#about">About</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#process">Process</a>
                 <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-                <a class="text-dark hover:text-primary font-medium" href="#testimonials">Testimonials</a>
-                <a class="text-dark hover:text-primary font-medium" href="#contact">Contact</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
                 <a class="flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
                     <i class="mr-2" data-feather="phone"></i> Call Now
                 </a>
             </div>
         </div>
     </header>
-  
 
     <main class="pt-24 pb-16 md:pt-32 md:pb-24">
         <div class="container mx-auto px-4">
             <article id="full-post-content" class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg">
                 <div class="text-center p-12">
-                    <p>Loading article...</p>
+                    <p class="text-lg text-gray-600">Loading article...</p>
                 </div>
             </article>
         </div>
     </main>
     
     <footer class="bg-dark text-white pt-16 pb-8">
-       </footer>
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
+                        <span class="ml-2 text-xl font-bold">DharTee</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Professional services for your business growth, including taxation, legal support, web design, and software solutions.</p>
+                    <div class="flex space-x-4 social-icon">
+                        <a href="#"><i data-feather="facebook"></i></a>
+                        <a href="#"><i data-feather="twitter"></i></a>
+                        <a href="#"><i data-feather="instagram"></i></a>
+                        <a href="#"><i data-feather="linkedin"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-400 hover:text-white" href="index.html#home">Home</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="index.html#services">Services</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="index.html#about">About Us</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="index.html#process">Our Process</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="index.html#contact">Contact</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Sitemap</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-400 hover:text-white" href="#">Taxation and GST Support</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Legal Advocate Support</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Web Designing</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Technical Expert for Coaching</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">A TO Z Software Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                    <form class="flex">
+                        <input class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark" placeholder="Your Email" type="email" />
+                        <button class="bg-primary px-4 rounded-r-lg hover:bg-blue-700 transition" type="submit">
+                            <i data-feather="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DharTee. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 right-6 z-[999]">
+        <div class="bg-white rounded-2xl shadow-xl w-80 hidden" id="chat-window">
+            <div class="bg-primary text-white p-4 rounded-t-2xl flex justify-between items-center">
+                <h3 class="font-bold">Chat Assistant</h3>
+                <button class="text-white" id="close-chat">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="p-4 h-64 overflow-y-auto">
+                <div class="mb-4">
+                    <div class="bg-gray-100 rounded-2xl p-3 inline-block">
+                        Hello! I'm your virtual assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="mb-4 text-right">
+                    <div class="bg-primary text-white rounded-2xl p-3 inline-block">
+                        I'd like to know about your services
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex">
+                    <input class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none" placeholder="Type your message..." type="text" />
+                    <button class="bg-primary text-white px-4 rounded-r-lg hover:bg-blue-700 transition">
+                        <i data-feather="send"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-blue-700 transition" id="chat-toggle">
+            <i data-feather="message-circle"></i>
+        </button>
+    </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
@@ -79,8 +180,10 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
     </script>
-    
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="script.js"></script>
     <script src="post.js"></script>
 </body>
-
 </html>
