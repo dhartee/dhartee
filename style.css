@@ -322,3 +322,64 @@ footer .social-icon a:hover {
     font-style: italic;
     color: #6b7280; /* gray-500 */
 }
+/* =================================== */
+/* Admin Panel Styles                  */
+/* =================================== */
+
+/* Basic styles for form elements */
+.admin-input, .admin-textarea {
+    display: block;
+    width: 100%;
+    border-radius: 0.375rem; /* rounded-md */
+    border: 1px solid #D1D5DB; /* border-gray-300 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-input:focus, .admin-textarea:focus {
+    border-color: #2563eb; /* primary */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none;
+}
+
+.admin-label {
+    display: block;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: #374151; /* text-gray-700 */
+}
+
+/* Style for the post list in admin */
+#posts-list .post-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem; /* p-3 sm:p-4 */
+    background-color: #F9FAFB; /* bg-gray-50 */
+    border-radius: 0.5rem; /* rounded-lg */
+    border: 1px solid #E5E7EB; /* border-gray-200 */
+}
+
+@media (min-width: 640px) {
+    #posts-list .post-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+#posts-list .post-item-info {
+    margin-bottom: 0.75rem; /* mb-3 sm:mb-0 */
+}
+
+@media (min-width: 640px) {
+    #posts-list .post-item-info {
+        margin-bottom: 0;
+    }
+}
+
+#posts-list .post-item-actions {
+    display: flex;
+    gap: 0.5rem; /* space-x-2 */
+    flex-shrink: 0;
+}
+
