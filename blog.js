@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <span>By Dharmendra Sharma</span><br/>
                             <span>${new Date(post.date).toLocaleDateString()}</span>
                         </div>
-                        <a href="post.html?id=${doc.id}" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                        <a href="/blog/${post.slug}" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -36,4 +36,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Re-initialize AOS after posts are loaded
     AOS.init({ duration: 1000, once: true });
+
 });
