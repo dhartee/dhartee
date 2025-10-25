@@ -8,10 +8,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryInput = document.getElementById('post-category');
     const imageInput = document.getElementById('post-image');
     const contentInput = document.getElementById('post-content');
-    const fullContentInput = document.getElementById('post-full-content');
     const postsList = document.getElementById('posts-list');
     const submitButton = document.getElementById('submit-button');
     const cancelEditButton = document.getElementById('cancel-edit');
+
+    // Initialize Quill editor
+    const quill = new Quill('#editor-container', {
+        theme: 'snow',
+        placeholder: 'Write your full article content here...',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                ['blockquote', 'code-block'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                [{ 'script': 'sub'}, { 'script': 'super' }],
+                [{ 'indent': '-1'}, { 'indent': '+1' }],
+                [{ 'direction': 'rtl' }],
+                [{ 'color': [] }, { 'background': [] }],
+                [{ 'align': [] }],
+                ['link', 'image', 'video'], // 'video' if you want video embed
+                ['clean']
+            ]
+        }
+    });
 
     // RENDER posts from Firebase
     const renderPosts = async () => {
@@ -24,17 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
         snapshot.forEach(doc => {
             const post = doc.data();
             const postElement = document.createElement('div');
-            postElement.className = 'post-item';
+            postElement.className = 'post-item'; // Use the class from style.css
             postElement.innerHTML = `
-    <div class="post-item-info">
-        <p class="font-semibold text-gray-800">${post.title}</p>
-        <p class="text-sm text-gray-500">${post.category} - ${new Date(post.date).toLocaleDateString()}</p>
-    </div>
-    <div class="post-item-actions">
-        <button class="edit-btn px-3 py-1.5 text-xs font-medium bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors" data-id="${doc.id}">Edit</Fbutton>
-        <button class="delete-btn px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors" data-id="${doc.id}">Delete</button>
-    </div>
-`;
+                <div class="post-item-info">
+                    <p class="font-semibold text-gray-800">${post.title}</p>
+                    <p class="text-sm text-gray-500">${post.category} - ${new Date(post.date).toLocaleDateString()}</p>
+                </div>
+                <div class="post-item-actions">
+                    <button class="edit-btn px-3 py-1.5 text-xs font-medium bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors" data-id="${doc.id}">Edit</button>
+                    <button class="delete-btn px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors" data-id="${doc.id}">Delete</button>
+                </div>
+            `;
             postsList.appendChild(postElement);
         });
     };
@@ -48,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
             category: categoryInput.value,
             image: imageInput.value,
             content: contentInput.value,
-            fullContent: fullContentInput.value,
+            // Get HTML content from Quill editor
+            fullContent: quill.root.innerHTML, 
             date: new Date().toISOString()
         };
 
@@ -74,7 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
             categoryInput.value = postToEdit.category;
             imageInput.value = postToEdit.image;
             contentInput.value = postToEdit.content;
-            fullContentInput.value = postToEdit.fullContent;
+            
+            // Set HTML content to Quill editor
+            quill.root.innerHTML = postToEdit.fullContent || ''; 
+
             cancelEditButton.classList.remove('hidden');
             window.scrollTo(0, 0);
         }
@@ -87,16 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Reset form to default state
     const resetForm = () => {
         form.reset();
         postIdInput.value = '';
         formTitle.textContent = 'Publish New Post';
         submitButton.textContent = 'Publish Post';
         cancelEditButton.classList.add('hidden');
-    };
+        quill.root.innerHTML = ''; // Clear Quill editor content
+    }
     
     cancelEditButton.addEventListener('click', resetForm);
 
     renderPosts();
-
 });
