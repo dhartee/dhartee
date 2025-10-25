@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>DharTee Services | Taxation, Legal and Web Solutions in Jaipur</title>
     <meta name="google-site-verification" content="gJtZKPb7d_tazfx_2bna22SLowglxkdy8oxw9BVLTiY" />
     <meta name="description" content="Dhartee.in offers A-Z business solutions. from GST support and legal advocacy to web design and software services, we are for your growth." />
     <meta name="keyword" content="GST services Gandhidham and Jodhpur and Jaipur , Legal Advocate Rajasthan and Gujarat, Web Design Gujarat and Rajasthan, Software Solutions India, Business Consulting Gujarat, Tax Support, Technical Expert Coaching, Income Tax Filing, Legal Advice for Business, Affordable Web Development, Custom Software, Dhartee.in" />
-    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivYqW-NgitfrySlZ-6KRI_zv0HrEUV0k2p9W-FUAjYFOnVJVlnvrjTlH6lStMlKFZc0Cegq8PHy5iPQGRlhWlaeAa90wzq-K80BkJoqu9oVi698mOYOF42M57juqRRuy6ukh4jYQZ9ckMANa_U1NZNhPRlQtpXrGSpeNLLxDCHoKlFFtgtT1z1OnfUPq25/s1600/apple-touch-icon-dhartee.png" rel="icon" type="image/x-icon" />
     <link href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivYqW-NgitfrySlZ-6KRI_zv0HrEUV0k2p9W-FUAjYFOnVJVlnvrjTlH6lStMlKFZc0Cegq8PHy5iPQGRlhWlaeAa90wzq-K80BkJoqu9oVi698mOYOF42M57juqRRuy6ukh4jYQZ9ckMANa_U1NZNhPRlQtpXrGSpeNLLxDCHoKlFFtgtT1z1OnfUPq25/s1600/apple-touch-icon-dhartee.png" rel="apple-touch-icon" />
 
@@ -515,7 +514,15 @@
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
     <script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
 
+<script src="firebase-config.js"></script>
+
+<script>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+</script>
 </body>
-
 </html>
