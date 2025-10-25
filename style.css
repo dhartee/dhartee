@@ -1,0 +1,269 @@
+/* =================================== */
+/* General Body and Font Styles        */
+/* =================================== */
+html, body {
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+.hero-bg {
+    background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =================================== */
+/* Service Section (Flip Cards)        */
+/* =================================== */
+.services-section {
+    padding: 80px 15px;
+    background-color: #f8fafc; /* light */
+    overflow-x: hidden;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+@media (min-width: 768px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Base Card Style (for mobile & animation) */
+.service-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out, box-shadow 0.3s ease;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-icon {
+    font-size: 48px;
+    color: #2563eb; /* primary */
+    margin-bottom: 20px;
+}
+
+.service-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1e293b; /* dark */
+}
+
+/* Desktop Only: 3D Flip Animation */
+@media (hover: hover) and (min-width: 992px) {
+    .service-card {
+        background-color: transparent;
+        padding: 0;
+        height: 300px;
+        perspective: 1000px;
+    }
+
+    .service-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.8s ease-in-out;
+    }
+
+    .service-card:hover .service-card-inner {
+        transform: rotateY(180deg);
+    }
+    
+    .service-card-front,
+    .service-card-back {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .service-card-front {
+        background-color: #ffffff;
+        color: #1e293b;
+    }
+
+    .service-card-back {
+        background-color: #2563eb;
+        color: white;
+        transform: rotateY(180deg);
+    }
+    
+    .service-card-back .service-title {
+        color: white;
+    }
+
+    .service-description {
+        font-size: 16px;
+        color: #e0e7ff;
+        line-height: 1.6;
+        margin-top: 15px;
+    }
+
+    .service-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background-color: #ffffff;
+        color: #2563eb;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .service-button:hover {
+        background-color: #f1f5f9;
+    }
+}
+
+/* =================================== */
+/* Process Section                     */
+/* =================================== */
+.process-step {
+    text-align: center;
+    position: relative;
+}
+
+.process-step .step-circle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    background-color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-step:hover .step-circle {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+.process-step .step-circle span {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* The connecting line for desktop view */
+@media (min-width: 768px) {
+    .process-step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 2.5rem;
+        left: calc(50% + 2.5rem);
+        width: calc(100% - 5rem);
+        height: 2px;
+        background-color: #e5e7eb; /* gray-200 */
+        z-index: 1;
+    }
+}
+
+/* =================================== */
+/* Testimonials Section                */
+/* =================================== */
+.testimonial-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Style for filled star icons */
+.feather-star {
+    fill: #facc15; /* yellow-400 */
+    color: #facc15; /* yellow-400 */
+}
+
+/* =================================== */
+/* Contact Section                     */
+/* =================================== */
+#contact .info-icon-circle {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background-color: #dbeafe; /* blue-100 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+#contact .info-icon-circle i, #contact .info-icon-circle svg {
+    color: #2563eb;
+}
+
+#contact a {
+    color: #4b5563; /* gray-600 */
+    transition: color 0.3s ease;
+}
+
+#contact a:hover {
+    color: #2563eb;
+}
+
+/* =================================== */
+/* Footer Section                      */
+/* =================================== */
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer .social-icon a {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background-color: #1f2937; /* gray-800 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+footer .social-icon a:hover {
+    background-color: #2563eb;
+}
