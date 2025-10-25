@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', () => {
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
-    const functionUrl = 'PASTE_YOUR_FUNCTION_URL_HERE'; // <-- IMPORTANT
+    const functionUrl = 'ZYQTRESXGYK96PKUVXDQ6DTR'; // <-- IMPORTANT
 
     const handleFormSubmit = async (event, formElement) => {
         event.preventDefault();
@@ -120,3 +120,4 @@ document.addEventListener('DOMContentLoaded', () => {
         mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm));
     }
 });
+
