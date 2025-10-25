@@ -38,3 +38,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     AOS.init({ duration: 1000, once: true });
 
 });
+
