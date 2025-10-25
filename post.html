@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="post-title-head">Blog Post | DharTee Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#2563eb', secondary: '#0ea5e9', accent: '#f97316', dark: '#1e293b', light: '#f8fafc' } } } }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <header class="fixed w-full bg-white shadow-md z-50">
+       </header>
+
+    <main class="pt-24 pb-16 md:pt-32 md:pb-24">
+        <div class="container mx-auto px-4">
+            <article id="full-post-content" class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <div class="text-center p-12">
+                    <p>Loading article...</p>
+                </div>
+            </article>
+        </div>
+    </main>
+    
+    <footer class="bg-dark text-white pt-16 pb-8">
+       </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    
+    <script src="post.js"></script>
+</body>
+</html>

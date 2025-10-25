@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | DharTee Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { primary: '#2563eb', secondary: '#0ea5e9', accent: '#f97316', dark: '#1e293b', light: '#f8fafc' } } } }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div></a>
+                <a href="/"><span class="ml-2 text-xl font-bold text-dark">DharTee</span></a>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a class="text-dark hover:text-primary font-medium" href="index.html">Home</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#services">Services</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#about">About</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#process">Process</a>
+                <a class="text-primary font-bold" href="blog.html">Blog</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
+                <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                 <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
+                    <i class="mr-2" data-feather="phone"></i> Call Now
+                </a>
+                <a class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About">
+                    <i data-feather="message-circle"></i>
+                </a>
+                <button class="md:hidden text-dark" id="menu-toggle">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16 md:pt-32 md:pb-24">
+        <section id="blog-posts" class="py-12">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4">Our Insights & Articles</h1>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Stay updated with the latest news in taxation, legal matters, and technology.</p>
+                </div>
+
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+                 <div id="no-posts-message" class="hidden text-center text-gray-500 mt-16">
+                    <p class="text-xl">No articles have been published yet.</p>
+                    <p>Please check back later or visit the admin panel to publish a new post.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white pt-16 pb-8">
+       </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+        feather.replace();
+    </script>
+    <script src="blog.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+</body>
+</html>
