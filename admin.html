@@ -60,9 +60,23 @@
         #editor-container .ql-editor {
             min-height: 100%; padding: 12px 15px;
         }
-        #html-editor {
-             height: 350px; font-family: monospace; font-size: 0.9rem; resize: vertical;
-        }
+        /* Add this new, improved style in its place */
+#html-editor {
+    height: 350px; /* Or your preferred height */
+    resize: vertical;
+    
+    /* --- Core Fixes for Code Viewing --- */
+    font-family: Consolas, 'Courier New', monospace; /* Professional monospaced font */
+    white-space: pre-wrap;     /* Wraps long lines of code correctly */
+    overflow-wrap: break-word; /* Breaks long words if necessary */
+    
+    /* --- Better Visual Styling --- */
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #1e293b; /* Dark text for readability */
+    background-color: #f8fafc; /* A slightly off-white, code-editor-like background */
+    padding: 1rem;
+}
         .editor-toggle-btn {
             @apply px-4 py-2 text-sm font-semibold border rounded-md transition-colors;
         }
@@ -160,3 +174,4 @@
     </script>
 </body>
 </html>
+
