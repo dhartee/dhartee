@@ -12,15 +12,12 @@
     
     <title>Admin Panel | DharTee Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.comcom/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
     
     <script>
-        // Custom Tailwind Config
         tailwind.config = {
             theme: {
                 extend: {
@@ -34,7 +31,6 @@
         }
     </script>
     <style>
-        /* --- NEW & IMPROVED FORM STYLES --- */
         .admin-label {
             @apply block mb-2 text-sm font-semibold text-gray-700;
         }
@@ -43,35 +39,29 @@
                    focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent 
                    transition-shadow duration-200;
         }
-        
-        /* Quill editor specific styles for height and border */
         #editor-container {
             height: 350px;
             background-color: #ffffff;
-            border-radius: 0.5rem;
-            border: 1px solid #D1D5DB;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; /* Ensures child elements conform to rounded corners */
         }
-        #editor-container .ql-toolbar {
-            border-bottom: 1px solid #D1D5DB;
-            padding: 8px 10px;
-            background-color: #f9fafb; /* Light grey toolbar background */
+        #html-editor {
+            height: 350px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #374151;
+            resize: vertical;
         }
-        #editor-container .ql-container {
-            flex-grow: 1;
-            border: none;
-            font-size: 1rem;
+        .editor-toggle-btn {
+            @apply px-4 py-2 text-sm font-semibold border rounded-md transition-colors;
         }
-        #editor-container .ql-editor {
-            min-height: 100%;
-            padding: 12px 15px;
+        .editor-toggle-btn.active {
+            @apply bg-primary text-white border-primary;
+        }
+        .editor-toggle-btn:not(.active) {
+            @apply bg-white text-gray-600 border-gray-300 hover:bg-gray-100;
         }
     </style>
 </head>
-<body class="bg-gray-100 antialiased" style="font-family: 'Poppins', sans-serif;">
+<body class="bg-slate-50 antialiased" style="font-family: 'Poppins', sans-serif;">
 
     <div id="sidebar-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
 
@@ -118,10 +108,12 @@
                         <label for="post-title" class="admin-label">Post Title</label>
                         <input type="text" id="post-title" class="admin-input" required placeholder="Enter the main headline">
                     </div>
+                    
                     <div>
-    <label for="post-slug" class="admin-label">Custom URL (Slug)</label>
-    <input type="text" id="post-slug" class="admin-input" required placeholder="e.g., my-first-blog-post">
-</div>
+                        <label for="post-slug" class="admin-label">Custom URL (Slug)</label>
+                        <input type="text" id="post-slug" class="admin-input" required placeholder="e.g., my-first-blog-post">
+                    </div>
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="post-category" class="admin-label">Category</label>
@@ -139,8 +131,15 @@
                     </div>
                     
                     <div>
-                        <label for="editor-container" class="admin-label">Full Article Content</label>
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="admin-label !mb-0">Full Article Content</label>
+                            <div class="flex space-x-2">
+                                <button type="button" id="compose-view-btn" class="editor-toggle-btn active">Compose</button>
+                                <button type="button" id="html-view-btn" class="editor-toggle-btn">HTML</button>
+                            </div>
+                        </div>
                         <div id="editor-container"></div>
+                        <textarea id="html-editor" class="admin-textarea hidden"></textarea>
                     </div>
                     
                     <div class="flex items-center space-x-4 pt-4 border-t border-gray-200">
@@ -170,26 +169,20 @@
     </script>
     
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
     <script src="admin.js"></script>
-
     <script>
         feather.replace();
-        
         const menuToggle = document.getElementById('menu-toggle');
         const sidebarClose = document.getElementById('sidebar-close');
         const sidebar = document.getElementById('sidebar');
         const sidebarBackdrop = document.getElementById('sidebar-backdrop');
-        
         const toggleSidebar = () => {
             sidebar.classList.toggle('-translate-x-full');
             sidebarBackdrop.classList.toggle('hidden');
         };
-
         menuToggle.addEventListener('click', toggleSidebar);
         sidebarClose.addEventListener('click', toggleSidebar);
         sidebarBackdrop.addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html>
-
