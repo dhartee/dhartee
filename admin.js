@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formTitle = document.getElementById('form-title');
     const postIdInput = document.getElementById('post-id');
     const titleInput = document.getElementById('post-title');
+    const slugInput = document.getElementById('post-slug');
     const categoryInput = document.getElementById('post-category');
     const imageInput = document.getElementById('post-image');
     const contentInput = document.getElementById('post-content');
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = postIdInput.value;
         const postData = {
             title: titleInput.value,
+            slug: slugInput.value.toLowerCase().replace(/\s+/g, '-'),
             category: categoryInput.value,
             image: imageInput.value,
             content: contentInput.value,
@@ -92,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Update Post';
             postIdInput.value = id;
             titleInput.value = postToEdit.title;
+            slugInput.value = postToEdit.slug;
             categoryInput.value = postToEdit.category;
             imageInput.value = postToEdit.image;
             contentInput.value = postToEdit.content;
@@ -115,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetForm = () => {
         form.reset();
         postIdInput.value = '';
+        slugInput.value = '';
         formTitle.textContent = 'Publish New Post';
         submitButton.textContent = 'Publish Post';
         cancelEditButton.classList.add('hidden');
@@ -125,3 +129,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderPosts();
 });
+
