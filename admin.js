@@ -24,17 +24,17 @@ document.addEventListener('DOMContentLoaded', () => {
         snapshot.forEach(doc => {
             const post = doc.data();
             const postElement = document.createElement('div');
-            postElement.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg border';
+            postElement.className = 'post-item';
             postElement.innerHTML = `
-                <div>
-                    <p class="font-semibold text-gray-800">${post.title}</p>
-                    <p class="text-sm text-gray-500">${post.category} - ${new Date(post.date).toLocaleDateString()}</p>
-                </div>
-                <div class="space-x-2">
-                    <button class="edit-btn px-3 py-1 text-sm bg-yellow-500 text-white rounded hover:bg-yellow-600" data-id="${doc.id}">Edit</button>
-                    <button class="delete-btn px-3 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600" data-id="${doc.id}">Delete</button>
-                </div>
-            `;
+    <div class="post-item-info">
+        <p class="font-semibold text-gray-800">${post.title}</p>
+        <p class="text-sm text-gray-500">${post.category} - ${new Date(post.date).toLocaleDateString()}</p>
+    </div>
+    <div class="post-item-actions">
+        <button class="edit-btn px-3 py-1.5 text-xs font-medium bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors" data-id="${doc.id}">Edit</Fbutton>
+        <button class="delete-btn px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors" data-id="${doc.id}">Delete</button>
+    </div>
+`;
             postsList.appendChild(postElement);
         });
     };
@@ -98,4 +98,5 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelEditButton.addEventListener('click', resetForm);
 
     renderPosts();
+
 });
