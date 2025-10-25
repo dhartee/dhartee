@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', () => {
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
-    const functionUrl = 'ZYQTRESXGYK96PKUVXDQ6DTR'; // <-- IMPORTANT
+    const functionUrl = 'https://console.firebase.google.com/u/0/project/dhartee-blog/usage/details'; // <-- IMPORTANT
 
     const handleFormSubmit = async (event, formElement) => {
         event.preventDefault();
@@ -120,4 +120,5 @@ document.addEventListener('DOMContentLoaded', () => {
         mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm));
     }
 });
+
 
