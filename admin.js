@@ -12,15 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const postsList = document.getElementById('posts-list');
     const submitButton = document.getElementById('submit-button');
     const cancelEditButton = document.getElementById('cancel-edit');
-
-    // NEW: Editor Elements
     const composeViewBtn = document.getElementById('compose-view-btn');
     const htmlViewBtn = document.getElementById('html-view-btn');
     const editorContainer = document.getElementById('editor-container');
     const htmlEditor = document.getElementById('html-editor');
     let isHtmlView = false;
 
-    // Initialize Quill Rich Text Editor
+    // Initialize Quill Editor
     const quill = new Quill('#editor-container', {
         theme: 'snow',
         placeholder: 'Write your full article content here...',
@@ -35,11 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         }
     });
-    
-    // NEW: Function to toggle between Compose and HTML views
+
     const toggleEditorView = (showHtml) => {
         if (showHtml) {
-            // Sync from Quill to HTML textarea
             htmlEditor.value = quill.root.innerHTML;
             editorContainer.classList.add('hidden');
             htmlEditor.classList.remove('hidden');
@@ -47,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             composeViewBtn.classList.remove('active');
             isHtmlView = true;
         } else {
-            // Sync from HTML textarea to Quill
             quill.root.innerHTML = htmlEditor.value;
             editorContainer.classList.remove('hidden');
             htmlEditor.classList.add('hidden');
@@ -60,27 +55,46 @@ document.addEventListener('DOMContentLoaded', () => {
     composeViewBtn.addEventListener('click', () => toggleEditorView(false));
     htmlViewBtn.addEventListener('click', () => toggleEditorView(true));
 
-    // RENDER existing posts
-    const renderPosts = async () => { /* ... (no changes here) ... */ };
+    // **FIXED**: RENDER posts from Firebase
+    const renderPosts = async () => {
+        postsList.innerHTML = '';
+        const snapshot = await postsCollection.orderBy('date', 'desc').get();
+        if (snapshot.empty) {
+            postsList.innerHTML = '<p class="text-gray-500">No posts have been published yet.</p>';
+            return;
+        }
+        snapshot.forEach(doc => {
+            const post = doc.data();
+            const postElement = document.createElement('div');
+            postElement.className = 'post-item';
+            postElement.innerHTML = `
+                <div class="post-item-info">
+                    <p class="font-semibold text-gray-800">${post.title}</p>
+                    <p class="text-sm text-gray-500">${post.category} - ${new Date(post.date).toLocaleDateString()}</p>
+                </div>
+                <div class="post-item-actions">
+                    <button class="edit-btn px-3 py-1.5 text-xs font-medium bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors" data-id="${doc.id}">Edit</button>
+                    <button class="delete-btn px-3 py-1.5 text-xs font-medium bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors" data-id="${doc.id}">Delete</button>
+                </div>
+            `;
+            postsList.appendChild(postElement);
+        });
+    };
 
-    // SUBMIT form (Create/Update)
+    // Form submission logic
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const id = postIdInput.value;
-        
-        // NEW: Get content from the currently active editor
         const fullContent = isHtmlView ? htmlEditor.value : quill.root.innerHTML;
-
         const postData = {
             title: titleInput.value,
             slug: slugInput.value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
             category: categoryInput.value,
             image: imageInput.value,
             content: contentInput.value,
-            fullContent: fullContent, // Use the content from the active view
+            fullContent: fullContent,
             date: new Date().toISOString()
         };
-
         if (id) {
             await postsCollection.doc(id).update(postData);
         } else {
@@ -90,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetForm();
     });
 
-    // CLICK handler for Edit/Delete
+    // Edit/Delete click handler
     postsList.addEventListener('click', async (e) => {
         const id = e.target.dataset.id;
         if (e.target.classList.contains('edit-btn')) {
@@ -98,41 +112,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const postToEdit = doc.data();
             formTitle.textContent = 'Edit Post';
             submitButton.textContent = 'Update Post';
-            
-            // Populate all fields
             postIdInput.value = id;
             titleInput.value = postToEdit.title;
             slugInput.value = postToEdit.slug;
             categoryInput.value = postToEdit.category;
             imageInput.value = postToEdit.image;
             contentInput.value = postToEdit.content;
-            
-            // NEW: Set content for BOTH editors
             quill.root.innerHTML = postToEdit.fullContent || '';
             htmlEditor.value = postToEdit.fullContent || '';
-
             cancelEditButton.classList.remove('hidden');
             window.scrollTo(0, 0);
         }
-        // ... (delete logic remains the same) ...
+        if (e.target.classList.contains('delete-btn')) {
+            if (confirm('Are you sure you want to delete this post?')) {
+                await postsCollection.doc(id).delete();
+                renderPosts();
+            }
+        }
     });
 
-    // Reset form to default state
     const resetForm = () => {
         form.reset();
         postIdInput.value = '';
-        slugInput.value = '';
         formTitle.textContent = 'Publish New Post';
         submitButton.textContent = 'Publish Post';
         cancelEditButton.classList.add('hidden');
-        
-        // NEW: Clear both editors and reset to compose view
         quill.root.innerHTML = '';
         htmlEditor.value = '';
         toggleEditorView(false); 
-    }
+    };
     
     cancelEditButton.addEventListener('click', resetForm);
 
-    renderPosts(); // Initial load of posts
+    renderPosts();
 });
