@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DharTee Services - Redirecting...</title>
+  <script>
+    // Get the full path the user tried to access
+    const path = window.location.pathname;
+
+    // Check if the path looks like a blog post URL
+    if (path.startsWith('/blog/')) {
+      // Extract the slug (e.g., 'my-first-post') from '/blog/my-first-post'
+      const slug = path.substring(6); // 6 is the length of '/blog/'
+      
+      // Redirect to post.html and pass the slug as a parameter
+      // The sessionStorage part is to prevent infinite redirect loops on a bad URL
+      sessionStorage.redirect = `/post.html?slug=${slug}`;
+      window.location.href = `/post.html?slug=${slug}`;
+
+    } else {
+      // If it's not a blog post, maybe redirect to the homepage
+      // or just show a standard 404 message
+      window.location.href = '/'; 
+    }
+  </script>
+</head>
+<body>
+  <p>If you are not redirected automatically, <a href="/">follow this link to the homepage</a>.</p>
+</body>
+</html>
