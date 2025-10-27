@@ -369,4 +369,143 @@ footer .social-icon a:hover {
     gap: 0.75rem; /* space-x-3 */
     flex-shrink: 0;
 }
+/* --- Service Card Flip Animation --- */
+/* Desktop Flip Styles */
+@media (min-width: 768px) {
+    .services-section .service-card {
+        perspective: 1000px;
+        min-height: 250px;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .services-section .service-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 250px;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 1rem;
+    }
+
+    .services-section .service-card:hover .service-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .services-section .service-card-front,
+    .services-section .service-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        border-radius: 1rem;
+        text-align: center;
+    }
+
+    .services-section .service-card-front {
+        background-color: #f8fafc;
+        color: #1e293b;
+    }
+    
+    .services-section .service-icon .fas {
+        font-size: 3rem;
+        color: #2563eb;
+        margin-bottom: 1rem;
+    }
+
+    .services-section .service-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .services-section .service-card-back {
+        background-color: #2563eb;
+        color: white;
+        transform: rotateY(180deg);
+    }
+
+    .services-section .service-card-back .service-title {
+        margin-bottom: 1rem;
+    }
+
+    .services-section .service-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .services-section .service-card-back .service-button {
+        display: inline-block;
+        background-color: white;
+        color: #2563eb;
+        padding: 0.5rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .services-section .service-card-back .service-button:hover {
+        background-color: #f1f5f9;
+    }
+}
+
+/* Mobile Fallback Styles */
+@media (max-width: 767px) {
+    .services-section .service-card {
+        min-height: 0;
+    }
+    
+    .services-section .service-card-inner {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 1rem;
+        padding: 24px;
+        background-color: #f8fafc;
+        text-align: center;
+    }
+
+    .services-section .service-card-front {
+        display: none; 
+    }
+    
+    .services-section .service-card-back {
+        display: block; 
+        color: #1e293b;
+    }
+
+    .services-section .service-card-back .service-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .services-section .service-card-back .service-description {
+        color: #475569;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .services-section .service-card-back .service-button {
+        display: inline-block;
+        background-color: #2563eb;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 1rem;
+        text-decoration: none;
+    }
+
+    .services-section .service-card-back .service-button:hover {
+        background-color: #1d4ed8;
+    }
+}
 
