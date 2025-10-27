@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>DharTee Services - Redirecting...</title>
-  <script>
-    // Get the full path the user tried to access
-    const path = window.location.pathname;
-
-    // Check if the path looks like a blog post URL
-    if (path.startsWith('/blog/')) {
-      // Extract the slug (e.g., 'my-first-post') from '/blog/my-first-post'
-      const slug = path.substring(6); // 6 is the length of '/blog/'
-      
-      // Redirect to post.html and pass the slug as a parameter
-      // The sessionStorage part is to prevent infinite redirect loops on a bad URL
-      sessionStorage.redirect = `/post.html?slug=${slug}`;
-      window.location.href = `/post.html?slug=${slug}`;
-
-    } else {
-      // If it's not a blog post, maybe redirect to the homepage
-      // or just show a standard 404 message
-      window.location.href = '/'; 
-    }
-  </script>
+    <meta charset="UTF-8">
+    <title>Page Not Found | DharTee Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Poppins', sans-serif; } </style>
+    <script>
+      const path = window.location.pathname;
+      if (path.startsWith('/blog/')) {
+        const slug = path.substring(6);
+        window.location.href = `/post.html?slug=${slug}`;
+      }
+    </script>
 </head>
-<body>
-  <p>If you are not redirected automatically, <a href="/">follow this link to the homepage</a>.</p>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="text-center">
+        <h1 class="text-9xl font-bold text-blue-600">404</h1>
+        <h2 class="text-3xl font-semibold text-gray-800 mt-4">Page Not Found</h2>
+        <p class="text-gray-600 mt-2">Sorry, the page you are looking for does not exist.</p>
+        <div class="mt-8">
+            <a href="/" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700">
+                Go to Homepage
+            </a>
+        </div>
+    </div>
 </body>
 </html>
