@@ -2,36 +2,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Core Site Interactivity ---
 
-    // Initialize Animate on Scroll (AOS) library
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-    }
+    AOS.init({ duration: 1000, once: true });
+    feather.replace();
 
-    // Initialize Feather Icons
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const menuToggle = document.getElementById('menu-toggle');
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Close menu on link click
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
     }
 
+    // --- UNIFIED SCROLLING & MENU CLOSE SCRIPT (THE FIX) ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault(); // Stop the default jump
+
+            // If the mobile menu is open and contains the clicked link, close it
+            if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                if (mobileMenu.contains(this)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+
+            // Perform the smooth scroll
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+    
     // Chat widget toggle
     const chatToggle = document.getElementById('chat-toggle');
     const closeChat = document.getElementById('close-chat');
@@ -45,24 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
     // --- Firebase Form Submission ---
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
-    // Ensure this URL is correct
     const functionUrl = 'https://us-central1-dhartee-blog.cloudfunctions.net/submitContactForm';
 
     const handleFormSubmit = async (event, formElement) => {
@@ -81,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data),
             });
-
             if (response.ok) {
                 formElement.reset();
                 submitButton.innerHTML = 'Message Sent!';
