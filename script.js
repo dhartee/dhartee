@@ -99,10 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Email Obfuscation ---
     const emailLink = document.getElementById('email-link');
     if (emailLink) {
-        const user = 'info';
-        const domain = 'dhartee.in';
+        const user = 'mrdgour2';
+        const domain = 'gmail.com';
         emailLink.href = 'mailto:' + user + '@' + domain;
         emailLink.textContent = user + '@' + domain;
     }
 
 }); // This single closing bracket now correctly closes the entire script.
+
