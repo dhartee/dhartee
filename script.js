@@ -119,7 +119,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainForm) {
         mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm));
     }
+// --- Email Obfuscation ---
+document.addEventListener('DOMContentLoaded', () => {
+    const emailLink = document.getElementById('email-link');
+    if (emailLink) {
+        const user = 'mrdgour2';
+        const domain = 'gmail.com';
+        emailLink.href = 'mailto:' + user + '@' + domain;
+        emailLink.textContent = user + '@' + domain;
+    }
 });
+
 
 
 
