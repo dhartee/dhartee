@@ -91,3 +91,4 @@ document.addEventListener('DOMContentLoaded', () => {
         emailLink.textContent = user + '@' + domain;
     }
 });
+
