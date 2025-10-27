@@ -3,13 +3,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Core Site Interactivity ---
 
     // Initialize Animate on Scroll (AOS) library
-    AOS.init({
-        duration: 1000,
-        once: true
-    });
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    }
 
     // Initialize Feather Icons
-    feather.replace();
+    if (typeof feather !== 'undefined') {
+        feather.replace();
+    }
 
     // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
@@ -18,19 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-    }
 
-    // --- NEW: Close menu on link click ---
-    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
-    if (mobileMenu && mobileMenuLinks.length > 0) {
+        // Close menu on link click
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // Add the 'hidden' class to close the menu
                 mobileMenu.classList.add('hidden');
             });
         });
     }
-    // --- End of new code ---
 
     // Chat widget toggle
     const chatToggle = document.getElementById('chat-toggle');
@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Firebase Form Submission ---
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
+    // Ensure this URL is correct
     const functionUrl = 'https://us-central1-dhartee-blog.cloudfunctions.net/submitContactForm';
 
     const handleFormSubmit = async (event, formElement) => {
@@ -84,17 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 formElement.reset();
                 submitButton.innerHTML = 'Message Sent!';
-                setTimeout(() => {
-                    submitButton.innerHTML = originalButtonText;
-                    submitButton.disabled = false;
-                }, 3000);
             } else {
                 throw new Error('Server responded with an error.');
             }
         } catch (error) {
             console.error('Form submission error:', error);
             submitButton.innerHTML = 'Submission Failed';
-             setTimeout(() => {
+        } finally {
+            setTimeout(() => {
                 submitButton.innerHTML = originalButtonText;
                 submitButton.disabled = false;
             }, 3000);
