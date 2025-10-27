@@ -1,4 +1,4 @@
-// blog.js
+// blog.js (Final Corrected Version)
 document.addEventListener('DOMContentLoaded', () => {
     // A short delay to ensure Firebase is fully initialized by other scripts
     setTimeout(() => {
@@ -57,5 +57,5 @@ document.addEventListener('DOMContentLoaded', () => {
                     noPostsMessage.textContent = "Error loading posts. Please try again later.";
                 }
             });
-    }, 100); // 100ms delay
+    }, 100); // 100ms delay to ensure Firebase is ready
 });
