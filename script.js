@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- NEW: Close menu on link click ---
+    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+    if (mobileMenu && mobileMenuLinks.length > 0) {
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Add the 'hidden' class to close the menu
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+    // --- End of new code ---
+
     // Chat widget toggle
     const chatToggle = document.getElementById('chat-toggle');
     const closeChat = document.getElementById('close-chat');
@@ -99,11 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Email Obfuscation ---
     const emailLink = document.getElementById('email-link');
     if (emailLink) {
-        const user = 'mrdgour2';
-        const domain = 'gmail.com';
+        const user = 'info';
+        const domain = 'dhartee.in';
         emailLink.href = 'mailto:' + user + '@' + domain;
         emailLink.textContent = user + '@' + domain;
     }
 
-}); // This single closing bracket now correctly closes the entire script.
-
+});
