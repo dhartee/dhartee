@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Core Site Interactivity ---
 
     // Initialize Animate on Scroll (AOS) library
     AOS.init({
@@ -13,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
     }
@@ -23,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeChat = document.getElementById('close-chat');
     const chatWindow = document.getElementById('chat-window');
     if (chatToggle && closeChat && chatWindow) {
-        chatToggle.addEventListener('click', function() {
+        chatToggle.addEventListener('click', () => {
             chatWindow.classList.toggle('hidden');
         });
-        closeChat.addEventListener('click', function() {
+        closeChat.addEventListener('click', () => {
             chatWindow.classList.add('hidden');
         });
     }
@@ -45,42 +47,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Intersection Observer for service card animations
-    const cards = document.querySelectorAll('.service-card');
-    if (cards.length > 0) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        cards.forEach(card => {
-            observer.observe(card);
-        });
-    }
-
-});
-// Add this code to the bottom of script.js
-
-document.addEventListener('DOMContentLoaded', () => {
+    // --- Firebase Form Submission ---
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
-    const functionUrl = 'https://us-central1-dhartee-blog.cloudfunctions.net/submitContactForm'; // <-- IMPORTANT
+    const functionUrl = 'https://us-central1-dhartee-blog.cloudfunctions.net/submitContactForm';
 
     const handleFormSubmit = async (event, formElement) => {
         event.preventDefault();
         const formData = new FormData(formElement);
         const data = Object.fromEntries(formData.entries());
-
+        
         const submitButton = formElement.querySelector('button[type="submit"]');
         const originalButtonText = submitButton.innerHTML;
         submitButton.innerHTML = 'Sending...';
@@ -119,17 +95,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainForm) {
         mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm));
     }
-// --- Email Obfuscation ---
-document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Email Obfuscation ---
     const emailLink = document.getElementById('email-link');
     if (emailLink) {
-        const user = 'mrdgour2';
-        const domain = 'gmail.com';
+        const user = 'info';
+        const domain = 'dhartee.in';
         emailLink.href = 'mailto:' + user + '@' + domain;
         emailLink.textContent = user + '@' + domain;
     }
-});
 
-
-
-
+}); // This single closing bracket now correctly closes the entire script.
