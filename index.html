@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DharTee Services | Taxation, Legal and Web Solutions</title>
-    <meta name="description" content="DharTee offers A-Z business solutions. From expert GST support and legal advocacy to custom web design and software services, we are dedicated to your growth.">
+    
+    <meta name="description" content="DharTee offers A-Z business solutions in Jaipur. From expert GST support and legal advocacy to custom web design and software services, we are dedicated to your growth.">
     <meta name="google-site-verification" content="gJtZKPb7d_tazfx_2bna22SLowglxkdy8oxw9BVLTiY" />
     <link rel="canonical" href="https://dhartee.in/" />
+
     <meta property="og:title" content="DharTee Services | Tax, Legal & Web Solutions">
     <meta property="og:description" content="DharTee offers comprehensive business solutions, from GST support and legal advocacy to custom web and software development for your growth.">
     <meta property="og:image" content="https://i.ibb.co/WpyrsNN5/dhartee-logo.png">
@@ -16,11 +18,14 @@
     <meta name="twitter:title" content="DharTee Services | Tax, Legal & Web Solutions">
     <meta name="twitter:description" content="DharTee offers comprehensive business solutions, from GST support and legal advocacy to custom web and software development for your growth.">
     <meta name="twitter:image" content="https://i.ibb.co/WpyrsNN5/dhartee-logo.png">
+
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="https://i.ibb.co/qtBXftY/apple-touch-icon-dhartee.png" />
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PGFFQ7M32V"></script>
     <script>
@@ -69,220 +74,21 @@
             }
         }
     </script>
- <style>
-        /* --- Desktop Flip Styles (min-width: 768px) --- */
-        @media (min-width: 768px) {
-            .services-section .service-card {
-                perspective: 1000px;
-                min-height: 250px;
-                background-color: transparent;
-                border: none;
-                box-shadow: none;
-            }
-
-            .services-section .service-card-inner {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                min-height: 250px;
-                transition: transform 0.6s;
-                transform-style: preserve-3d;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                border-radius: 1rem; /* 16px */
-            }
-
-            /* Flip on hover */
-            .services-section .service-card:hover .service-card-inner {
-                transform: rotateY(180deg);
-            }
-
-            .services-section .service-card-front,
-            .services-section .service-card-back {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                -webkit-backface-visibility: hidden; /* Safari */
-                backface-visibility: hidden;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 24px;
-                border-radius: 1rem; /* 16px */
-                text-align: center;
-            }
-
-            .services-section .service-card-front {
-                background-color: #f8fafc; /* light */
-                color: #1e293b; /* dark */
-            }
-            
-            .services-section .service-icon .fas {
-                font-size: 3rem; /* 48px */
-                color: #2563eb; /* primary */
-                margin-bottom: 1rem;
-            }
-    
-            .services-section .service-title {
-                font-size: 1.25rem; /* 20px */
-                font-weight: 600;
-                margin-bottom: 0.5rem;
-            }
-
-            .services-section .service-card-back {
-                background-color: #2563eb; /* primary */
-                color: white;
-                transform: rotateY(180deg); /* Start flipped over */
-            }
-
-            .services-section .service-card-back .service-title {
-                margin-bottom: 1rem;
-            }
-
-            .services-section .service-description {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .services-section .service-card-back .service-button {
-                display: inline-block;
-                background-color: white;
-                color: #2563eb; /* primary */
-                padding: 0.5rem 1.5rem;
-                border-radius: 9999px; /* full */
-                font-weight: 500;
-                text-decoration: none;
-                transition: background-color 0.3s, color 0.3s;
-            }
-            .services-section .service-card-back .service-button:hover {
-                background-color: #f1f5f9;
-            }
-        }
-        
-        
-        /* --- Mobile Styles (max-width: 767px) --- */
-        @media (max-width: 767px) {
-            .services-section .service-card {
-                min-height: 0;
-            }
-            
-            /* 1. Use a standard card layout */
-            .services-section .service-card-inner {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-                border-radius: 1rem;
-                height: auto;
-                padding: 24px;
-                background-color: #f8fafc; /* light */
-                text-align: center;
-            }
-
-            /* 2. Hide the front content completely */
-            .services-section .service-card-front {
-                display: none; 
-            }
-            
-            /* 3. Show the back content (title, description, button) */
-            .services-section .service-card-back {
-                display: block; 
-                color: #1e293b; /* dark */
-            }
-
-            .services-section .service-card-back .service-title {
-                 font-size: 1.25rem; /* 20px */
-                font-weight: 600;
-                margin-bottom: 1rem;
-            }
-
-            .services-section .service-card-back .service-description {
-                color: #475569; /* gray-600 */
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            /* 4. This is the FIX: Style the button correctly */
-            .services-section .service-card-back .service-button {
-                display: inline-block;
-                background-color: #2563eb; /* primary */
-                color: white;
-                padding: 0.75rem 1.5rem; /* 12px 24px */
-                border-radius: 9999px; /* full */
-                font-weight: 500;
-                text-align: center;
-                margin-top: 1rem;
-                text-decoration: none;
-            }
-
-            .services-section .service-card-back .service-button:hover {
-                background-color: #1d4ed8; /* darker primary */
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-light">
     <header class="fixed w-full bg-white shadow-md z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <a href="/">
-                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
-                </a>
-                <a href="/"><span class="ml-2 text-xl font-bold text-dark">DharTee</span></a>
-            </div>
-            <nav class="hidden md:flex space-x-8">
-                <a class="text-dark hover:text-primary font-medium" href="#home">Home</a>
-                <a class="text-dark hover:text-primary font-medium" href="#services">Services</a>
-                <a class="text-dark hover:text-primary font-medium" href="#about">About</a>
-                <a class="text-dark hover:text-primary font-medium" href="#process">Process</a>
-                <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-                <a class="text-dark hover:text-primary font-medium" href="#testimonials">Testimonials</a>
-                <a class="text-dark hover:text-primary font-medium" href="#contact">Contact</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
-                    <i class="mr-2" data-feather="phone"></i> Call Now
-                </a>
-                <a class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About">
-                    <i data-feather="message-circle"></i>
-                </a>
-                <button class="md:hidden text-dark" id="menu-toggle">
-                    <i data-feather="menu"></i>
-                </button>
-            </div>
-        </div>
-        <div class="hidden md:hidden bg-white py-4 px-4 shadow-lg" id="mobile-menu">
-            <div class="flex flex-col space-y-3">
-                <a class="text-dark hover:text-primary font-medium" href="#home">Home</a>
-                <a class="text-dark hover:text-primary font-medium" href="#services">Services</a>
-                <a class="text-dark hover:text-primary font-medium" href="#about">About</a>
-                <a class="text-dark hover:text-primary font-medium" href="#process">Process</a>
-                <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-                <a class="text-dark hover:text-primary font-medium" href="#testimonials">Testimonials</a>
-                <a class="text-dark hover:text-primary font-medium" href="#contact">Contact</a>
-                <a class="flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
-                    <i class="mr-2" data-feather="phone"></i> Call Now
-                </a>
-            </div>
-        </div>
-    </header>
+        </header>
 
     <main>
         <section class="hero-bg pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden" id="home">
             <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left" data-aos="fade-right">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">Professional Services for Your Business Growth</h1>
-                    <p class="text-xl text-blue-100 mb-8">Taxation and GST Support, Legal Advocate Support, Web Designing, A TO Z Software Services and Business Consultation</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
-                        <a class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg" href="#services">Explore Services</a>
-                        <a class="bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition flex items-center justify-center" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About">
-                            <i class="mr-2" data-feather="message-circle"></i> WhatsApp Now
-                        </a>
                     </div>
-                </div>
                 <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
                     <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md">
                         <h2 class="text-2xl font-bold text-dark mb-4 text-center">Get in Touch</h2>
-                        <form action="https://formsubmit.co/mrdgour2@gmail.com" method="POST">
+                        <form id="hero-contact-form">
                             <div class="mb-4">
                                 <input class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="name" placeholder="Your Name" required type="text" />
                             </div>
@@ -299,282 +105,13 @@
             </div>
         </section>
 
-        <section class="services-section" id="services">
-            <div class="container">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Core Services</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Providing comprehensive solutions to fuel your business growth.</p>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-calculator"></i></div>
-                                <h3 class="service-title">Taxation &amp; GST Support</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">Taxation &amp; GST</h3>
-                                <p class="service-description">Expert assistance with tax planning, compliance, and GST registration.</p>
-                                <a class="service-button" href="gst_services.html">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-gavel"></i></div>
-                                <h3 class="service-title">Legal Advocate Support</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">Legal Support</h3>
-                                <p class="service-description">Professional legal counsel and representation for all your business matters.</p>
-                                <a class="service-button" href="legal_services.html">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-desktop"></i></div>
-                                <h3 class="service-title">Web Designing</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">Web Designing</h3>
-                                <p class="service-description">Modern, responsive websites to enhance your online presence and attract customers.</p>
-                                <a class="service-button" href="#contact">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                                <h3 class="service-title">Technical Expertise</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">New Creative Ideas</h3>
-                                <p class="service-description">Specialized technical support for coaching institutes to streamline operations.</p>
-                                <a class="service-button" href="#contact">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-                                <h3 class="service-title">Business Consultation</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">Grow Your Business</h3>
-                                <p class="service-description">Strategic business advice to help you make informed decisions and achieve growth.</p>
-                                <a class="service-button" href="#contact">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-card-inner">
-                            <div class="service-card-front">
-                                <div class="service-icon"><i class="fas fa-cogs"></i></div>
-                                <h3 class="service-title">A to Z Software Services</h3>
-                            </div>
-                            <div class="service-card-back">
-                                <h3 class="service-title">Software Services</h3>
-                                <p class="service-description">End-to-end software solutions customized for your business requirements.</p>
-                                <a class="service-button" href="#contact">Get Service</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="py-16 md:py-24 bg-gray-50 overflow-hidden" id="about">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 min-w-0 mb-10 md:mb-0" data-aos="fade-right">
-                        <picture>
-
-  <source type="image/webp" srcset="https://i.ibb.co/B5SFZqXX/Dharmendra-Sharma.webp">
-
-  <img alt="Dharmendra Sharma, Director of DharTee Services" class="max-w-full h-auto rounded-lg shadow-md mx-auto md:max-w-[80%] lg:max-w-[65%]" src="https://i.ibb.co/B5SFZqXX/Dharmendra-Sharma.webp" /></picture>
-                    </div>
-                    <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
-                        <h2 class="text-3xl md:text-4xl font-bold text-dark mb-6 text-center">About DharTee</h2>
-                        <p class="text-gray-600 mb-6 text-justify">DharTee is a dynamic professional services firm dedicated to empowering businesses and individuals with comprehensive solutions. Based in Jaipur and also serving clients in Gandhidham, Gujarat, we specialize in a unique blend of services spanning taxation, legal support, web and software development, and expert consultation on new government schemes and portals. Our mission is to provide tailored, technology-driven solutions that help our clients navigate complex challenges and achieve their strategic goals. At DharTee, we pride ourselves on our expert team, timely delivery, and unwavering commitment to client satisfaction.</p>
-                        <h3 class="text-3xl md:text-4xl font-bold text-dark mb-6 text-center">About Director - Dharmendra Sharma</h3>
-                        <p class="text-gray-600 mb-6 text-justify">Dharmendra Sharma, the visionary founder of DharTee, brings a rare and powerful combination of expertise to the table. As an Advocate, Tax Consultant, and GST Practitioner, he possesses a deep understanding of the legal and financial landscapes. Complementing this is his proficiency as a skilled Web and Software Developer and a Technical Expert. Originally from Barmer, Rajasthan, Dharmendra has built a reputation in Jaipur for his creative mindset and innovative use of technology. He has successfully designed numerous websites and software solutions, consulted with a diverse range of businesses to foster growth, and advised many leading coaching institutes. His passion lies in leveraging technology to simplify complexities and create opportunities for his clients.</p>
-                        <div class="flex flex-wrap gap-4 justify-center">
-                            <div class="flex items-center">
-                                <i class="text-green-500 mr-2" data-feather="check-circle"></i>
-                                <span class="text-dark font-medium">Expert Team</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="text-green-500 mr-2" data-feather="check-circle"></i>
-                                <span class="text-dark font-medium">Timely Delivery</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="text-green-500 mr-2" data-feather="check-circle"></i>
-                                <span class="text-dark font-medium">Client Satisfaction</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 md:py-24 bg-white" id="process">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Process</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">A streamlined approach to deliver exceptional results</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-                    <div class="process-step" data-aos="fade-up" data-aos-delay="100">
-                        <div class="step-circle">
-                            <span>1</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Consultation</h3>
-                        <p class="text-gray-600">We start with understanding your requirements and objectives in detail.</p>
-                    </div>
-                    <div class="process-step" data-aos="fade-up" data-aos-delay="200">
-                        <div class="step-circle">
-                            <span>2</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Planning</h3>
-                        <p class="text-gray-600">Our team develops a customized plan tailored to your specific needs.</p>
-                    </div>
-                    <div class="process-step" data-aos="fade-up" data-aos-delay="300">
-                        <div class="step-circle">
-                            <span>3</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Execution</h3>
-                        <p class="text-gray-600">We implement the solution with precision and attention to detail.</p>
-                    </div>
-                    <div class="process-step" data-aos="fade-up" data-aos-delay="400">
-                        <div class="step-circle">
-                            <span>4</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-dark mb-3">Delivery &amp; Support</h3>
-                        <p class="text-gray-600">We deliver the final product and provide ongoing support as needed.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-16 md:py-24 bg-gray-50" id="testimonials">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Client Testimonials</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Hear what our satisfied clients have to say about our services</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="testimonial-card bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="100">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
-                            <div>
-                                <h4 class="font-bold text-dark">Rajesh Sharma</h4>
-                                <p class="text-gray-600 text-sm">Business Owner</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-6">"DharTee's taxation services helped us save significant costs while maintaining full compliance. Their expertise is unmatched!"</p>
-                        <div class="flex text-yellow-400">
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial-card bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
-                            <div>
-                                <h4 class="font-bold text-dark">Priya Patel</h4>
-                                <p class="text-gray-600 text-sm">Coaching Institute Director</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-6">"The technical support we received for our coaching institute was exceptional. Our operations became much more efficient."</p>
-                        <div class="flex text-yellow-400">
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                        </div>
-                    </div>
-                    <div class="testimonial-card bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="300">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 mr-4"></div>
-                            <div>
-                                <h4 class="font-bold text-dark">Amit Verma</h4>
-                                <p class="text-gray-600 text-sm">Startup Founder</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 mb-6">"Our new website designed by DharTee has significantly increased our online visibility and customer engagement."</p>
-                        <div class="flex text-yellow-400">
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                            <i class="feather-star" data-feather="star"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="py-16 md:py-24 bg-white" id="contact">
             <div class="container mx-auto px-4">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Contact Us</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Get in touch with us for any inquiries or to schedule a consultation</p>
-                </div>
                 <div class="flex flex-col md:flex-row">
                     <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                        <div class="bg-gray-100 rounded-2xl h-full p-8">
-                            <h3 class="text-2xl font-bold text-dark mb-6">Get In Touch</h3>
-                            <div class="space-y-6">
-                                <div class="flex items-start">
-                                    <div class="info-icon-circle">
-                                        <i data-feather="map-pin"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-dark mb-1">Our Location</h4>
-                                        <p class="text-gray-600">Jaipur, Rajasthan, India</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="info-icon-circle">
-                                        <i data-feather="phone"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-dark mb-1">Phone Number</h4>
-                                        <p class="text-gray-600"><a href="tel:8264604505">+91 8264604505</a></p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="info-icon-circle">
-                                        <i data-feather="mail"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-dark mb-1">Email Address</h4>
-                                        <p class="text-gray-600">info@dhartee.in</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="info-icon-circle">
-                                        <i data-feather="clock"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-dark mb-1">Working Hours</h4>
-                                        <p class="text-gray-600">Monday - Saturday: 9AM - 7PM</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
                     <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
-                        <form action="https://formsubmit.co/mrdgour2@gmail.com" class="bg-light p-8 rounded-2xl shadow-lg" method="POST">
+                        <form id="main-contact-form" class="bg-light p-8 rounded-2xl shadow-lg">
                             <div class="mb-6">
                                 <label class="block text-dark font-medium mb-2">Full Name</label>
                                 <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="name" required type="text" />
@@ -614,108 +151,25 @@
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
-                        <span class="ml-2 text-xl font-bold">DharTee</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">Professional services for your business growth, including taxation, legal support, web design, and software solutions.</p>
-                    <div class="flex space-x-4 social-icon">
-                        <a href="#"><i data-feather="facebook"></i></a>
-                        <a href="#"><i data-feather="twitter"></i></a>
-                        <a href="#"><i data-feather="instagram"></i></a>
-                        <a href="#"><i data-feather="linkedin"></i></a>
-                    </div>
-                </div>
-                <div>
                     <h3 class="text-lg font-bold mb-6">Quick Links</h3>
                     <ul class="space-y-3">
-                        <li><a class="text-gray-400 hover:text-white" href="#home">Home</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#services">Services</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#about">About Us</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#process">Our Process</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#contact">Contact</a></li>
                         <li><a class="text-gray-400 hover:text-white" href="sitemap.xml">Sitemap</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a class="text-gray-400 hover:text-white" href="#">Taxation and GST Support</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#">Legal Advocate Support</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#">Web Designing</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#">Technical Expert for Coaching</a></li>
-                        <li><a class="text-gray-400 hover:text-white" href="#">A TO Z Software Services</a></li>
-                    </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Newsletter</h3>
-                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
-                    <form class="flex">
-                        <input class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark" placeholder="Your Email" type="email" />
-                        <button class="bg-primary px-4 rounded-r-lg hover:bg-blue-700 transition" type="submit">
-                            <i data-feather="send"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
             <div class="border-t border-gray-800 pt-8 text-center">
                 <p class="text-gray-400">&copy; 2025 DharTee. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <div class="fixed bottom-6 right-6 z-[999]">
-        <div class="bg-white rounded-2xl shadow-xl w-80 hidden" id="chat-window">
-            <div class="bg-primary text-white p-4 rounded-t-2xl flex justify-between items-center">
-                <h3 class="font-bold">Chat Assistant</h3>
-                <button class="text-white" id="close-chat">
-                    <i data-feather="x"></i>
-                </button>
-            </div>
-            <div class="p-4 h-64 overflow-y-auto">
-                <div class="mb-4">
-                    <div class="bg-gray-100 rounded-2xl p-3 inline-block">
-                        Hello! I'm your virtual assistant. How can I help you today?
-                    </div>
-                </div>
-                <div class="mb-4 text-right">
-                    <div class="bg-primary text-white rounded-2xl p-3 inline-block">
-                        I'd like to know about your services
-                    </div>
-                </div>
-            </div>
-            <div class="p-4 border-t border-gray-200">
-                <div class="flex">
-                    <input class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none" placeholder="Type your message..." type="text" />
-                    <button class="bg-primary text-white px-4 rounded-r-lg hover:bg-blue-700 transition">
-                        <i data-feather="send"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <button class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-blue-700 transition" id="chat-toggle">
-            <i data-feather="message-circle"></i>
-        </button>
-    </div>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
-<script src="script.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
     
-<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js" defer></script>
+    <script src="firebase-config.js" defer></script>
 
-<script src="firebase-config.js"></script>
-
-<script>
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-</script>
+    <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
