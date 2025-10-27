@@ -39,3 +39,55 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+
+    // Initialize Feather Icons
+    feather.replace();
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // --- NEW: Close menu on link click ---
+    const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+    if (mobileMenu && mobileMenuLinks.length > 0) {
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Add the 'hidden' class to close the menu
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+    // --- End of new code ---
+
+    // Chat widget toggle
+    const chatToggle = document.getElementById('chat-toggle');
+    const closeChat = document.getElementById('close-chat');
+    const chatWindow = document.getElementById('chat-window');
+    if (chatToggle && closeChat && chatWindow) {
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+        });
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
