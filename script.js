@@ -1,26 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     // --- Core Site Interactivity ---
-
-    if (typeof AOS !== 'undefined') {
-        AOS.init({ duration: 1000, once: true });
-    }
-    if (typeof feather !== 'undefined') {
-        feather.replace();
-    }
+    if (typeof AOS !== 'undefined') { AOS.init({ duration: 1000, once: true }); }
+    if (typeof feather !== 'undefined') { feather.replace(); }
 
     const mobileMenu = document.getElementById('mobile-menu');
     const menuToggle = document.getElementById('menu-toggle');
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-        });
-
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
         });
     }
 
@@ -30,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                // Close mobile menu if a link inside it is clicked
                 if (mobileMenu && !mobileMenu.classList.contains('hidden') && mobileMenu.contains(this)) {
                     mobileMenu.classList.add('hidden');
                 }
@@ -61,9 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     formElement.reset();
                     submitButton.innerHTML = 'Message Sent!';
-                } else {
-                    throw new Error('Server responded with an error.');
-                }
+                } else { throw new Error('Server responded with an error.'); }
             } catch (error) {
                 console.error('Form submission error:', error);
                 submitButton.innerHTML = 'Submission Failed';
@@ -74,12 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 3000);
             }
         };
-        if (heroForm) {
-            heroForm.addEventListener('submit', (e) => handleFormSubmit(e, heroForm));
-        }
-        if (mainForm) {
-            mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm));
-        }
+        if (heroForm) { heroForm.addEventListener('submit', (e) => handleFormSubmit(e, heroForm)); }
+        if (mainForm) { mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm)); }
     }
 
     // --- Email Obfuscation ---
@@ -91,4 +71,3 @@ document.addEventListener('DOMContentLoaded', () => {
         emailLink.textContent = user + '@' + domain;
     }
 });
-
