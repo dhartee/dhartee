@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="text-sm text-gray-500 mb-6">
                     <span>By Dharmendra Sharma</span> | <span>Published on ${new Date(post.date).toLocaleDateString()}</span>
                 </div>
-                <img class="w-full rounded-lg shadow-md mb-8" src="${post.image}" alt="${post.title}">
+                <img loading="lazy" class="w-full rounded-lg shadow-md mb-8" src="${post.image}" alt="${post.title}">
                 <div class="post-content text-lg leading-relaxed">
                     ${post.fullContent}
                 </div>
@@ -97,3 +97,4 @@ function loadDisqus(postId, postSlug) {
         (d.head || d.body).appendChild(s);
     })();
 }
+
