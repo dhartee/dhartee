@@ -134,6 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        // --- NEW: Populate form with the first imported item ---
+        if (importedCount > 0) {
+            window.populateForm(data[0]); // This fills the input boxes
+        }
+        
         alert(`Buyer Import Complete:\n- ${importedCount} buyers imported successfully.\n- ${errorCount} rows failed.`);
         
         // We must call loadData() from script.js to refresh the dropdowns
@@ -156,6 +161,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 errorCount++;
             }
         });
+        
+        // --- NEW: Populate form with the first imported item ---
+        if (importedCount > 0) {
+            window.populateForm(data[0]); // This fills the input boxes
+        }
         
         alert(`Seller Import Complete:\n- ${importedCount} sellers imported successfully.\n- ${errorCount} rows failed.`);
         
@@ -329,4 +339,3 @@ Instructions for Invoice Template:
         XLSX.writeFile(wb, fileName);
     }
 });
-
