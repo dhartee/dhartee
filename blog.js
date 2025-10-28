@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const postCard = `
                         <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col" data-aos="fade-up">
                             <a href="/blog/${post.slug}" class="block">
-                                <img class="w-full h-56 object-cover" src="${post.image}" alt="${post.title}">
+                                <img loading="lazy" class="w-full h-56 object-cover" src="${post.image}" alt="${post.title}">
                             </a>
                             <div class="p-6 flex flex-col flex-grow">
                                 <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">${post.category}</span>
@@ -59,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }, 100); // 100ms delay to ensure Firebase is ready
 });
+
