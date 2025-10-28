@@ -41,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Form Population ---
-    const populateForm = (data) => {
+    // MODIFIED: Made globally accessible for import.js
+    window.populateForm = (data) => {
         for (const key in data) {
             const element = document.getElementById(key);
             if (element) {
@@ -238,4 +239,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Initial Load ---
     loadData();
 });
-
