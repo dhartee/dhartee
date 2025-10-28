@@ -1,9 +1,9 @@
-// post.js (Final Corrected Version)
+// post.js (Final Corrected Version for GitHub Pages)
 document.addEventListener('DOMContentLoaded', () => {
     // A short delay to ensure Firebase is fully initialized
     setTimeout(async () => {
         if (typeof firebase === 'undefined' || typeof firebase.firestore === 'undefined') {
-            console.error("Firebase is not initialized.");
+            console.error("Firebase is not initialized. Cannot fetch post.");
             return;
         }
 
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const navigationContainer = document.getElementById('post-navigation-container');
         
         try {
-            // Get the slug from the URL
-            const path = window.location.pathname;
-            const slug = path.split('/').pop();
+            // **THE FIX**: Get the slug from the URL parameter (?slug=...)
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
 
             if (!slug || !postContentEl) {
-                if (postContentEl) postContentEl.innerHTML = '<h1 class="text-2xl font-bold text-center">Post Not Found</h1>';
+                if (postContentEl) postContentEl.innerHTML = '<h1 class="text-2xl font-bold text-center">Post Not Found.</h1><p class="text-center text-gray-500">No post identifier was provided.</p>';
                 return;
             }
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const snapshot = await postsCollection.where('slug', '==', slug).limit(1).get();
 
             if (snapshot.empty) {
-                postContentEl.innerHTML = '<h1 class="text-2xl font-bold text-center">Post not found.</h1>';
+                postContentEl.innerHTML = '<h1 class="text-2xl font-bold text-center">Post not found.</h1><p class="text-center text-gray-500">Please check the slug or update the post in the admin panel.</p>';
                 return;
             } 
             
@@ -50,42 +50,20 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // --- 2. Fetch Previous and Next Posts ---
             const fetchAdjacentPosts = async () => {
-                // Previous Post: Order by date descending, find first one older than current
-                const prevQuery = await postsCollection
-                    .orderBy('date', 'desc')
-                    .where('date', '<', post.date)
-                    .limit(1)
-                    .get();
-                
-                // Next Post: Order by date ascending, find first one newer than current
-                const nextQuery = await postsCollection
-                    .orderBy('date', 'asc')
-                    .where('date', '>', post.date)
-                    .limit(1)
-                    .get();
-
+                const prevQuery = await postsCollection.orderBy('date', 'desc').where('date', '<', post.date).limit(1).get();
+                const nextQuery = await postsCollection.orderBy('date', 'asc').where('date', '>', post.date).limit(1).get();
                 let navHTML = '';
                 
                 if (!prevQuery.empty) {
                     const prevPost = prevQuery.docs[0].data();
-                    navHTML += `
-                        <a href="/blog/${prevPost.slug}" class="prev-post">
-                            <div class="nav-label">&larr; Previous Article</div>
-                            <div class="nav-title">${prevPost.title}</div>
-                        </a>
-                    `;
+                    navHTML += `<a href="/blog/${prevPost.slug}" class="prev-post"><div class="nav-label">&larr; Previous Article</div><div class="nav-title">${prevPost.title}</div></a>`;
                 } else {
-                     navHTML += `<div></div>`; // Empty div for spacing
+                     navHTML += `<div></div>`;
                 }
 
                 if (!nextQuery.empty) {
                     const nextPost = nextQuery.docs[0].data();
-                    navHTML += `
-                        <a href="/blog/${nextPost.slug}" class="next-post">
-                            <div class="nav-label">Next Article &rarr;</div>
-                            <div class="nav-title">${nextPost.title}</div>
-                        </a>
-                    `;
+                    navHTML += `<a href="/blog/${nextPost.slug}" class="next-post"><div class="nav-label">Next Article &rarr;</div><div class="nav-title">${nextPost.title}</div></a>`;
                 }
                 
                 if (navigationContainer) navigationContainer.innerHTML = navHTML;
@@ -110,7 +88,6 @@ function loadDisqus(postId, postSlug) {
         this.page.identifier = postId;
     };
     
-    // Replace 'YOUR_DISQUS_SHORTNAME' with your actual shortname
     const shortname = 'dhartee'; 
     
     (function() { 
