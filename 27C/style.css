@@ -1,0 +1,263 @@
+/* Custom styles for matching the form layout and print view */
+body {
+    /* Gradient background from user request */
+    background-color: #fce4ec;
+    background-image: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+}
+
+.form-container {
+    border: 2px solid black;
+}
+
+/* This grid creates the complex layout of the form */
+.form-section {
+    display: grid;
+    /* 12-column grid for flexibility */
+    grid-template-columns: repeat(12, 1fr);
+    border-top: 1px solid #000;
+}
+
+.form-cell {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 4px 8px;
+    min-height: 40px;
+    /* Allows content inside to be structured */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Remove the outer-right border */
+.form-cell:last-child {
+    border-right: 0;
+}
+
+/* Apply left border to all cells *except* the first one in a row */
+.form-section > * {
+    border-left: 1px solid #000;
+}
+.form-section > :first-child {
+    border-left: 0;
+}
+
+/* Styling for form inputs to make them blend in */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 2px;
+    font-size: 0.875rem;
+    background-color: transparent;
+    /* Allows input to grow if needed, but start small */
+    flex-grow: 1;
+}
+
+/* Styling for the helper labels inside cells */
+.label {
+    font-size: 0.75rem;
+    color: #4a5568; /* Tailwind gray-600 */
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+/* ===== NEW ===== */
+/* Hide Page 2 content from screen view */
+#page-2-container { /* <<< CHANGED from #page-2-content */
+    display: none;
+}
+/* ===== END NEW ===== */
+
+
+/* Print-specific styles */
+@media print {
+    /* --- RULES TO FIX 4-PAGE PROBLEM --- */
+    body {
+        background-color: #fff;
+        background-image: none;
+        padding: 0;
+        margin: 0;
+        font-size: 9pt; /* Set a smaller base font for printing */
+    }
+    
+    .form-container {
+        box-shadow: none;
+        margin: 0;
+        max-width: 100%;
+        width: 100%; /* Ensure it uses the full page width */
+        border: 2px solid black; 
+    }
+    /* --- END OF RULES --- */
+
+    .no-print {
+        display: none;
+    }
+
+    /* --- NEW AGGRESSIVE COMPACT PRINT STYLES --- */
+    
+    /* Reduce cell padding and height to absolute minimum */
+    .form-cell {
+        padding: 1px 4px; /* MINIMAL padding */
+        min-height: 0;    /* Let content define height */
+        height: auto;
+    }
+    
+    .form-section {
+        border-top: 1px solid #000;
+    }
+    
+    .form-cell, .form-section > * {
+        border-color: #000; /* Ensure borders are black */
+    }
+
+    /* Reduce input/select font size */
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select {
+        font-size: 8pt; /* Smaller font for inputs */
+        padding: 1px;
+        border: none !important; /* Remove all borders */
+        height: auto;
+    }
+    
+    /* Add a dotted line for empty inputs */
+    input[type="text"]:placeholder-shown,
+    input[type="email"]:placeholder-shown,
+    input[type="tel"]:placeholder-shown {
+         border-bottom: 1px dotted #666 !important;
+    }
+    
+    /* Reduce label font size */
+    .label {
+        font-size: 7pt; /* Even smaller font for labels */
+        color: #000;
+        margin-bottom: 0;
+    }
+    
+    /* --- THIS IS THE FIX --- */
+    /* Reduce padding on headers and other sections */
+    .text-center.p-4 { padding: 3px; } /* Header */
+    .p-4.font-bold { padding: 3px; } /* Part I/II */
+    .p-4.border-y { padding: 3px; border-width: 1px;} /* Verification */
+    
+    /* This targets the "Forwarded to..." container */
+    .p-4.mt-4 { 
+        padding: 3px !important; 
+        margin-top: 0px !important;
+    }
+    
+    /* This targets the flex container for Place/Date/Signature */
+    .p-4.mt-4 .flex {
+        margin-top: 0.25rem !important; /* Was mt-8 (2rem) -> NOW VERY SMALL */
+    }
+
+    /* This targets the signature line container */
+    .p-4.mt-4 .flex .text-center {
+        margin-top: 0 !important;
+    }
+
+    /* This targets the signature line itself */
+     .p-4.mt-4 .flex .w-64.border-b {
+         margin-top: 0.25rem !important; /* Was mt-4 (1rem) -> NOW VERY SMALL */
+    }
+    
+    /* Reduce font size for text elements */
+    .text-sm { font-size: 8pt; line-height: 1.0; } /* TIGHTEST line height */
+    /* --- END OF FIX --- */
+
+    .text-xs { font-size: 7pt; }
+    .font-semibold { font-size: 10pt; }
+    .font-bold { font-size: 9pt; }
+    .text-xl { font-size: 11pt; } /* FORM No. 27C */
+
+    /* --- END OF COMPACT STYLES --- */
+    
+    input[type="checkbox"] {
+        border: 1px solid #000 !important;
+        width: 10px; /* Make checkbox smaller */
+        height: 10px;
+        margin-right: 2px;
+    }
+
+
+    /* --- THIS IS THE PAGE BREAK FIX --- */
+    /* Show the page-2 container only for print */
+    #page-2-container { /* <<< NEW RULE */
+        display: block !important;
+        page-break-before: always; /* Start this whole container on a new page */
+        border: 2px solid black;   /* <<< ADDED BORDER */
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    #page-2-content { /* <<< MODIFIED RULE */
+        /* display: block !important; */  /* Handled by parent */
+        /* page-break-before: always; */ /* Handled by parent */
+        font-size: 9pt;
+        /* padding-top: 1rem; */ /* Removed, handled by notes-section */
+    }
+
+    /* Style the new notes section */
+    #notes-section {
+        padding: 1rem 1rem 0 1rem; /* Padding, but no bottom padding */
+        font-size: 8pt;
+        line-height: 1.2;
+    }
+    #notes-section h4 {
+        font-size: 9pt;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+    #notes-section ol {
+        list-style-position: outside;
+        padding-left: 1.25rem; /* 20px */
+        margin: 0;
+    }
+    #notes-section ol > li {
+        padding-left: 4px;
+        margin-bottom: 2px;
+    }
+    #notes-section ol ol {
+        list-style-type: lower-roman;
+        margin-top: 2px;
+        padding-left: 1.25rem;
+    }
+
+    /* Remove the old page break rule from annexure */
+    #annexure-display {
+        padding: 1rem; /* Add padding for print */
+        margin-top: 1rem;
+        border-top: 1px solid #000;
+    }
+    
+    /* If the annexure is empty, just hide it. The notes will still print. */
+    #annexure-display:empty {
+         display: none;
+    }
+    /* --- END OF PAGE BREAK FIX --- */
+
+    
+    #annexure-display th, #annexure-display td {
+        padding: 2px 4px;
+        font-size: 8pt;
+    }
+
+    /* Ensure the annexure table prints nicely */
+    #annexure-display table {
+        page-break-inside: auto; 
+    }
+    
+    #annexure-display tr {
+        page-break-inside: avoid; 
+    }
+}
+
