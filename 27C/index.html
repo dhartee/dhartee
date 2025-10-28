@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form No. 27C</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to our external CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- ===== NEW: Link to import styles ===== -->
+    <link rel="stylesheet" href="import-style.css">
+</head>
+<body class="py-10">
+
+    <!-- ===== PAGE 1 CONTAINER ===== -->
+    <div id="form-27c" class="form-container max-w-5xl mx-auto bg-white shadow-2xl font-sans">
+        
+        <!-- Header Section -->
+        <div class="text-center p-4">
+            <h1 class="font-bold text-xl">FORM No. 27C</h1>
+            <p class="text-sm">[See rule 37C]</p>
+            <p class="font-semibold mt-2">Declaration under sub-section (1A) of section 206C of the Income-tax Act, 1961 to be made by a buyer for obtaining goods without collection of tax</p>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls p-4 bg-gray-50 border-t-2 border-b-2 border-black no-print">
+            <h3 class="font-bold text-lg mb-4 text-center">Form Controls</h3>
+            <div class="flex flex-wrap gap-4 justify-center">
+                <!-- Buyer Dropdown -->
+                <div class="flex-1 min-w-[200px]">
+                    <label for="buyerDropdown" class="block text-sm font-medium text-gray-700">Select Saved Buyer</label>
+                    <select id="buyerDropdown" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+                        <option>-- Select Buyer --</option>
+                    </select>
+                </div>
+                <!-- Seller Dropdown -->
+                <div class="flex-1 min-w-[200px]">
+                    <label for="sellerDropdown" class="block text-sm font-medium text-gray-700">Select Saved Seller</label>
+                    <select id="sellerDropdown" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+                        <option>-- Select Seller --</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-4 justify-center mt-4">
+                 <button id="saveBuyerBtn" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Save Buyer Information</button>
+                 <button id="saveSellerBtn" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">Save Seller Information</button>
+                 <button id="invoiceBtn" class="bg-purple-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-300">Add Invoice Details</button>
+                 <button id="printBtn" class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300">Print Form</button>
+            </div>
+
+            <!-- ===== NEW: Import Controls ===== -->
+            <div id="import-controls" class="mt-4">
+                <h4 class="font-bold text-md mb-2 text-center text-gray-700">Import from Excel (.xlsx)</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Buyer Import -->
+                    <div class="import-section">
+                        <!-- MODIFIED: Added download link to label -->
+                        <label for="buyerFile">1. Import Buyer(s) (<a href="#" id="downloadBuyerTemplate" class="template-link">Download Template</a>)</label>
+                        <div class="import-actions">
+                            <label for="buyerFile" class="file-input-label">Choose File</label>
+                            <input type="file" id="buyerFile" accept=".xlsx, .xls, .csv">
+                            <button id="importBuyerBtn" class="import-btn">Import</button>
+                        </div>
+                    </div>
+                    <!-- Seller Import -->
+                    <div class="import-section">
+                        <!-- MODIFIED: Added download link to label -->
+                        <label for="sellerFile">2. Import Seller(s) (<a href="#" id="downloadSellerTemplate" class="template-link">Download Template</a>)</label>
+                        <div class="import-actions">
+                            <label for="sellerFile" class="file-input-label">Choose File</label>
+                            <input type="file" id="sellerFile" accept=".xlsx, .xls, .csv">
+                            <button id="importSellerBtn" class="import-btn">Import</button>
+                        </div>
+                    </div>
+                    <!-- Invoice Import -->
+                    <div class="import-section">
+                        <!-- MODIFIED: Added download link to label -->
+                        <label for="invoiceFile">3. Import Invoices (<a href="#" id="downloadInvoiceTemplate" class="template-link">Download Template</a>)</label>
+                        <div class="import-actions">
+                            <label for="invoiceFile" class="file-input-label">Choose File</label>
+                            <input type="file" id="invoiceFile" accept=".xlsx, .xls, .csv">
+                            <button id="importInvoiceBtn" class="import-btn">Import</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ===== END: Import Controls ===== -->
+            
+        </div>
+
+        <!-- Page 1 Content -->
+        <form id="mainForm">
+            <!-- PART I -->
+            <div class="p-4 font-bold text-lg text-center">PART I</div>
+            <div class="form-section">
+                <div class="form-cell col-span-7">
+                    <label class="label">1. Name of Buyer (applicant)</label>
+                    <input type="text" id="buyerName" placeholder=" ">
+                </div>
+                <div class="form-cell col-span-5">
+                    <label class="label">2. Permanent Account Number of the Buyer</label>
+                    <input type="text" id="buyerPan" placeholder=" ">
+                </div>
+            </div>
+            <div class="form-section">
+                <div class="form-cell col-span-3"><label class="label">3. Flat/Door/Block No.</label><input type="text" id="buyerFlat" placeholder=" "></div>
+                <div class="form-cell col-span-6"><label class="label">4. Name of Premises</label><input type="text" id="buyerPremises" placeholder=" "></div>
+                <div class="form-cell col-span-3">
+                    <label class="label">5. ***Status</label>
+                    <select id="buyerStatus">
+                        <option value="">Choose</option>
+                        <option value="1">1-Company</option>
+                        <option value="2">2-Firm</option>
+                        <option value="3">3-AOP/BOI</option>
+                        <option value="4">4-HUF</option>
+                        <option value="5">5-Individual</option>
+                        <option value="6">6-Others</option>
+                    </select>
+                </div>
+            </div>
+             <div class="form-section">
+                <div class="form-cell col-span-5"><label class="label">6. Road/Street/Lane</label><input type="text" id="buyerRoad" placeholder=" "></div>
+                <div class="form-cell col-span-7"><label class="label">7. Area/Locality</label><input type="text" id="buyerArea" placeholder=" "></div>
+             </div>
+             <div class="form-section">
+                <div class="form-cell col-span-6"><label class="label">8. Assessed in which Ward/Circle</label><input type="text" id="buyerWard" placeholder=" "></div>
+                <div class="form-cell col-span-6">
+                    <label class="label">9. AO Code (under whom assessed last time)</label>
+                    <div class="grid grid-cols-4 gap-x-2">
+                        <input type="text" id="buyerAoArea" placeholder="Area">
+                        <input type="text" id="buyerAoType" placeholder="Type">
+                        <input type="text" id="buyerAoRange" placeholder="Range">
+                        <input type="text" id="buyerAoNo" placeholder="AO No">
+                    </div>
+                </div>
+             </div>
+             <div class="form-section">
+                 <div class="form-cell col-span-5"><label class="label">10. Town/City/District</label><input type="text" id="buyerCity" placeholder=" "></div>
+                 <div class="form-cell col-span-4"><label class="label">11. State</label><input type="text" id="buyerState" placeholder=" "></div>
+                 <div class="form-cell col-span-3"><label class="label">12. PIN</label><input type="text" id="buyerPin" placeholder=" "></div>
+             </div>
+             <div class="form-section">
+                 <div class="form-cell col-span-7"><label class="label">14. Email</label><input type="email" id="buyerEmail" placeholder=" "></div>
+                 <div class="form-cell col-span-5"><label class="label">15. Telephone No. and Mobile No.</label><input type="tel" id="buyerPhone" placeholder=" "></div>
+             </div>
+             <div class="form-section">
+                <div class="form-cell col-span-12"><label class="label">19. Nature of Business/Occupation</label><input type="text" id="buyerBusinessNature" placeholder=" "></div>
+            </div>
+             <div class="form-section">
+                <div class="form-cell col-span-8 flex items-center">
+                    <label class="label mr-4">20. Purpose of utilization of goods</label>
+                    <div class="flex gap-4 items-center">
+                        <label class="flex items-center text-sm"><input type="checkbox" id="purposeManufacturing" class="mr-1">Manufacturing, processing, production</label>
+                        <label class="flex items-center text-sm"><input type="checkbox" id="purposePower" class="mr-1">Generation of power</label>
+                    </div>
+                </div>
+                <div class="form-cell col-span-4"><label class="label">21. Nature of goods</label><input type="text" id="goodsNature" placeholder=" "></div>
+            </div>
+
+            <!-- Verification -->
+            <div class="p-4 border-y border-black">
+                <h3 class="font-bold text-center">Declaration/Verification</h3>
+                <p class="text-sm mt-2">
+                    *I/We <input type="text" id="declarantName" class="w-64 border-b border-gray-400 focus:border-blue-500"> do hereby declare that to the best of *my/our knowledge and belief what is stated above is correct, complete and is truly stated. *I/we declare that the goods referred to in Column No. 21 shall not be used for trading purposes. *I/We also, declare that *I/we *am/are resident in India within the meaning of section 6 of the Income-tax Act, 1961.
+                </p>
+                <div class="flex justify-between mt-8">
+                    <div>
+                        <label class="label">Place:</label>
+                        <input type="text" id="declarationPlace" class="w-48 border-b">
+                    </div>
+                    <div>
+                        <label class="label">Date:</label>
+                        <input type="date" id="declarationDate" class="w-32 border-b">
+                    </div>
+                    <div class="text-center">
+                        <div class="w-64 border-b border-dotted border-black mt-4"></div>
+                        <p class="text-sm">**Signature of the Declarant</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART II -->
+            <div class="p-4 font-bold text-lg text-center">PART II</div>
+            <div class="text-center text-xs pb-2">[For use by the person to whom the declaration is furnished]</div>
+            
+            <div class="form-section">
+                <div class="form-cell col-span-7"><label class="label">1. Name of the Seller</label><input type="text" id="sellerName" placeholder=" "></div>
+                <div class="form-cell col-span-5"><label class="label">2. Permanent Account Number of the Seller</label><input type="text" id="sellerPan" placeholder=" "></div>
+            </div>
+            <div class="form-section">
+                <div class="form-cell col-span-12"><label class="label">3. Complete address</label><input type="text" id="sellerAddress" placeholder=" "></div>
+            </div>
+            <div class="form-section">
+                <div class="form-cell col-span-6"><label class="label">4. TAN of the Seller</label><input type="text" id="sellerTan" placeholder=" "></div>
+                <div class="form-cell col-span-6"><label class="label">5. Email</label><input type="email" id="sellerEmail" placeholder=" "></div>
+            </div>
+            <div class="form-section">
+                <div class="form-cell col-span-5"><label class="label">6. Telephone No. and Mobile No.</label><input type="tel" id="sellerPhone" placeholder=" "></div>
+                <div class="form-cell col-span-3">
+                    <label class="label">7. ***Status</label>
+                    <select id="sellerStatus">
+                        <option value="">Choose</option>
+                        <option value="1">1-Company</option>
+                        <option value="2">2-Firm</option>
+                        <option value="3">3-AOP/BOI</option>
+                        <option value="4">4-HUF</option>
+                        <option value="5">5-Individual</option>
+                        <option value="6">6-Others</option>
+                    </select>
+                </div>
+                <div class="form-cell col-span-4"><label class="label">8. Date on which declaration is furnished</label><input type="date" id="furnishDate"></div>
+            </div>
+            <div class="form-section">
+                <div class="form-cell col-span-12"><label class="label">9. Date of debiting of the amount payable by the buyer</label><input type="date" id="debitDate"></div>
+            </div>
+            
+             <!-- Forwarding Section -->
+            <div class="p-4 mt-4">
+                <p class="text-sm">Forwarded to the Chief Commissioner or Commissioner of Income-tax ....................................................</p>
+                 <div class="flex justify-between mt-8">
+                    <div>
+                        <label class="label">Place:</label>
+                        <input type="text" id="forwardPlace" class="w-48 border-b">
+                    </div>
+                    <div>
+                        <label class="label">Date:</label>
+                        <input type="date" id="forwardDate" class="w-32 border-b">
+                    </div>
+                    <div class="text-center">
+                        <div class="w-64 border-b border-dotted border-black mt-4"></div>
+                        <p class="text-xs">Signature of the person responsible for collecting tax</p>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> <!-- ===== END OF PAGE 1 CONTAINER ===== -->
+
+
+    <!-- ===== PAGE 2 CONTAINER (NEW) ===== -->
+    <div id="page-2-container">
+        <div id="page-2-content">
+            <!-- New Notes Section -->
+            <div id="notes-section">
+                <h4 class="font-bold mb-2">Notes:</h4>
+                <ol class="list-decimal list-outside text-sm pl-5 space-y-1">
+                    <li>The declaration should be furnished in duplicate.</li>
+                    <li>*Delete whichever is not applicable.</li>
+                    <li>**Indicate the capacity in which the declaration is furnished on behalf of a HUF, AOP, firm, company, etc.</li>
+                    <li>***1=Company; 2=Firm; 3=AOP/BOI; 4=HUF; 5=Individual; 6=Others</li>
+                    <li>Before signing the verification, the declarant should satisfy himself that the information furnished in the declaration is true, correct and complete in all respects. Any person making a false statement in the declaration shall be liable to prosecution under 277 of the Income-tax Act, 1961 and on conviction be punishable-
+                        <ol class="list-[lower-roman] list-outside pl-5 space-y-1 mt-1">
+                            <li>In a case where tax sought to be evaded exceeds twenty-five lakh rupees, with rigorous imprisonment which shall not be less than 6 months but which may extend to seven years and with fine;</li>
+                            <li>In any other case, with rigorous imprisonment which shall not be less than 3 months but which may extend to two years and with fine.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            
+            <!-- Annexure Display Area (Moved inside) -->
+            <div id="annexure-display" class="border-t-2 border-black mt-4"></div>
+        </div>
+    </div>
+    <!-- ===== END OF PAGE 2 CONTAINER ===== -->
+
+
+    <!-- Invoice Modal -->
+    <div id="invoiceModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden no-print">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 class="text-xl font-bold">Invoice Details (Annexure-1)</h2>
+                <button id="closeModalBtn" class="text-2xl font-bold">&times;</button>
+            </div>
+            <div class="p-4 max-h-[60vh] overflow-y-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="border p-2 text-left">Bill No</th>
+                            <th class="border p-2 text-left">Date</th>
+                            <th class="border p-2 text-left">Amount</th>
+                            <th class="border p-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoiceTableBody">
+                        <!-- Rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div classs="p-4 border-t flex justify-end gap-4">
+                <button id="addInvoiceRowBtn" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">Add Row</button>
+                <button id="saveInvoicesBtn" class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to our external JS -->
+    <!-- ===== NEW: Add SheetJS Library (MUST be before other scripts) ===== -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+    <!-- ===== NEW: Link to import logic ===== -->
+    <script src="import.js"></script>
+</body>
+</html>
+
+
