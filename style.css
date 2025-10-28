@@ -371,3 +371,54 @@ footer .social-icon a:hover {
     gap: 0.75rem;
     flex-shrink: 0;
 }
+/* =================================== */
+/* Single Post Page Enhancements       */
+/* =================================== */
+
+/* Justify paragraph text for a cleaner look */
+.post-content p {
+    text-align: justify;
+}
+
+/* Styles for Next/Previous post navigation */
+.post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.post-navigation a {
+    display: block;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    max-width: 48%;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.post-navigation a:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.post-navigation .nav-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.post-navigation .nav-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin-top: 0.25rem;
+}
+
+.post-navigation .prev-post {
+    text-align: left;
+}
+
+.post-navigation .next-post {
+    text-align: right;
+}
