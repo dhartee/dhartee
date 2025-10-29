@@ -422,3 +422,28 @@ footer .social-icon a:hover {
 .post-navigation .next-post {
     text-align: right;
 }
+input[type="text"], input[type="url"], select, textarea {
+  font-family: inherit;
+  border: 1px solid #e6edf3;
+  background: #fff;
+  transition: box-shadow .18s ease, border-color .12s ease;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: rgba(37,99,235,0.85);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.06);
+}
+button {
+  font-family: inherit;
+}
+#posts-list .thumb-sm { border-radius: 6px; }
+
+.ql-editor { min-height: 260px; font-size: 15px; line-height: 1.65; }
+.ql-toolbar { border-radius: 8px 8px 0 0; }
+
+#editor-container { border-radius: 8px; }
+
+@media (max-width: 1024px) {
+  aside { display:none; }
+}
+
