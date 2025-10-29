@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sitemap Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center">
+        <h1 class="text-2xl font-bold mb-4">Sitemap Generator</h1>
+        <p class="mb-6 text-gray-600">Click the button to generate and download an updated sitemap.xml file.</p>
+        <button id="generateBtn" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700">
+            Generate & Download Sitemap
+        </button>
+        <pre id="output" class="hidden mt-6 p-4 bg-gray-50 text-left text-sm rounded-md overflow-x-auto"></pre>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const generateBtn = document.getElementById('generateBtn');
+            const output = document.getElementById('output');
+            generateBtn.textContent = 'Generating...';
+            generateBtn.disabled = true;
+
+            const db = firebase.firestore();
+            const postsSnapshot = await db.collection('posts').orderBy('date', 'desc').get();
+            const today = new Date().toISOString().split('T')[0];
+
+            let sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://dhartee.in/</loc>
+    <lastmod>${today}</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog.html</loc>
+    <lastmod>${today}</lastmod>
+    <priority>0.80</priority>
+  </url>`;
+
+            postsSnapshot.forEach(doc => {
+                const post = doc.data();
+                const postDate = new Date(post.date).toISOString().split('T')[0];
+                sitemapContent += `
+  <url>
+    <loc>https://dhartee.in/blog/${post.slug}</loc>
+    <lastmod>${postDate}</lastmod>
+    <priority>0.80</priority>
+  </url>`;
+            });
+
+            sitemapContent += `\n</urlset>`;
+
+            output.textContent = sitemapContent;
+            output.classList.remove('hidden');
+
+            const blob = new Blob([sitemapContent], { type: 'application/xml' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'sitemap.xml';
+            link.click();
+
+            generateBtn.textContent = 'Generate & Download Sitemap';
+            generateBtn.disabled = false;
+        });
+    </script>
+</body>
+</html>
