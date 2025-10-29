@@ -1,1 +1,33 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://dhartee.in/</loc>
+    <lastmod>2025-10-29</lastmod>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog.html</loc>
+    <lastmod>2025-10-29</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog/gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy</loc>
+    <lastmod>2025-10-29</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog/money-recovery-advocate-notice</loc>
+    <lastmod>2025-10-27</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog/police-custody-and-judicial-custody</loc>
+    <lastmod>2025-10-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/blog/vote-counting-process</loc>
+    <lastmod>2025-10-25</lastmod>
+    <priority>0.80</priority>
+  </url>
+</urlset>
