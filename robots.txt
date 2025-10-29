@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://dhartee.in/sitemap
+Sitemap: https://dhartee.in/sitemap.xml
