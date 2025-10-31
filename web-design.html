@@ -1,132 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Custom Web Design & Development Services India | Dhartee.in</title>
-    <meta name="description" content="Dhartee.in offers professional web design services in India. We build modern, responsive, and SEO-friendly websites for businesses to enhance their online presence.">
-    <meta name="keywords" content="web design India, web development services, responsive websites, SEO friendly websites, website builder Jaipur, business website, custom web design, dhartee.in, affordable websites">
-    <meta name="author" content="Dhartee.in">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <title>Custom Web Design & Development Services | DharTee</title>
+    <meta name="description" content="DharTee offers professional web design services in India. We build modern, responsive, and SEO-friendly websites to showcase your brand and grow your business." />
+    <meta name="keywords" content="web design India, web development services, responsive websites, SEO friendly websites, website builder Jaipur, business website, custom web design, dhartee.in, affordable websites" />
+    
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivYqW-NgitfrySlZ-6KRI_zv0HrEUV0k2p9W-FUAjYFOnVJVlnvrjTlH6lStMlKFZc0Cegq8PHy5iPQGRlhWlaeAa90wzq-K80BkJoqu9oVi698mOYOF42M57juqRRuy6ukh4jYQZ9ckMANa_U1NZNhPRlQtpXrGSpeNLLxDCHoKlFFtgtT1z1OnfUPq25/s1600/apple-touch-icon-dhartee.png" rel="icon" type="image/x-icon" />
+    <link href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivYqW-NgitfrySlZ-6KRI_zv0HrEUV0k2p9W-FUAjYFOnVJVlnvrjTlH6lStMlKFZc0Cegq8PHy5iPQGRlhWlaeAa90wzq-K80BkJoqu9oVi698mOYOF42M57juqRRuy6ukh4jYQZ9ckMANa_U1NZNhPRlQtpXrGSpeNLLxDCHoKlFFtgtT1z1OnfUPq25/s1600/apple-touch-icon-dhartee.png" rel="apple-touch-icon" />
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        .hero-bg {
-            background-color: #1e3a8a; /* A fallback color */
-            background-image: linear-gradient(to right, #2563eb, #0ea5e9);
-        }
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-bg { background-image: linear-gradient(to right, #2563eb, #0ea5e9); }
     </style>
 </head>
-<body class="bg-light">
- <header class="fixed w-full bg-white shadow-md z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center">
-            <a href="/"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div></a>
-            <a href="/"><span class="ml-2 text-xl font-bold text-dark">DharTee</span></a>
-        </div>
-        <nav class="hidden md:flex space-x-8">
-            <a class="text-dark hover:text-primary font-medium" href="index.html">Home</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#services">Services</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#about">About</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#process">Process</a>
-            <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
-        </nav>
-        <div class="flex items-center space-x-4">
-             <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
-                <i data-feather="phone" class="mr-2"></i> Call Now
-            </a>
-            <a class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About">
-                <i data-feather="message-circle"></i>
-            </a>
-            <button class="md:hidden text-dark" id="menu-toggle">
-                <i data-feather="menu"></i>
-            </button>
-        </div>
-    </div>
-    <div class="hidden md:hidden bg-white py-4 px-4 shadow-lg" id="mobile-menu">
-        <div class="flex flex-col space-y-3">
-            <a class="text-dark hover:text-primary font-medium" href="index.html">Home</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#services">Services</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#about">About</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#process">Process</a>
-            <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
-            <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
-            <a class="flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
-                <i data-feather="phone" class="mr-2"></i> Call Now
-            </a>
-        </div>
-    </div>
-</header>
-    <main>
 
-        <section id="home" class="hero-bg pt-24 pb-16 md:pt-32 md:pb-24">
+<body class="bg-light">
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="/">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
+                </a>
+                <a href="/"><span class="ml-2 text-xl font-bold text-dark">DharTee</span></a>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a class="text-dark hover:text-primary font-medium" href="/#home">Home</a>
+                <a class="text-dark hover:text-primary font-medium" href="/#services">Services</a>
+                <a class="text-primary font-bold" href="web-design.html">Web Design</a> <a class="text-dark hover:text-primary font-medium" href="/#about">About</a>
+                <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
+                <a class="text-dark hover:text-primary font-medium" href="/#contact">Contact</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
+                    <i class="mr-2" data-feather="phone"></i> Call Now
+                </a>
+                <a class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About%20Web%20Design">
+                    <i data-feather="message-circle"></i>
+                </a>
+                <button class="md:hidden text-dark" id="menu-toggle">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+        </div>
+        <div class="hidden md:hidden bg-white py-4 px-4 shadow-lg" id="mobile-menu">
+            <div class="flex flex-col space-y-3">
+                 <a class="text-dark hover:text-primary font-medium" href="/#home">Home</a>
+                <a class="text-dark hover:text-primary font-medium" href="/#services">Services</a>
+                <a class="text-primary font-bold" href="web-design.html">Web Design</a>
+                <a class="text-dark hover:text-primary font-medium" href="/#about">About</a>
+                <a class="text-dark hover:text-primary font-medium" href="blog.html">Blog</a>
+                <a class="text-dark hover:text-primary font-medium" href="/#contact">Contact</a>
+                <a class="flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
+                    <i class="mr-2" data-feather="phone"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-bg pt-32 pb-24">
             <div class="container mx-auto px-4 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight" data-aos="fade-down">
                     Creative & Professional Web Designing
                 </h1>
-                <p class="mt-4 text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
+                <p class="mt-4 text-lg md:text-xl text-blue-100 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
                     We build modern, responsive, and SEO-friendly websites that attract customers and grow your business online.
                 </p>
-                <div class="mt-8 flex justify-center gap-4 flex-wrap">
-                    <a href="#contact" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg">
+                <div class="mt-8 flex justify-center gap-4 flex-wrap" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#contact" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 hover:scale-105 transition-all shadow-lg">
                         Get a Free Quote
                     </a>
-                    <a href="#projects" class="bg-accent text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition">
+                    <a href="#projects" class="border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:text-primary hover:scale-105 transition-all">
                         Our Projects
                     </a>
                 </div>
             </div>
         </section>
 
-        <section id="services" class="py-16 md:py-24 bg-gray-50">
+        <section class="py-16 md:py-24 bg-light">
             <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark">Our Web Design Services</h2>
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark">Our Web Design Expertise</h2>
                     <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">Complete solutions to build your powerful online presence.</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
-                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
                         <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-blue-100 mb-4">
-                           <svg class="h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path></svg>
+                           <i class="fas fa-drafting-compass text-4xl text-primary"></i>
                         </div>
-                        <h3 class="text-2xl font-semibold text-dark">Custom Website Design</h3>
-                        <p class="mt-2 text-gray-600">
-                            Unique, beautiful website designs tailored to your brand identity and business goals.
-                        </p>
+                        <h3 class="text-2xl font-semibold text-dark">Custom Design</h3>
+                        <p class="mt-2 text-gray-600">Unique, beautiful websites tailored to your brand identity and business goals.</p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                         <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-blue-100 mb-4">
-                            <svg class="h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <i class="fas fa-mobile-alt text-4xl text-primary"></i>
                         </div>
                         <h3 class="text-2xl font-semibold text-dark">Responsive Development</h3>
-                        <p class="mt-2 text-gray-600">
-                            Websites that look and work perfectly on all devices, from desktops to smartphones.
-                        </p>
+                        <p class="mt-2 text-gray-600">Websites that look and work perfectly on all devices, from desktops to smartphones.</p>
                     </div>
                     
-                    <div class="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
+                    <div class="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-xl hover:-translate-y-2 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
                         <div class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-blue-100 mb-4">
-                            <svg class="h-10 w-10 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            <i class="fas fa-search-dollar text-4xl text-primary"></i>
                         </div>
-                        <h3 class="text-2xl font-semibold text-dark">E-commerce Solutions</h3>
-                        <p class="mt-2 text-gray-600">
-                           Complete online stores with secure payment gateways to sell your products online.
-                        </p>
+                        <h3 class="text-2xl font-semibold text-dark">SEO-Friendly</h3>
+                        <p class="mt-2 text-gray-600">Built with search engine optimization in mind to help you rank higher on Google.</p>
                     </div>
                 </div>
             </div>
@@ -134,67 +139,58 @@
 
         <section id="projects" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Projects</h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">A selection of websites we've proudly developed for our clients.</p>
                 </div>
                 
-             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                        <img src="https://placehold.co/600x400/2563eb/white?text=Oswal+Lumbers" alt="Oswal Lumbers Website Project" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark">Oswal Lumbers Pvt. Ltd.</h3>
-                            <p class="mt-2 text-gray-600">A professional corporate website for a leading timber and wood products company.</p>
-                            <a href="http://oswallumbers.in" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-primary text-white font-medium py-2 px-5 rounded-full hover:bg-blue-700 transition">Visit Website</a>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="relative rounded-lg shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/600x400/2563eb/white?text=Oswal+Lumbers" alt="Oswal Lumbers Website" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex flex-col justify-center items-center text-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Oswal Lumbers</h3>
+                            <a href="http://oswallumbers.in" target="_blank" rel="noopener noreferrer" class="mt-4 bg-white text-primary font-bold py-2 px-6 rounded-full opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">View Project</a>
                         </div>
                     </div>
-                    
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                        <img src="https://placehold.co/600x400/0ea5e9/white?text=Shree+Maruti" alt="Shree Maruti Wood Website Project" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark">Shree Maruti Wood</h3>
-                            <p class="mt-2 text-gray-600">A clean product showcase website for a wood manufacturing and supply business.</p>
-                            <a href="http://shreemarutiwood.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-primary text-white font-medium py-2 px-5 rounded-full hover:bg-blue-700 transition">Visit Website</a>
+                    <div class="relative rounded-lg shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://placehold.co/600x400/0ea5e9/white?text=Shree+Maruti" alt="Shree Maruti Wood Website" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-secondary bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex flex-col justify-center items-center text-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Shree Maruti Wood</h3>
+                            <a href="http://shreemarutiwood.com" target="_blank" rel="noopener noreferrer" class="mt-4 bg-white text-secondary font-bold py-2 px-6 rounded-full opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">View Project</a>
                         </div>
                     </div>
-
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                        <img src="https://placehold.co/600x400/f97316/white?text=Law+Classes" alt="Law Classes Jaipur Website Project" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark">Law Classes Jaipur</h3>
-                            <p class="mt-2 text-gray-600">An educational portal for a law coaching institute with course details and resources.</p>
-                            <a href="http://lawclassesjaipur.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-primary text-white font-medium py-2 px-5 rounded-full hover:bg-blue-700 transition">Visit Website</a>
+                     <div class="relative rounded-lg shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://placehold.co/600x400/f97316/white?text=Law+Classes" alt="Law Classes Jaipur Website" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-accent bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex flex-col justify-center items-center text-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Law Classes Jaipur</h3>
+                            <a href="http://lawclassesjaipur.com" target="_blank" rel="noopener noreferrer" class="mt-4 bg-white text-accent font-bold py-2 px-6 rounded-full opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">View Project</a>
                         </div>
                     </div>
-                    
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                        <img src="https://placehold.co/600x400/1e293b/white?text=Arvind+Sir" alt="Arvind Sir English Website Project" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark">Arvind Sir English</h3>
-                            <p class="mt-2 text-gray-600">A personal branding and educational website for an English language tutor.</p>
-                            <a href="http://arvindsirenglish.com" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-primary text-white font-medium py-2 px-5 rounded-full hover:bg-blue-700 transition">Visit Website</a>
+                     <div class="relative rounded-lg shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/600x400/1e293b/white?text=Arvind+Sir" alt="Arvind Sir English Website" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-dark bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex flex-col justify-center items-center text-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Arvind Sir English</h3>
+                            <a href="http://arvindsirenglish.com" target="_blank" rel="noopener noreferrer" class="mt-4 bg-white text-dark font-bold py-2 px-6 rounded-full opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">View Project</a>
                         </div>
                     </div>
-
-                    <div class="bg-white rounded-lg shadow-lg overflow-hidden group">
-                        <img src="https://placehold.co/600x400/10b981/white?text=Karma+Judiciary" alt="Karma Judiciary Website Project" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-dark">Karma Judiciary</h3>
-                            <p class="mt-2 text-gray-600">An informational and course-focused website for a judicial services coaching center.</p>
-                            <a href="https://dhartee.github.io/karmajudiciary/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-primary text-white font-medium py-2 px-5 rounded-full hover:bg-blue-700 transition">Visit Website</a>
+                    <div class="relative rounded-lg shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
+                        <img src="https://placehold.co/600x400/10b981/white?text=Karma+Judiciary" alt="Karma Judiciary Website" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-emerald-500 bg-opacity-0 group-hover:bg-opacity-80 transition-all duration-300 flex flex-col justify-center items-center text-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Karma Judiciary</h3>
+                            <a href="https://dhartee.github.io/karmajudiciary/" target="_blank" rel="noopener noreferrer" class="mt-4 bg-white text-emerald-500 font-bold py-2 px-6 rounded-full opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">View Project</a>
                         </div>
                     </div>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="py-16 md:py-24 bg-gray-50">
+        <section id="contact" class="py-16 md:py-24 bg-light">
             <div class="container mx-auto px-4">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Get a Free Web Design Quote</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Have a project in mind? Let's talk about it. Fill out the form below to get started.</p>
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Let's Build Your Website</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Have a project in mind? Fill out the form below to get a free, no-obligation quote.</p>
                 </div>
-                <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg" data-aos="fade-up" data-aos-delay="200">
                     <form id="main-contact-form">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -205,27 +201,13 @@
                                 <label class="block text-dark font-medium mb-2">Email Address</label>
                                 <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="email" required type="email" />
                             </div>
-                             <div>
-                                <label class="block text-dark font-medium mb-2">Phone Number</label>
-                                <input class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="phone" type="tel" />
-                            </div>
-                            <div>
-                                <label class="block text-dark font-medium mb-2">Service Interested In</label>
-                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="service">
-                                    <option>Select a service</option>
-                                    <option>Custom Website Design</option>
-                                    <option>E-commerce Website</option>
-                                    <option>Website Redesign</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="mt-6">
                             <label class="block text-dark font-medium mb-2">Tell us about your project</label>
-                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="message" required rows="5"></textarea>
+                            <textarea class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" name="message" required rows="5" placeholder="Describe your website needs, goals, and any examples you like..."></textarea>
                         </div>
                         <div class="text-center mt-6">
-                            <button class="w-full md:w-auto bg-primary text-white font-bold py-3 px-12 rounded-lg hover:bg-blue-700 transition" type="submit">Send Message</button>
+                            <button class="bg-primary text-white font-bold py-3 px-12 rounded-full hover:bg-blue-700 hover:scale-105 transition-all shadow-lg" type="submit">Send Project Details</button>
                         </div>
                     </form>
                 </div>
@@ -233,5 +215,75 @@
         </section>
     </main>
 
-    </body>
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
+                        <span class="ml-2 text-xl font-bold">DharTee</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Professional services for your business growth, including taxation, legal support, web design, and software solutions.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i data-feather="linkedin"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-400 hover:text-white" href="/#home">Home</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="/#services">Services</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="/#about">About Us</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="/#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a class="text-gray-400 hover:text-white" href="#">Taxation and GST</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Legal Support</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="web-design.html">Web Designing</a></li>
+                        <li><a class="text-gray-400 hover:text-white" href="#">Software Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe for updates and offers.</p>
+                    <form class="flex">
+                        <input class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark" placeholder="Your Email" type="email" />
+                        <button class="bg-primary px-4 rounded-r-lg hover:bg-blue-700 transition" type="submit">
+                            <i data-feather="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 DharTee. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        // Initialize AOS (Animate on Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
 </html>
