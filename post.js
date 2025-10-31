@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full">${post.category}</span>
                 <h1 class="text-3xl md:text-4xl font-bold text-dark my-4">${post.title}</h1>
                 <div class="text-sm text-gray-500 mb-6">
-                    <span>By Dharmendra Sharma</span> | <span>Published on ${new Date(post.date).toLocaleDateString()}</span>
+                    <span>By Dharmendra Sharma</span> | <span>Published on ${new Date(post.date).toLocaleDateString('en-IN')}</span>
                 </div>
                 <img loading="lazy" class="w-full rounded-lg shadow-md mb-8" src="${post.image}" alt="${post.title}">
                 <div class="post-content text-lg leading-relaxed">
@@ -97,4 +97,5 @@ function loadDisqus(postId, postSlug) {
         (d.head || d.body).appendChild(s);
     })();
 }
+
 
