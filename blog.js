@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
                                     <div class="text-sm text-gray-500">
                                         <span>By Dharmendra Sharma</span><br/>
-                                        <span>${new Date(post.date).toLocaleDateString()}</span>
+                                        <span>${new Date(post.date).toLocaleDateString('en-IN')}</span>
                                     </div>
                                     <a href="/blog/${post.slug}" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
                                 </div>
@@ -59,4 +59,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }, 100); // 100ms delay to ensure Firebase is ready
 });
+
 
