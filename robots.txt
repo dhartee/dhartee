@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /login.html
+
+
 Sitemap: https://dhartee.in/sitemap.xml
