@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroForm = document.getElementById('hero-contact-form');
     const mainForm = document.getElementById('main-contact-form');
     if (heroForm || mainForm) {
-        const functionUrl = 'https://us-central1-dhartee-blog.cloudfunctions.net/submitContactForm';
+        const functionUrl = 'https://submitcontactform-jsev7mahbq-uc.a.run.app';
         const handleFormSubmit = async (event, formElement) => {
             event.preventDefault();
             const formData = new FormData(formElement);
@@ -71,3 +71,4 @@ document.addEventListener('DOMContentLoaded', () => {
         emailLink.textContent = user + '@' + domain;
     }
 });
+
