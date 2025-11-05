@@ -56,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (!prevQuery.empty) {
                     const prevPost = prevQuery.docs[0].data();
-                    navHTML += `<a href="/blog/${prevPost.slug}" class="prev-post"><div class="nav-label">&larr; Previous Article</div><div class="nav-title">${prevPost.title}</div></a>`;
+                    navHTML += `<a href="post.html?slug=${prevPost.slug}" class="prev-post"><div class="nav-label">&larr; Previous Article</div><div class="nav-title">${prevPost.title}</div></a>`;
                 } else {
                      navHTML += `<div></div>`;
                 }
 
                 if (!nextQuery.empty) {
                     const nextPost = nextQuery.docs[0].data();
-                    navHTML += `<a href="/blog/${nextPost.slug}" class="next-post"><div class="nav-label">Next Article &rarr;</div><div class="nav-title">${nextPost.title}</div></a>`;
+                    navHTML += `<a href="post.html?slug=${nextPost.slug}" class="next-post"><div class="nav-label">Next Article &rarr;</div><div class="nav-title">${nextPost.title}</div></a>`;
                 }
                 
                 if (navigationContainer) navigationContainer.innerHTML = navHTML;
@@ -97,5 +97,6 @@ function loadDisqus(postId, postSlug) {
         (d.head || d.body).appendChild(s);
     })();
 }
+
 
 
