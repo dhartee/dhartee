@@ -2,31 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dhartee.in/</loc>
-    <lastmod>2025-10-29</lastmod>
+    <lastmod>2025-11-05</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
     <loc>https://dhartee.in/blog.html</loc>
+    <lastmod>2025-11-05</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/post.html?slug=21-gemini-prompts-that-will-save-you-hours</loc>
+    <lastmod>2025-11-01</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/post.html?slug=how-to-use-ai-gemini-chatgpt-and-perplexity</loc>
+    <lastmod>2025-10-31</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/post.html?slug=gemini-ai-tool-for-any-work-the-future-of-smart-assistance</loc>
+    <lastmod>2025-10-31</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dhartee.in/post.html?slug=gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy</loc>
     <lastmod>2025-10-29</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://dhartee.in/blog/gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy</loc>
-    <lastmod>2025-10-29</lastmod>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://dhartee.in/blog/money-recovery-advocate-notice</loc>
+    <loc>https://dhartee.in/post.html?slug=money-recovery-advocate-notice</loc>
     <lastmod>2025-10-27</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://dhartee.in/blog/police-custody-and-judicial-custody</loc>
+    <loc>https://dhartee.in/post.html?slug=police-custody-and-judicial-custody</loc>
     <lastmod>2025-10-25</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://dhartee.in/blog/vote-counting-process</loc>
+    <loc>https://dhartee.in/post.html?slug=vote-counting-process</loc>
     <lastmod>2025-10-25</lastmod>
     <priority>0.80</priority>
   </url>
