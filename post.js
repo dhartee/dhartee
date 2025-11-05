@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Populate the article content
             postTitleHead.textContent = `${post.title} | DharTee Services`;
+            const canonicalLink = document.createElement('link');
+            canonicalLink.setAttribute('rel', 'canonical');
+            canonicalLink.setAttribute('href', `https://dhartee.in/post.html?slug=${slug}`);
+            document.head.appendChild(canonicalLink);
             postContentEl.innerHTML = `
                 <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full">${post.category}</span>
                 <h1 class="text-3xl md:text-4xl font-bold text-dark my-4">${post.title}</h1>
@@ -97,6 +101,7 @@ function loadDisqus(postId, postSlug) {
         (d.head || d.body).appendChild(s);
     })();
 }
+
 
 
 
