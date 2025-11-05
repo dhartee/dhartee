@@ -17,7 +17,15 @@
     <meta name="description" content="Expert legal advocate support for business matters in India. Dhartee.in offers professional legal counsel, representation, and advisory services. Contact us.">
     <meta name="keywords" content="legal support India, business legal services, advocate support, corporate lawyer India, dhartee.in, legal counsel, legal representation, business representation">
     <meta name="author" content="Dhartee.in">
-
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'self'; 
+    script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://www.gstatic.com https://dhartee.disqus.com; 
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; 
+    img-src 'self' https: data:; 
+    font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    connect-src 'self' https://*.googleapis.com https://www.gstatic.com https://cdn.jsdelivr.net https://us-central1-dhartee-blog.cloudfunctions.net https://dhartee.disqus.com https://www.googletagmanager.com https://*.google-analytics.com;
+    frame-src 'self' https://disqus.com;
+">
     <!-- TailwindCSS for modern styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -405,6 +413,7 @@
 <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
 
