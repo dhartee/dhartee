@@ -47,7 +47,7 @@
                 const postDate = new Date(post.date).toISOString().split('T')[0];
                 sitemapContent += `
   <url>
-    <loc>https://dhartee.in/blog/${post.slug}</loc>
+    <loc>https://dhartee.in/post.html?slug=${post.slug}</loc>
     <lastmod>${postDate}</lastmod>
     <priority>0.80</priority>
   </url>`;
