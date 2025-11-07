@@ -61,13 +61,13 @@ html, body {
     }
 
     .services-section .service-card-front {
-        background-color: #f8fafc;
+        background-color: #fdf2f8;
         color: #1e293b;
     }
     
     .services-section .service-icon .fas {
         font-size: 3rem;
-        color: #2563eb;
+        color: #ec4899;
         margin-bottom: 1rem;
     }
 
@@ -78,7 +78,7 @@ html, body {
     }
 
     .services-section .service-card-back {
-        background-color: #2563eb;
+        background-color: #ec4899;
         color: white;
         transform: rotateY(180deg);
     }
@@ -446,4 +446,5 @@ button {
 @media (max-width: 1024px) {
   aside { display:none; }
 }
+
 
