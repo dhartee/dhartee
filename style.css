@@ -117,7 +117,7 @@ html, body {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         border-radius: 1rem;
         padding: 24px;
-        background-color: #f8fafc;
+        background-color: #fdf2f8;
         text-align: center;
     }
 
@@ -446,5 +446,6 @@ button {
 @media (max-width: 1024px) {
   aside { display:none; }
 }
+
 
 
