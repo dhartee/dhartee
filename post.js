@@ -35,14 +35,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const post = currentPostDoc.data();
             
             // Populate the article content
-            postTitleHead.textContent = `${post.title} | DharTee Services`;
-            const canonicalLink = document.createElement('link');
-            canonicalLink.setAttribute('rel', 'canonical');
-            canonicalLink.setAttribute('href', `https://dhartee.in/post.html?slug=${slug}`);
-            document.head.appendChild(canonicalLink);
+           // --- Populate Meta Tags & Title ---
+            const pageTitle = `${post.title} | DharTee Services`;
+            const pageDescription = post.metaDescription || post.excerpt; // Use metaDesc, fall back to excerpt
+            const pageImage = post.ogImage || post.image; // Use specific OG image, fall back to featured
+            const pageUrl = `https://dhartee.in/post.html?slug=${slug}`;
+
+            postTitleHead.textContent = pageTitle;
+            document.getElementById('meta-description').setAttribute('content', pageDescription);
+            document.getElementById('canonical-link').setAttribute('href', pageUrl);
+            
+            // Update Open Graph tags
+            document.getElementById('og-title').setAttribute('content', pageTitle);
+            document.getElementById('og-description').setAttribute('content', pageDescription);
+            document.getElementById('og-image').setAttribute('content', pageImage);
+            document.getElementById('og-url').setAttribute('content', pageUrl);
+
+            // Update Twitter tags
+            document.getElementById('twitter-title').setAttribute('content', pageTitle);
+            document.getElementById('twitter-description').setAttribute('content', pageDescription);
+            document.getElementById('twitter-image').setAttribute('content', pageImage);
+
+
+            // --- Populate the Article Content ---
             postContentEl.innerHTML = `
-                <h2 class="text-xl font-semibold text-primary mb-4">${post.category}</h2>
+                <h2 class="text-lg font-semibold text-primary mb-2">${post.category}</h2>
                 <h1 class="text-3xl md:text-4xl font-bold text-dark my-4">${post.title}</h1>
+                
                 <div class="text-sm text-gray-500 mb-6">
                     <span>By Dharmendra Sharma</span> | <span>Published on ${new Date(post.date).toLocaleDateString('en-IN')}</span>
                 </div>
@@ -101,6 +120,7 @@ function loadDisqus(postId, postSlug) {
         (d.head || d.body).appendChild(s);
     })();
 }
+
 
 
 
