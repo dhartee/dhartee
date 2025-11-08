@@ -25,43 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // --- Firebase Form Submission ---
-    const heroForm = document.getElementById('hero-contact-form');
-    const mainForm = document.getElementById('main-contact-form');
-    if (heroForm || mainForm) {
-        const functionUrl = 'https://submitcontactform-jsev7mahbq-uc.a.run.app';
-        const handleFormSubmit = async (event, formElement) => {
-            event.preventDefault();
-            const formData = new FormData(formElement);
-            const data = Object.fromEntries(formData.entries());
-            const submitButton = formElement.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.innerHTML = 'Sending...';
-            submitButton.disabled = true;
-            try {
-                const response = await fetch(functionUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                });
-                if (response.ok) {
-                    formElement.reset();
-                    submitButton.innerHTML = 'Message Sent!';
-                } else { throw new Error('Server responded with an error.'); }
-            } catch (error) {
-                console.error('Form submission error:', error);
-                submitButton.innerHTML = 'Submission Failed';
-            } finally {
-                setTimeout(() => {
-                    submitButton.innerHTML = originalButtonText;
-                    submitButton.disabled = false;
-                }, 3000);
-            }
-        };
-        if (heroForm) { heroForm.addEventListener('submit', (e) => handleFormSubmit(e, heroForm)); }
-        if (mainForm) { mainForm.addEventListener('submit', (e) => handleFormSubmit(e, mainForm)); }
-    }
-
+    
     // --- Email Obfuscation ---
     const emailLink = document.getElementById('email-link');
     if (emailLink) {
@@ -71,4 +35,5 @@ document.addEventListener('DOMContentLoaded', () => {
         emailLink.textContent = user + '@' + domain;
     }
 });
+
 
