@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog | DharTee Services</title>
     <meta name="description" content="Read the latest insights and articles from DharTee Services on taxation, GST, legal matters, and technology for business growth in India.">
-    
- <meta http-equiv="Content-Security-Policy" content="
+    <meta http-equiv="Content-Security-Policy" content="
     default-src 'self'; 
     script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://unpkg.com https://cdn.jsdelivr.net https://www.gstatic.com https://dhartee.disqus.com; 
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; 
@@ -23,7 +23,6 @@
         tailwind.config = { theme: { extend: { colors: { primary: '#2563eb', secondary: '#0ea5e9', accent: '#f97316', dark: '#1e293b', light: '#f8fafc' } } } }
     </script>
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body class="bg-light">
 <header class="fixed w-full bg-white shadow-md z-50">
@@ -44,13 +43,13 @@
             <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
         </nav>
         <div class="flex items-center space-x-4">
-            <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
+             <a class="hidden md:flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
                 <i data-feather="phone" class="mr-2"></i> Call Now
             </a>
             <a class="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition" href="https://wa.me/918264604505?text=%20Sir%20I%20want%20To%20Enquiry%20About">
                 <i data-feather="message-circle"></i>
             </a>
-            <button class="md-hidden text-dark" id="menu-toggle">
+            <button class="md:hidden text-dark" id="menu-toggle">
                 <i data-feather="menu"></i>
             </button>
         </div>
@@ -65,68 +64,247 @@
             <a class="text-dark hover:text-primary font-medium" href="index.html#testimonials">Testimonials</a>
             <a class="text-dark hover:text-primary font-medium" href="index.html#contact">Contact</a>
             <a class="flex items-center bg-accent text-white px-4 py-2 rounded-full hover:bg-orange-600 transition" href="tel:8264604505">
-                <i data-feather="phone" class="mr-2"></i> Call Now
+                <i class="mr-2" data-feather="phone"></i> Call Now
             </a>
         </div>
     </div>
 </header>
-
-    <main class="pt-24 pb-16 md:pt-32 md:pb-24">
-        <section id="blog-posts" class="py-12">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4">Our Insights & Articles</h1>
-                    <p class="text-gray-600 max-w-2xl mx-auto">Stay updated with the latest news in taxation, legal matters, and technology.</p>
+<main class="pt-24 pb-16 md:pt-32 md:pb-24">
+    <section id="blog-posts" class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4">Our Insights & Articles</h1>
+                <p class="text-gray-600 max-w-2xl mx-auto">Stay updated with the latest news in taxation, legal matters, and technology.</p>
+            </div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-dark">Latest Posts</h2>
+            </div>
+            <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/the-innovation-ai-driven-search-meets-trading-tools.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://firebasestorage.googleapis.com/v0/b/dhartee-blog.firebasestorage.app/o/featured-images%2F1762526218882_Google_AI_trading_and_search_technology.webp?alt=media&token=127f4b06-0160-40ca-a53a-85065ed3f6dc" alt="The Innovation: AI-Driven Search Meets Trading Tools">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">Tech</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/the-innovation-ai-driven-search-meets-trading-tools.html" class="hover:text-primary transition-colors">The Innovation: AI-Driven Search Meets Trading Tools</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Google has rolled out new capabilities that merge its massive search and AI infrastructure with financial markets.</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>7/11/2025</span>
+                                </div>
+                                <a href="posts/the-innovation-ai-driven-search-meets-trading-tools.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
                     </div>
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-dark">Latest Posts</h2>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/21-gemini-prompts-that-will-save-you-hours.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://firebasestorage.googleapis.com/v0/b/dhartee-blog.firebasestorage.app/o/featured-images%2F1761964570114_1000972390.jpg?alt=media&token=43195f3c-64d4-483b-a203-32ad07567ce5" alt="21 Gemini Prompts That Will Save You Hours">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">AI</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/21-gemini-prompts-that-will-save-you-hours.html" class="hover:text-primary transition-colors">21 Gemini Prompts That Will Save You Hours</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Inbox Zero
+Prompt: “Act as an executive assistant. Here are 10 emails I don’t know how to respond to. Draft quick, professional replies I can send or edit.</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>1/11/2025</span>
+                                </div>
+                                <a href="posts/21-gemini-prompts-that-will-save-you-hours.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/how-to-use-ai-gemini-chatgpt-and-perplexity.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://firebasestorage.googleapis.com/v0/b/dhartee-blog.firebasestorage.app/o/featured-images%2F1761935680571_How_to_Use_AI_Gemini%2C_ChatGPT%2C_and_Perplexity.png?alt=media&token=f9bacbf2-39a2-474c-8663-78490e907ea6" alt="How to Use AI: Gemini, ChatGPT, and Perplexity">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">AI</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/how-to-use-ai-gemini-chatgpt-and-perplexity.html" class="hover:text-primary transition-colors">How to Use AI: Gemini, ChatGPT, and Perplexity</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">How to Use AI: Gemini, ChatGPT, and Perplexity — Smart Ways to Combine Them</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>1/11/2025</span>
+                                </div>
+                                <a href="posts/how-to-use-ai-gemini-chatgpt-and-perplexity.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/gemini-ai-tool-for-any-work-the-future-of-smart-assistance.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://firebasestorage.googleapis.com/v0/b/dhartee-blog.firebasestorage.app/o/featured-images%2F1761935766143_Gemini_AI_Tool_(1).png?alt=media&token=87753b0f-6009-42a7-9850-a44aa399cfbb" alt="Gemini AI Tool for Any Work — The Future of Smart Assistance">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">AI</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/gemini-ai-tool-for-any-work-the-future-of-smart-assistance.html" class="hover:text-primary transition-colors">Gemini AI Tool for Any Work — The Future of Smart Assistance</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Gemini AI Tool for Any Work | Smart Productivity with Google’s AI</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>1/11/2025</span>
+                                </div>
+                                <a href="posts/gemini-ai-tool-for-any-work-the-future-of-smart-assistance.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://knallp.com/wp-content/uploads/2025/08/GST-2.0-A-New-Era-of-Economic-Freedom-for-India_.webp" alt="GST 2.0: How India’s 2025 Tax Reform Could Reshape Prices, Compliance, and the Economy">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">Taxation</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy.html" class="hover:text-primary transition-colors">GST 2.0: How India’s 2025 Tax Reform Could Reshape Prices, Compliance, and the Economy</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">GST 2.0: How India’s 2025 Tax Reform - DharTee
+A Tax Revolution Five Years in the Making
+ The New Structure – What Exactly Changes
+Winners and Losers – Who Gains, Who Pays</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>29/10/2025</span>
+                                </div>
+                                <a href="posts/gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/money-recovery-advocate-notice.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://i.ibb.co/MDDyJrsB/money-recovery.png" alt="The Advocate's Role in Money Recovery: Drafting and Sending a Legal Notice">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">Law</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/money-recovery-advocate-notice.html" class="hover:text-primary transition-colors">The Advocate's Role in Money Recovery: Drafting and Sending a Legal Notice</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">The First Step in Justice: How an Advocate Drafts and Sends a Money Recovery Notice</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>27/10/2025</span>
+                                </div>
+                                <a href="posts/money-recovery-advocate-notice.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/police-custody-and-judicial-custody.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7sjmo2P04aO0gPs72QVfaSQRcUsxOJ2oscQU8ls1r-eR6y9Rh1G0dzEYGgt8e34sb-GR2CavRrDcxvKFB8O1oPnyqix3OmvShT4CBoXnAsnM9e4a2Y6S7dl7TGC9dq2_h1f_owlddn9cFV3cc2zTIeTBhB6St6dfgkjGYRUfyn_RBJUEk592wk6O0Gpmj/s320/police.png" alt="Police Remand (पुलिस हिरासत) व JC (न्यायिक हिरासत) में क्या अंतर है?">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">Law</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/police-custody-and-judicial-custody.html" class="hover:text-primary transition-colors">Police Remand (पुलिस हिरासत) व JC (न्यायिक हिरासत) में क्या अंतर है?</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Police Remand (पुलिस हिरासत) व JC (न्यायिक हिरासत) में क्या अंतर है?</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>25/10/2025</span>
+                                </div>
+                                <a href="posts/police-custody-and-judicial-custody.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="blog-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <a href="posts/vote-counting-process.html" class="block">
+                            <img loading="lazy" class="w-full h-56 object-cover" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh84SbZsSFQcyDUpkhSdnREWiyr7xaoWeOGy62TCZiuFLQCBOrXXt8MwtSsitey0_0JDuNFwUxy_OORk6VIcDYyBejwjhNteKIg1zDFKjnC-nq2c2qsBNAL6ThQF9Z2js7ayQkno8HYtavvQY8-R06UzyT6AvLXKQS1BuwZdtbejKE2OicZ7HWb25q4HJTq/w320-h244/kaise%20hoti%20hai%20voto%20ki%20ginti.jpg" alt="कैसे होती है वोटों की गिनती ?, वोटो की गिनती वाले हॉल में अंदर कौन-कौन मौजूद होता है ?">
+                        </a>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <span class="text-sm font-semibold text-white bg-primary py-1 px-3 rounded-full self-start mb-4">General</span>
+                            <h3 class="text-xl font-bold text-dark mb-2">
+                                <a href="posts/vote-counting-process.html" class="hover:text-primary transition-colors">कैसे होती है वोटों की गिनती ?, वोटो की गिनती वाले हॉल में अंदर कौन-कौन मौजूद होता है ?</a>
+                            </h3>
+                            <p class="text-gray-600 mb-4 flex-grow">कैसे होती है वोटों की गिनती ?, वोटो की गिनती वाले हॉल में अंदर कौन-कौन मौजूद होता है ?</p>
+                            <div class="mt-auto pt-4 border-t border-gray-200 flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <span>By Dharmendra Sharma</span><br/>
+                                    <span>25/10/2025</span>
+                                </div>
+                                <a href="posts/vote-counting-process.html" class="font-bold text-primary hover:text-blue-700">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                  
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl">D</div>
+                    <span class="ml-2 text-xl font-bold">DharTee</span>
                 </div>
-                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <noscript>
-                        <p class="text-gray-700 col-span-full">Please enable JavaScript to view our articles. You can also find our articles below:</p>
-                        <ul class="col-span-full list-disc list-inside">
-                            <li><a href="post.html?slug=the-innovation-ai-driven-search-meets-trading-tools" class="text-blue-600 underline">The Innovation: AI-Driven Search Meets Trading Tools</a></li>
-                            <li><a href="post.html?slug=21-gemini-prompts-that-will-save-you-hours" class="text-blue-600 underline">21 Gemini Prompts That Will Save You Hours</a></li>
-                            <li><a href="post.html?slug=how-to-use-ai-gemini-chatgpt-and-perplexity" class="text-blue-600 underline">How to use AI Gemini ChatGPT and Perplexity</a></li>
-                            <li><a href="post.html?slug=gemini-ai-tool-for-any-work-the-future-of-smart-assistance" class="text-blue-600 underline">Gemini AI Tool for Any Work</a></li>
-                            <li><a href="post.html?slug=gst-20-how-indias-2025-tax-reform-could-reshape-prices-compliance-and-the-economy" class="text-blue-600 underline">GST 2.0: How India's 2025 Tax Reform Could Reshape Prices</a></li>
-                            <li><a href="post.html?slug=money-recovery-advocate-notice" class="text-blue-600 underline">Money Recovery Advocate Notice</a></li>
-                            <li><a href="post.html?slug=police-custody-and-judicial-custody" class="text-blue-600 underline">Police Custody and Judicial Custody</a></li>
-                            <li><a href="post.html?slug=vote-counting-process" class="text-blue-600 underline">Vote Counting Process</a></li>
-                        </ul>
-                    </noscript>
-                    
-                </div>
-                 <div id="no-posts-message" class="hidden text-center text-gray-500 mt-16">
-                    <p class="text-xl">No articles have been published yet.</p>
+                <p class="text-gray-400 mb-6">Professional services for your business growth, including taxation, legal support, web design, and software solutions.</p>
+                <div class="flex space-x-4 social-icon">
+                    <a href="https://www.facebook.com/dharteeservices/" aria-label="DharTee on Facebook"><i data-feather="facebook"></i></a>
+                    <a href="https://x.com/Dharmagour" aria-label="DharTee on Twitter"><i data-feather="twitter"></i></a>
+                    <a href="https://www.instagram.com/advocate_dharmendra" aria-label="DharTee on Instagram"><i data-feather="instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/dharmendargour/" aria-label="DharTee on LinkedIn"><i data-feather="linkedin"></i></a>
                 </div>
             </div>
-        </section>
-    </main>
+            <div>
+                <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a class="text-gray-400 hover:text-white" href="index.html#home">Home</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="index.html#services">Services</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="index.html#about">About Us</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="index.html#process">Our Process</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="index.html#contact">Contact</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="sitemap.xml">Sitemap</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">Services</h3>
+                <ul class="space-y-3">
+                    <li><a class="text-gray-400 hover:text-white" href="gst_services.html">Taxation and GST Support</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="legal_services.html">Legal Advocate Support</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="web-design.html">Web Designing</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="#">Technical Expert for Coaching</a></li>
+                    <li><a class="text-gray-400 hover:text-white" href="#">A TO Z Software Services</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold mb-6">Newsletter</h3>
+                <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
+                <form class="flex" action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                    <input class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-dark" placeholder="Your Email" type="email" name="email" />
+                    <button class="bg-primary px-4 rounded-r-lg hover:bg-blue-700 transition" type="submit">
+                        <i data-feather="send"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center">
+            <p class="text-gray-400">&copy; 2025 DharTee. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
 
-    <footer class="bg-dark text-white pt-16 pb-8">
-       </footer>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
-    
-    <script src="firebase-config.js"></script>
-    
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="blog.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
