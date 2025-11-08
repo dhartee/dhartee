@@ -256,7 +256,7 @@
                     </div>
                     
                     <!-- Contact Form -->
-                    <form id="contact-form" class="space-y-6" data-netlify="true" name="legal-contact">
+                    <form id="contact-form" class="space-y-6" action="https://formspree.io/f/xgvrworj" method="POST">
                         <input type="hidden" name="form-name" value="legal-contact">
                         
                         <!-- Name -->
@@ -384,35 +384,11 @@
     </div>
 
     <!-- JavaScript for Contact Form -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contact-form');
-            const successMessage = document.getElementById('success-message');
-            const closeButton = document.getElementById('close-message');
-
-            contactForm.addEventListener('submit', function(e) {
-                // Prevent default form submission
-                e.preventDefault();
-
-                // Show the success message
-                successMessage.classList.remove('hidden');
-
-                // Reset the form fields
-                contactForm.reset();
-                
-                // This will work if you host on Netlify (due to data-netlify="true").
-                // If not, you'd use fetch() to POST to your own server endpoint.
-            });
-
-            // Close the message box
-            closeButton.addEventListener('click', function() {
-                successMessage.classList.add('hidden');
-            });
-        });
-    </script>
+ 
 <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
 
