@@ -137,8 +137,9 @@ auth.onAuthStateChanged(user => {
 
      const userClientId = doc.data().clientId ? doc.data().clientId.trim() : null;
 
-      // 3. --- सबसे महत्वपूर्ण सुरक्षा जाँच ---
-      // क्या उपयोगकर्ता का clientId URL के clientId से मेल खाता है?
+      console.log("CHECKING URL CLIENT ID:", "'" + urlClientId + "'");
+      console.log("CHECKING USER CLIENT ID:", "'" + userClientId + "'");
+      console.log("ARE THEY EQUAL?:", userClientId === urlClientId);
       if (userClientId === urlClientId) {
         // हाँ! यह सही उपयोगकर्ता है।
         CURRENT_CLIENT_ID = userClientId;
@@ -1159,3 +1160,4 @@ function refreshKPIs() {
   // if (qs('#r-inv-table')) renderInvoiceReport();
 
 })();
+
