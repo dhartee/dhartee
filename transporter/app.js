@@ -1124,7 +1124,7 @@ async function exportPdf(sel, prefix) {
   mainContent.style.minWidth = `${fullWidth}px`; 
   const { jsPDF } = window.jspdf;
   await new Promise(resolve => setTimeout(resolve, 100));
-  const canvas = await html2canvas(targetEl, { scale: 2, useCORS: true });
+  const canvas = await html2canvas(targetEl, { scale: 3, useCORS: true });
   scrollWrapper.style.cssText = oldWrapperStyle;
   mainContent.style.cssText = oldContentStyle;
   const img = canvas.toDataURL('image/png');
@@ -1160,4 +1160,5 @@ function refreshKPIs() {
   // if (qs('#r-inv-table')) renderInvoiceReport();
 
 })();
+
 
