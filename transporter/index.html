@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Transporter Web App</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+<section id="splash-screen" class="min-h-dvh flex items-center justify-center p-4">
+    <div class="text-center">
+      <h1 id="splash-title" class="text-3xl font-semibold text-gray-700 mb-4">
+        Loading Transporter App...
+      </h1>
+      <p class="text-gray-500">(Loading...)</p>
+      </div>
+  </section>
+
+  <section id="login-screen" class="hidden min-h-dvh flex items-center justify-center p-4">
+  <div class="w-full max-w-sm card">
+    <h1 id="login-title" class="text-2xl font-semibold text-center mb-6 text-gray-800">
+      Transporter Login
+    </h1>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-sm mb-1 font-medium text-gray-700">Username</label>
+          <input id="login-username" type="text" class="input" placeholder="Enter username" autocomplete="username" required>
+        </div>
+        <div>
+          <label class="block text-sm mb-1 font-medium text-gray-700">Password</label>
+          <input id="login-password" type="password" class="input" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <button class="btn-primary w-full !py-3">Login</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="app-shell" class="hidden min-h-dvh">
+    <header class="bg-white shadow-sm sticky top-0 z-30">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <button id="btn-open-drawer" class="md:hidden p-2 rounded-lg hover:bg-slate-100" aria-label="Open menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </button>
+          <h1 class="text-lg md:text-xl font-semibold text-gray-800">Transporter Service Provider</h1>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="current-user" class="text-sm text-slate-600 hidden sm:inline"></span>
+          <button id="btn-logout" class="btn-ghost">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-2 md:px-4 py-4 grid md:grid-cols-[240px_1fr] gap-4">
+      <aside id="sidebar" class="bg-white rounded-2xl shadow md:sticky md:top-20 h-max p-2 md:p-3 hidden md:block">
+        <nav class="space-y-1">
+          <button data-nav="dashboard" class="nav-btn active">🏠 Dashboard</button>
+          <button data-nav="lr" class="nav-btn">📋 Lorry Receipt</button>
+          <button data-nav="invoice" class="nav-btn">🧾 Invoice</button>
+          <button data-nav="masters" class="nav-btn">👥 Masters</button>
+          <button data-nav="reports" class="nav-btn">📊 Reports</button>
+          <button data-nav="settings" class="nav-btn">⚙️ Settings</button>
+        </nav>
+      </aside>
+
+      <main id="content" class="space-y-4 min-w-0">
+        <div id="mobile-drawer" class="fixed inset-0 z-40 hidden">
+          <div class="absolute inset-0 bg-black/30" data-close></div>
+          <div class="absolute left-0 top-0 h-full w-72 bg-white shadow-xl p-3">
+            <div class="flex items-center justify-between mb-2">
+              <h2 class="font-semibold">Menu</h2>
+              <button class="btn-ghost" data-close>✕</button>
+            </div>
+            <nav class="space-y-1">
+              <button data-nav="dashboard" class="nav-btn w-full text-left">🏠 Dashboard</button>
+              <button data-nav="lr" class="nav-btn w-full text-left">📋 Lorry Receipt</button>
+              <button data-nav="invoice" class="nav-btn w-full text-left">🧾 Invoice</button>
+              <button data-nav="masters" class="nav-btn w-full text-left">👥 Masters</button>
+              <button data-nav="reports" class="nav-btn w-full text-left">📊 Reports</button>
+              <button data-nav="settings" class="nav-btn w-full text-left">⚙️ Settings</button>
+            </nav>
+          </div>
+        </div>
+
+        <section id="page-dashboard" class="card">
+          <h2 class="card-title">Dashboard</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div class="kpi">Total Receipts <span id="kpi-receipts" class="kpi-value">0</span></div>
+            <div class="kpi">Total Invoices <span id="kpi-invoices" class="kpi-value">0</span></div>
+            <div class="kpi">Total Parties <span id="kpi-parties" class="kpi-value">0</span></div>
+            <div class="kpi">Total Stations <span id="kpi-stations" class="kpi-value">0</span></div>
+          </div>
+        </section>
+
+        <section id="page-lr" class="card hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <h2 class="card-title m-0">Lorry Receipt Generator</h2>
+            <div class="flex flex-wrap gap-2 justify-start sm:justify-end">
+              <button id="lr-save" class="btn-primary">Save</button>
+              <button id="lr-edit" class="btn-outline">Edit</button>
+              <button id="lr-print" class="btn-ghost">Print</button>
+              <button id="lr-export" class="btn-ghost">Export PDF</button>
+              <button id="lr-whatsapp" class="btn-ghost">WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+            <div>
+              <label class="lbl">LR No</label>
+              <input id="lr-number" class="input" placeholder="Auto" readonly>
+            </div>
+            <div>
+              <label class="lbl">Date</label>
+              <input id="lr-date" type="date" class="input">
+            </div>
+            <div>
+              <label class="lbl">Vehicle No</label>
+              <input id="lr-vehicle" class="input" placeholder="GJ00AA0000">
+            </div>
+            <div>
+              <label class="lbl">Driver</label>
+              <input id="lr-driver" class="input" placeholder="Optional">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            <div class="box">
+              <div class="box-title">Consignor</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="lbl">GST Number</label>
+                  <input id="cgor-gst" class="input master-autofill" placeholder="Type GST No…">
+                </div>
+                <div>
+                  <label class="lbl">Name</label>
+                  <input id="cgor-name" class="input master-autofill" placeholder="Type Name…">
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="lbl">Address</label>
+                  <input id="cgor-address" class="input">
+                </div>
+                <div>
+                  <label class="lbl">Pincode</label>
+                  <input id="cgor-pin" class="input" inputmode="numeric">
+                </div>
+                <div>
+                  <label class="lbl">Station</label>
+                  <input id="cgor-station" class="input">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="box-title">Consignee</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="lbl">GST Number</label>
+                  <input id="cgee-gst" class="input master-autofill" placeholder="Type GST No…">
+                </div>
+                <div>
+                  <label class="lbl">Name</label>
+                  <input id="cgee-name" class="input master-autofill" placeholder="Type Name…">
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="lbl">Address</label>
+                  <input id="cgee-address" class="input">
+                </div>
+                <div>
+                  <label class="lbl">Pincode</label>
+                  <input id="cgee-pin" class="input" inputmode="numeric">
+                </div>
+                <div>
+                  <label class="lbl">Station</label>
+                  <input id="cgee-station" class="input">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box mt-3">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
+              <div class="box-title mb-0">Goods / Charges</div>
+              <div class="flex items-center gap-2 self-start sm:self-center">
+                  <input type="checkbox" id="goods-tbb" class="h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                  <label for="goods-tbb" class="text-sm font-medium text-gray-700">Print "To Be Billed"</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <input id="goods-desc" class="input sm:col-span-2" placeholder="Description / Nature of Goods">
+                <textarea id="goods-details" class="input sm:col-span-2" placeholder="Invoice Details (e.g., Qty, Marks, etc.)" rows="2"></textarea>
+                <input id="goods-weight" class="input" placeholder="Charged Weight" inputmode="decimal">
+                <input id="goods-freight" class="input" placeholder="Freight / Unit" inputmode="decimal">
+                <input id="goods-amount" class="input" placeholder="Amount" inputmode="decimal">
+                <button id="goods-add" class="btn-ghost sm:col-start-2 sm:self-end justify-self-start sm:justify-self-end">Add</button>
+            </div>
+
+            <div class="overflow-auto mt-3">
+              <table class="w-full text-sm border">
+                <thead class="bg-slate-50">
+                  <tr>
+                    <th class="th">Description</th>
+                    <th class="th">Charged Wt</th>
+                    <th class="th">Freight/Unit</th>
+                    <th class="th">Amount</th>
+                    <th class="th">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="goods-rows"></tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="td text-right font-medium">Total</td>
+                    <td class="td font-semibold" id="goods-total">0.00</td>
+                    <td class="td"></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+            <div class="box">
+              <div class="box-title">Insurance (Optional)</div>
+              <label class="lbl">Company</label><input id="ins-company" class="input" />
+              <label class="lbl mt-2">Policy No</label><input id="ins-policy" class="input" />
+              <label class="lbl mt-2">Amount</label><input id="ins-amount" class="input" inputmode="decimal" />
+              <label class="lbl mt-2">Policy Date</label><input id="ins-date" type="date" class="input" />
+            </div>
+            <div class="box md:col-span-2">
+              <div class="box-title">Terms & Notes</div>
+              <textarea id="lr-terms" rows="5" class="input" placeholder="Terms printed on LR"></textarea>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+            <div class="box">
+              <div class="box-title">GST Paid By</div>
+              <select id="lr-gst-by" class="input">
+                <option>Sender</option><option>Receiver</option><option>Transporter</option>
+              </select>
+            </div>
+            <div class="box md:col-span-2">
+              <div class="box-title">Bank Details</div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input id="bank-name" class="input" placeholder="Bank" />
+                <input id="bank-ac" class="input" placeholder="A/C No" />
+                <input id="bank-ifsc" class="input" placeholder="IFSC" />
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full overflow-x-auto mt-6">
+            <div id="lr-print-area" class="print-a4">
+              </div>
+          </div>
+        </section>
+
+        <section id="page-invoice" class="card hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <h2 class="card-title m-0">Invoice Generator</h2>
+            <div class="flex flex-wrap gap-2 justify-start sm:justify-end">
+              <button id="inv-save" class="btn-primary">Save</button>
+              <button id="inv-edit" class="btn-outline">Edit</button>
+              <button id="inv-print" class="btn-ghost">Print</button>
+              <button id="inv-export" class="btn-ghost">Export PDF</button>
+              <button id="inv-whatsapp" class="btn-ghost">WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            <div><label class="lbl">Invoice No</label><input id="inv-number" class="input" readonly placeholder="Auto"></div>
+            <div><label class="lbl">Invoice Date</label><input id="inv-date" type="date" class="input"></div>
+            <div><label class="lbl">Due Date</label><input id="inv-due" type="date" class="input"></div>
+            <div><label class="lbl">LR No (link)</label>
+              <select id="inv-lr-link" class="input"></select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            <div class="box">
+              <div class="box-title">Bill From (Consignor)</div>
+              <input id="inv-from" class="input" placeholder="Auto from LR" readonly>
+            </div>
+            <div class="box">
+              <div class="box-title">Bill To (Consignee)</div>
+              <input id="inv-to" class="input" placeholder="Auto from LR" readonly>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+            <div><label class="lbl">Amount</label><input id="inv-amount" class="input" inputmode="decimal"></div>
+            <div><label class="lbl">GST Amount</label><input id="inv-gst" class="input" inputmode="decimal"></div>
+            <div><label class="lbl">Total</label><input id="inv-total" class="input" readonly></div>
+          </div>
+
+          <div class="w-full overflow-x-auto mt-6">
+            <div id="inv-print-area" class="print-a4">
+              </div>
+          </div>
+        </section>
+
+        <section id="page-masters" class="card hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <h2 class="card-title">Consignor & Consignee Masters</h2>
+            <div class="text-xs text-slate-500">Tip: Type GST/Name in LR fields to auto-populate.</div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div class="box">
+              <div class="box-title">Add / Update Consignor</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input id="m-cgor-gst" class="input" placeholder="GST Number">
+                <input id="m-cgor-name" class="input" placeholder="Name">
+                <input id="m-cgor-address" class="input sm:col-span-2" placeholder="Address">
+                <input id="m-cgor-pin" class="input" placeholder="Pincode" inputmode="numeric">
+                <input id="m-cgor-station" class="input" placeholder="Station">
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button id="m-cgor-save" class="btn-primary">Save</button>
+                <button id="m-cgor-clear" class="btn-ghost">Clear</button>
+              </div>
+              <div class="mt-3">
+                <input id="m-cgor-search" class="input" placeholder="Search consignor…">
+                <div class="table-wrap mt-2"><table class="table" id="m-cgor-table"></table></div>
+              </div>
+            </div>
+
+            <div class="box">
+              <div class="box-title">Add / Update Consignee</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input id="m-cgee-gst" class="input" placeholder="GST Number">
+                <input id="m-cgee-name" class="input" placeholder="Name">
+                <input id="m-cgee-address" class="input sm:col-span-2" placeholder="Address">
+                <input id="m-cgee-pin" class="input" placeholder="Pincode" inputmode="numeric">
+                <input id="m-cgee-station" class="input" placeholder="Station">
+              </div>
+              <div class="flex gap-2 mt-3">
+                <button id="m-cgee-save" class="btn-primary">Save</button>
+                <button id="m-cgee-clear" class="btn-ghost">Clear</button>
+              </div>
+              <div class="mt-3">
+                <input id="m-cgee-search" class="input" placeholder="Search consignee…">
+                <div class="table-wrap mt-2"><table class="table" id="m-cgee-table"></table></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="page-reports" class="card hidden">
+          <h2 class="card-title">Reports</h2>
+
+          <div class="box">
+            <div class="box-title">Lorry Receipts</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+              <input id="r-lr-search" class="input" placeholder="Search by LR no / party / station…">
+              <input id="r-lr-from" class="input" type="date">
+              <input id="r-lr-to" class="input" type="date">
+            </div>
+            <div class="table-wrap"><table class="table" id="r-lr-table"></table></div>
+            <div class="text-sm mt-2">Total Receipts: <span id="r-lr-count">0</span> &middot; Total Amount: ₹<span id="r-lr-total">0.00</span></div>
+          </div>
+
+          <div class="box mt-4">
+            <div class="box-title">Invoices</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+              <input id="r-inv-search" class="input" placeholder="Search by Inv no / LR / party…">
+              <input id="r-inv-from" class="input" type="date">
+              <input id="r-inv-to" class="input" type="date">
+            </div>
+            <div class="table-wrap"><table class="table" id="r-inv-table"></table></div>
+            <div class="text-sm mt-2">Total Invoices: <span id="r-inv-count">0</span> &middot; Total Amount: ₹<span id="r-inv-total">0.00</span></div>
+          </div>
+        </section>
+
+        <section id="page-settings" class="card hidden">
+          <h2 class="card-title">Settings / Company Profile</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input id="cmp-name" class="input" placeholder="Company Name">
+            <input id="cmp-email" class="input" placeholder="Email">
+            <input id="cmp-contact" class="input" placeholder="Contact numbers">
+            <input id="cmp-pan" class="input" placeholder="PAN">
+            <input id="cmp-gst" class="input" placeholder="GSTIN">
+            <input id="cmp-bank" class="input" placeholder="Bank Name">
+            <input id="cmp-ac" class="input" placeholder="Account No">
+            <input id="cmp-ifsc" class="input" placeholder="IFSC">
+            <textarea id="cmp-address" class="input md:col-span-2" rows="3" placeholder="Address (for header)"></textarea>
+          </div>
+          <div class="flex gap-2 mt-3">
+            <button id="cmp-save" class="btn-primary">Save Profile</button>
+            <button id="cmp-clear" class="btn-ghost">Clear</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-100 py-6 font-medium">
+    © <span id="year"></span> Transporter Web App
+  </footer>
+  
+  <div id="toast-container"></div>
+
+  <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyC9t0cblotC6rYShQtCMuYrz7tTfKiig78",
+    authDomain: "transporterapp-7a769.firebaseapp.com",
+    projectId: "transporterapp-7a769",
+    storageBucket: "transporterapp-7a769.firebasestorage.app",
+    messagingSenderId: "31216416485",
+    appId: "1:31216416485:web:83ca8a4b2fceb5981e060c",
+    measurementId: "G-PV7J5B0DMJ"
+  };
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Firebase ऐप को प्रारंभ करें
+    firebase.initializeApp(firebaseConfig);
+
+    // बाद में उपयोग के लिए सेवाओं को आसान पहुँच दें
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+  <script>
+    // यह ग्लोबल वैरिएबल app.js द्वारा उपयोग किया जाएगा
+    window.APP_CLIENT_ID = null; 
+
+    async function loadBranding() {
+      const splashScreen = document.getElementById('splash-screen');
+      const loginScreen = document.getElementById('login-screen');
+      const splashTitle = document.getElementById('splash-title');
+      const loginTitle = document.getElementById('login-title');
+
+      try {
+        // 1. URL से क्लाइंट ID प्राप्त करें
+        const params = new URLSearchParams(window.location.search);
+        const clientId = params.get('client');
+
+        if (!clientId) {
+          // कोई ?client=... नहीं मिला, बस सामान्य लॉगिन दिखाएँ
+          splashTitle.textContent = 'Login Required';
+          throw new Error('No client ID in URL.');
+        }
+
+        // 2. ग्लोबल वैरिएबल सेट करें
+        window.APP_CLIENT_ID = clientId;
+
+        // 3. Firebase को प्रारंभ करें (यह index.html में होना चाहिए)
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // 4. Firestore से पब्लिक ब्रांडिंग जानकारी लाएँ
+        const docRef = db.collection('publicClients').doc(clientId);
+        const doc = await docRef.get();
+
+        let companyName = clientId; // डिफ़ॉल्ट
+        if (doc.exists) {
+          companyName = doc.data().companyName || clientId;
+          // आप यहाँ लोगो URL (doc.data().logoUrl) भी लोड कर सकते हैं
+        }
+
+        // 5. स्प्लैश और लॉगिन स्क्रीन को ब्रांड करें
+        splashTitle.textContent = `Loading ${companyName}...`;
+        loginTitle.textContent = `${companyName} Login`;
+
+      } catch (e) {
+        console.warn('Branding failed:', e.message);
+        // यदि कोई त्रुटि होती है, तो भी लॉगिन टाइटल को अपडेट करें (यदि संभव हो)
+        if(window.APP_CLIENT_ID) {
+           loginTitle.textContent = `${window.APP_CLIENT_ID} Login`;
+        }
+      } finally {
+        // 6. स्प्लैश स्क्रीन छिपाएँ और लॉगिन स्क्रीन दिखाएँ
+        splashScreen.classList.add('hidden');
+        loginScreen.classList.remove('hidden');
+      }
+    }
+
+    // इस फ़ंक्शन को तुरंत चलाएँ
+    loadBranding();
+  </script>
+
+<script src="app.js"></script>
+ 
+</body>
+</html>
