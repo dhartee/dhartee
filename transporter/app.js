@@ -135,7 +135,7 @@ auth.onAuthStateChanged(user => {
         return;
       }
 
-      const userClientId = doc.data().clientId; // उपयोगकर्ता का असली clientId
+     const userClientId = doc.data().clientId ? doc.data().clientId.trim() : null;
 
       // 3. --- सबसे महत्वपूर्ण सुरक्षा जाँच ---
       // क्या उपयोगकर्ता का clientId URL के clientId से मेल खाता है?
@@ -1157,4 +1157,5 @@ function refreshKPIs() {
   // ये फ़ंक्शंस अब डेटा लोड होने के बाद `loadAllClientData` द्वारा कॉल किए जाते हैं
   // if (qs('#r-lr-table')) renderLRReport();
   // if (qs('#r-inv-table')) renderInvoiceReport();
+
 })();
