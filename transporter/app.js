@@ -110,6 +110,7 @@ qsa('#mobile-drawer [data-close]').forEach(el => el.addEventListener('click', ()
 }));
 
 function enterApp(user) {
+  qs('#splash-screen').classList.add('hidden');
   if (!user) return;
   loginScreen.classList.add('hidden');
   appShell.classList.remove('hidden');
@@ -170,7 +171,7 @@ auth.onAuthStateChanged(user => {
     });
 
   } else {
-    // उपयोगकर्ता लॉग आउट है
+    qs('#splash-screen').classList.add('hidden');
     console.log("User is logged out.");
     loginScreen.classList.remove('hidden');
     appShell.classList.add('hidden');
@@ -1181,3 +1182,4 @@ function refreshKPIs() {
   qs('#inv-due').value = today();
   qs('#lr-terms').value = defaultTerms();
 })();
+
