@@ -446,7 +446,7 @@
       try {
         // 1. URL से क्लाइंट ID प्राप्त करें
         const params = new URLSearchParams(window.location.search);
-        const clientId = params.get('client');
+        const clientId = params.get('client') ? params.get('client').trim() : null;
 
         if (!clientId) {
           // कोई ?client=... नहीं मिला, बस सामान्य लॉगिन दिखाएँ
