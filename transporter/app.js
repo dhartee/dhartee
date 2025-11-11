@@ -1,3 +1,5 @@
+/* Transporter Web App – Firebase Edition (FINAL) */
+
 let CURRENT_CLIENT_ID = null; // लॉग इन क्लाइंट का ID स्टोर करता है
 let localConsignors = []; // Consignors को यहाँ कैश करें
 let localConsignees = []; // Consignees को यहाँ कैश करें
@@ -8,12 +10,21 @@ let currentlyEditingCgorId = null;
 let currentlyEditingCgeeId = null;
 
 /* ---------- Utils ---------- */
-// localStorage utils (load, save, loadObj, saveObj, DB) अब हटा दिए गए हैं
 const qs = (sel, el = document) => el.querySelector(sel);
 const qsa = (sel, el = document) => [...el.querySelectorAll(sel)];
 const fmt = n => (isNaN(+n) ? 0 : +n).toFixed(2);
 const today = () => new Date().toISOString().slice(0, 10);
 const uid = (p = 'ID') => `${p}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+
+// ===== NEW =====
+// Indian Date Formatter (yyyy-MM-dd to dd-MM-yyyy)
+const fmtDate = (isoDate) => {
+  if (!isoDate || isoDate.length < 10) return '';
+  // isoDate is yyyy-MM-dd
+  const [y, m, d] = isoDate.split('-');
+  return `${d}-${m}-${y}`; // dd-MM-yyyy
+};
+// ===== END NEW =====
 
 /* ---------- NEW Toast Notification Function ---------- */
 function toast(msg, type = 'success') {
@@ -84,12 +95,9 @@ function setNav(name) {
   qsa('.nav-btn').forEach(b => b.classList.remove('active'));
   qsa(`[data-nav="${name}"]`).forEach(b => b.classList.add('active'));
 }
-// --- नेविगेशन और मोबाइल ड्रॉवर के लिए इवेंट लिस्नर ---
-// (यह कोड ब्लॉक छूट गया था)
 
 qsa('.nav-btn').forEach(btn => btn.addEventListener('click', e => {
   setNav(btn.getAttribute('data-nav'));
-  // '?' यह सुनिश्चित करता है कि qs('#mobile-drawer') null होने पर एरर न आए
   qs('#mobile-drawer')?.classList.add('hidden'); 
 }));
 
@@ -101,7 +109,6 @@ qsa('#mobile-drawer [data-close]').forEach(el => el.addEventListener('click', ()
   qs('#mobile-drawer')?.classList.add('hidden');
 }));
 
-// --- (बाकी का कोड यहाँ से जारी रहेगा) ---
 function enterApp(user) {
   if (!user) return;
   loginScreen.classList.add('hidden');
@@ -177,18 +184,15 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// --- नया: सभी डेटा को एक साथ लोड करता है ---
 async function loadAllClientData() {
   if (!CURRENT_CLIENT_ID) return;
   console.log("Loading all client data...");
   
-  // मास्टर्स और ट्रांजैक्शन्स को एक साथ ( समानांतर में) लोड करें
   await Promise.all([
     loadAllMasters(),
     loadAllTransactions()
   ]);
   
-  // सब कुछ लोड होने के बाद UI को रिफ्रेश करें
   console.log("All data loaded. Refreshing UI.");
   renderLRReport();
   renderInvoiceReport();
@@ -196,7 +200,6 @@ async function loadAllClientData() {
   refreshKPIs();
 }
 
-// --- नया: Masters लोड करता है ---
 async function loadAllMasters() {
   try {
     // Consignors
@@ -218,7 +221,6 @@ async function loadAllMasters() {
   }
 }
 
-// --- नया: LRs और Invoices लोड करता है ---
 async function loadAllTransactions() {
   try {
     // LRs
@@ -241,7 +243,6 @@ async function loadAllTransactions() {
 
 
 /* ---------- Masters CRUD (Firestore) ---------- */
-// (यह पिछले चरण से अपरिवर्तित है)
 function renderMasterTable(kind) {
   const data = (kind === 'cgor') ? localConsignors : localConsignees;
   const table = qs(kind === 'cgor' ? '#m-cgor-table' : '#m-cgee-table');
@@ -451,15 +452,31 @@ qs('#goods-add').onclick = () => {
   updateGoodsTotal();
   qsa('#goods-desc,#goods-details,#goods-weight,#goods-freight,#goods-amount').forEach(i => i.value = '');
 };
+
+// ===== NEW =====
+// Recalculate "To Pay" from "Total" and "Advance"
+function recalcToPay() {
+  const total = +qs('#goods-total').textContent || 0;
+  const advance = +qs('#lr-advance').value || 0;
+  const toPay = total - advance;
+  qs('#lr-to-pay').textContent = fmt(toPay);
+}
+// Add event listener for the new Advance input
+qs('#lr-advance').addEventListener('input', recalcToPay);
+// ===== END NEW =====
+
+// ===== CHANGED =====
 function updateGoodsTotal() {
   let t = 0; 
   qsa('#goods-rows tr').forEach(tr => { t += +tr.children[3].textContent || 0; });
   qs('#goods-total').textContent = fmt(t);
+  recalcToPay(); // Call the new function
 }
+// ===== END CHANGE =====
+
 
 /* ---------- Lorry Receipt (LR) Section (Firestore) ---------- */
 
-// --- नया: Firestore LR Counter ---
 async function nextLRNumber() {
   const y = new Date().getFullYear().toString();
   const counterRef = db.collection('counters').doc(CURRENT_CLIENT_ID);
@@ -473,20 +490,16 @@ async function nextLRNumber() {
       let next = 1;
 
       if (!doc.exists) {
-        // यह क्लाइंट का पहला LR है, एक नया काउंटर बनाएँ
         seqMap = { [y]: 1 };
         next = 1;
       } else {
-        // मौजूदा काउंटर से बढ़ाएँ
         seqMap = doc.data().sequences || {};
         next = (seqMap[y] || 0) + 1;
         seqMap[y] = next;
       }
       
-      // काउंटर दस्तावेज़ को वापस सहेजें
       transaction.set(counterRef, { sequences: seqMap });
       
-      // LR नंबर फॉर्मेट करें
       const nextNum = String(next).padStart(4, '0');
       nextStr = `LR-${y}-${nextNum}`;
     });
@@ -496,22 +509,20 @@ async function nextLRNumber() {
   } catch (e) {
     console.error("LR Counter Transaction failed: ", e);
     toast("Error generating LR number. Please try again.", "error");
-    return null; // एक त्रुटि का संकेत दें
+    return null;
   }
 }
 
-// --- संशोधित: 'async' और nextLRNumber() के लिए 'await' का उपयोग करता है ---
+// ===== CHANGED =====
 async function collectLR() {
   let number = qs('#lr-number').value.trim();
   if (!number) {
-    // नया async LR नंबर जनरेटर
     number = await nextLRNumber(); 
-    if (!number) return null; // यदि LR नंबर जनरेट करने में त्रुटि हुई
+    if (!number) return null;
     qs('#lr-number').value = number;
   }
 
   return {
-    // id को अब Firestore द्वारा संभाला जाता है, id: uid('LR') हटा दिया गया है
     number,
     date: qs('#lr-date').value || today(),
     vehicle: qs('#lr-vehicle').value.trim(),
@@ -533,20 +544,26 @@ async function collectLR() {
       freight: +tr.children[2].textContent,
       amount: +tr.children[3].textContent
     })),
-    totals: { amount: +qs('#goods-total').textContent || 0 },
+    totals: { 
+      amount: +qs('#goods-total').textContent || 0,
+      advance: +qs('#lr-advance').value || 0,
+      toPay: +qs('#lr-to-pay').textContent || 0
+    },
     insurance: {
       company: qs('#ins-company').value.trim(), policy: qs('#ins-policy').value.trim(),
       amount: qs('#ins-amount').value.trim(), date: qs('#ins-date').value
     },
     isTBB: qs('#goods-tbb').checked,
+    hideDetails: qs('#lr-hide-details').checked, // Added this
     gstBy: qs('#lr-gst-by').value,
     bank: { name: qs('#bank-name').value.trim(), ac: qs('#bank-ac').value.trim(), ifsc: qs('#bank-ifsc').value.trim() },
     terms: qs('#lr-terms').value.trim(),
-    clientId: CURRENT_CLIENT_ID // --- सबसे महत्वपूर्ण: clientId जोड़ें ---
+    clientId: CURRENT_CLIENT_ID
   };
 }
+// ===== END CHANGE =====
 
-// यह फ़ंक्शन अपरिवर्तित है
+// ===== CHANGED =====
 function setLR(lr) {
   qs('#lr-number').value = lr.number;
   qs('#lr-date').value = lr.date;
@@ -563,6 +580,8 @@ function setLR(lr) {
   qs('#cgee-pin').value = lr.consignee.pin || '';
   qs('#cgee-station').value = lr.consignee.station || '';
   qs('#goods-tbb').checked = lr.isTBB || false;
+  qs('#lr-hide-details').checked = lr.hideDetails || false; // Added this
+  
   goodsRows.innerHTML = '';
   (lr.goods || []).forEach(g => {
     const id = uid('ROW');
@@ -576,7 +595,11 @@ function setLR(lr) {
       </tr>`);
     goodsRows.querySelector(`[data-rm="${id}"]`).onclick = () => { goodsRows.querySelector(`[data-id="${id}"]`).remove(); updateGoodsTotal(); };
   });
-  updateGoodsTotal();
+  
+  updateGoodsTotal(); // Updates total
+  qs('#lr-advance').value = fmt(lr.totals.advance || 0); // Set advance
+  recalcToPay(); // Recalculate and set To Pay
+  
   qs('#ins-company').value = lr.insurance.company || '';
   qs('#ins-policy').value = lr.insurance.policy || '';
   qs('#ins-amount').value = lr.insurance.amount || '';
@@ -587,6 +610,7 @@ function setLR(lr) {
   qs('#bank-ifsc').value = lr.bank.ifsc || '';
   qs('#lr-terms').value = lr.terms || defaultTerms();
 }
+// ===== END CHANGE =====
 
 function defaultTerms() {
   return `1. The Consignment Note is subject to conditions printed overleaf.
@@ -594,30 +618,26 @@ function defaultTerms() {
 3. Shortage allowed 1%.`;
 }
 
-// --- संशोधित: Firestore में LR सहेजता/अपडेट करता है ---
 qs('#lr-save').onclick = async () => {
-  const lr = await collectLR(); // 'await' क्योंकि collectLR() अब async है
-  if (!lr) return; // LR नंबर जनरेशन में त्रुटि
+  const lr = await collectLR();
+  if (!lr) return;
 
   const idx = localLrs.findIndex(x => x.number === lr.number);
 
   try {
     if (idx > -1) {
-      // --- यह एक अपडेट है ---
       const docId = localLrs[idx].docId;
       await db.collection('lrs').doc(docId).update(lr);
-      localLrs[idx] = { ...lr, docId: docId }; // लोकल कैश अपडेट करें
+      localLrs[idx] = { ...lr, docId: docId };
       toast('LR updated in cloud', 'success');
     } else {
-      // --- यह एक नया LR है ---
       const docRef = await db.collection('lrs').add(lr);
-      localLrs.push({ ...lr, docId: docRef.id }); // लोकल कैश अपडेट करें
+      localLrs.push({ ...lr, docId: docRef.id });
       toast('LR saved to cloud', 'success');
     }
     
     qs('#lr-number').value = lr.number;
     
-    // UI को रीफ्रेश करें
     refreshKPIs();
     buildInvoiceLRList();
     renderLRReport();
@@ -629,12 +649,10 @@ qs('#lr-save').onclick = async () => {
   }
 };
 
-// --- संशोधित: Firestore से LR खोजता है ---
 qs('#lr-edit').onclick = async () => {
   const n = prompt('Enter LR No to edit:');
   if (!n) return;
   
-  // Firestore में खोजें
   try {
     const q = db.collection('lrs')
       .where("number", "==", n.trim())
@@ -659,9 +677,8 @@ qs('#lr-edit').onclick = async () => {
 };
 
 /* ---------- LR Print Area ---------- */
-// --- संशोधित: कंपनी डेटा को सेटिंग्स फ़ॉर्म से पढ़ता है ---
+// ===== CHANGED =====
 function buildLRPrint(lr) {
-  // यह सुनिश्चित करता है कि यह हमेशा Firestore से लोड किए गए नवीनतम कंपनी डेटा का उपयोग करता है
   const c = {
       name: qs('#cmp-name').value,
       address: qs('#cmp-address').value,
@@ -672,7 +689,6 @@ function buildLRPrint(lr) {
   };
   
   const el = qs('#lr-print-area');
-  // (बाकी का HTML अपरिवर्तित है)
   el.innerHTML = `
   <div class="lr-sheet a4-landscape">
     <div class="lr-row lr-header">
@@ -686,7 +702,7 @@ function buildLRPrint(lr) {
     <div class="rule rule-blue"></div>
     <div class="lr-row">
       <div class="lr-col lr-col-3"><span class="lbl">LR No:</span> <b>${lr.number}</b></div>
-      <div class="lr-col lr-col-3"><span class="lbl">Date:</span> ${lr.date}</div>
+      <div class="lr-col lr-col-3"><span class="lbl">Date:</span> ${fmtDate(lr.date)}</div>
       <div class="lr-col lr-col-3"><span class="lbl">Vehicle No:</span> ${lr.vehicle || ''}</div>
       <div class="lr-col lr-col-3"><span class="lbl">Driver:</span> ${lr.driver || ''}</div>
     </div>
@@ -713,15 +729,30 @@ function buildLRPrint(lr) {
     </div>
     <table class="grid-table mt-8">
       <thead>
-        <tr>
-          <th class="text-left">DESCRIPTION / NATURE OF GOODS</th>
-          <th>CHARGED WT</th>
-          <th>FREIGHT/UNIT</th>
-          <th>AMOUNT</th>
-        </tr>
+        ${lr.hideDetails ? `
+          <tr>
+            <th class="text-left">DESCRIPTION / NATURE OF GOODS</th>
+            <th>AMOUNT</th>
+          </tr>
+        ` : `
+          <tr>
+            <th class="text-left">DESCRIPTION / NATURE OF GOODS</th>
+            <th>CHARGED WT</th>
+            <th>FREIGHT/UNIT</th>
+            <th>AMOUNT</th>
+          </tr>
+        `}
       </thead>
       <tbody>
-        ${(lr.goods || []).map(g => `
+        ${(lr.goods || []).map(g => lr.hideDetails ? `
+          <tr>
+            <td class="text-left" style="vertical-align: top;">
+              <b>${g.desc}</b>
+              ${g.details ? `<br><span style="font-size: 9pt; white-space: pre-wrap; color: #333;">${g.details}</span>` : ''}
+            </td>
+            <td>${lr.isTBB ? 'To Be Billed' : fmt(g.amount)}</td>
+          </tr>
+        ` : `
           <tr>
             <td class="text-left" style="vertical-align: top;">
               <b>${g.desc}</b>
@@ -730,12 +761,21 @@ function buildLRPrint(lr) {
             <td>${fmt(g.weight)}</td>
             <td>${lr.isTBB ? 'To Be Billed' : fmt(g.freight)}</td>
             <td>${lr.isTBB ? 'To Be Billed' : fmt(g.amount)}</td>
-          </tr>`).join('')}
+          </tr>
+        `).join('')}
       </tbody>
       <tfoot>
         <tr>
-          <td class="text-right" colspan="3"><b>FREIGHT</b></td>
+          <td class="text-right" colspan="${lr.hideDetails ? '1' : '3'}"><b>Total Freight</b></td>
           <td><b>${lr.isTBB ? 'To Be Billed' : fmt(lr.totals.amount)}</b></td>
+        </tr>
+        <tr>
+          <td class="text-right" colspan="${lr.hideDetails ? '1' : '3'}"><b>Advance</b></td>
+          <td><b>${lr.isTBB ? 'To Be Billed' : fmt(lr.totals.advance || 0)}</b></td>
+        </tr>
+        <tr>
+          <td class="text-right" colspan="${lr.hideDetails ? '1' : '3'}"><b>To Pay</b></td>
+          <td><b>${lr.isTBB ? 'To Be Billed' : fmt(lr.totals.toPay || 0)}</b></td>
         </tr>
       </tfoot>
     </table>
@@ -745,7 +785,7 @@ function buildLRPrint(lr) {
         <div class="box-line"><span class="lbl">Company:</span> ${lr.insurance.company || 'N/A'}</div>
         <div class="box-line"><span class="lbl">Policy No:</span> ${lr.insurance.policy || 'N/A'}</div>
         <div class="box-line"><span class="lbl">Amount:</span> ${lr.insurance.amount || 'N/A'}</div>
-        <div class="box-line"><span class="lbl">Policy Date:</span> ${lr.insurance.date || 'N/A'}</div>
+        <div class="box-line"><span class="lbl">Policy Date:</span> ${fmtDate(lr.insurance.date) || 'N/A'}</div>
       </div>
       <div class="lr-col lr-col-6 lr-box">
         <div class="box-title">BANK DETAILS</div>
@@ -769,6 +809,7 @@ function buildLRPrint(lr) {
     </div>
   </div>`;
 }
+// ===== END CHANGE =====
 
 /* Print & Export & WhatsApp for LR */
 qs('#lr-print').onclick = () => window.print();
@@ -788,9 +829,9 @@ function buildInvoiceFromLR(lr) {
   qs('#inv-to').value = `${lr.consignee.name} (${lr.consignee.gst})`;
   qs('#inv-amount').value = fmt(lr.totals.amount);
   recalcInvoiceTotal();
-  // बाकी का buildInvoicePrint() भी कॉल किया जाएगा, जो ठीक है
 }
 
+// ===== CHANGED =====
 function buildInvoicePrint(inv) {
   const c = {
       name: qs('#cmp-name').value,
@@ -801,7 +842,6 @@ function buildInvoicePrint(inv) {
       email: qs('#cmp-email').value
   };
   const el = qs('#inv-print-area');
-  // (बाकी का HTML अपरिवर्तित है)
   el.innerHTML = `
   <div class="a4-landscape">
     <div class="text-center">
@@ -813,8 +853,8 @@ function buildInvoicePrint(inv) {
     <hr class="my-3">
     <div class="grid sm:grid-cols-3 gap-2 text-sm">
       <div><b>Invoice No:</b> ${inv.number}</div>
-      <div><b>Date:</b> ${inv.date}</div>
-      <div><b>Due:</b> ${inv.due}</div>
+      <div><b>Date:</b> ${fmtDate(inv.date)}</div>
+      <div><b>Due:</b> ${fmtDate(inv.due)}</div>
       <div class="sm:col-span-3"><b>LR Link:</b> ${inv.lrNo}</div>
     </div>
     <div class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
@@ -834,8 +874,8 @@ function buildInvoicePrint(inv) {
     <div class="text-right mt-4 text-lg font-bold">Payable: ₹${fmt(inv.total)}</div>
   </div>`;
 }
+// ===== END CHANGE =====
 
-// --- संशोधित: Firestore में Invoice सहेजता/अपडेट करता है ---
 qs('#inv-save').onclick = async () => {
   const lrNo = qs('#inv-lr-link').value;
   let number = qs('#inv-number').value.trim();
@@ -854,22 +894,20 @@ qs('#inv-save').onclick = async () => {
     amount: +qs('#inv-amount').value || 0,
     gst: +qs('#inv-gst').value || 0,
     total: +qs('#inv-total').value || 0,
-    clientId: CURRENT_CLIENT_ID // --- clientId जोड़ें ---
+    clientId: CURRENT_CLIENT_ID
   };
 
   const idx = localInvoices.findIndex(x => x.number === inv.number);
 
   try {
     if (idx > -1) {
-      // --- यह एक अपडेट है ---
       const docId = localInvoices[idx].docId;
       await db.collection('invoices').doc(docId).update(inv);
-      localInvoices[idx] = { ...inv, docId: docId }; // लोकल कैश अपडेट करें
+      localInvoices[idx] = { ...inv, docId: docId };
       toast('Invoice updated in cloud', 'success');
     } else {
-      // --- यह एक नया Invoice है ---
       const docRef = await db.collection('invoices').add(inv);
-      localInvoices.push({ ...inv, docId: docRef.id }); // लोकल कैश अपडेट करें
+      localInvoices.push({ ...inv, docId: docRef.id });
       toast('Invoice saved to cloud', 'success');
     }
 
@@ -883,7 +921,6 @@ qs('#inv-save').onclick = async () => {
   }
 };
 
-// --- संशोधित: Firestore से Invoice खोजता है ---
 qs('#inv-edit').onclick = async () => {
   const n = prompt('Enter Invoice No to edit:');
   if (!n) return;
@@ -911,7 +948,6 @@ qs('#inv-edit').onclick = async () => {
   }
 };
 
-// यह फ़ंक्शन अपरिवर्तित है
 function setInvoice(inv) {
   qs('#inv-number').value = inv.number; qs('#inv-date').value = inv.date; qs('#inv-due').value = inv.due;
   qs('#inv-lr-link').value = inv.lrNo; qs('#inv-from').value = inv.from; qs('#inv-to').value = inv.to;
@@ -929,17 +965,15 @@ qs('#inv-whatsapp').onclick = () => {
   window.open(`https://wa.me/?text=${msg}`, '_blank');
 };
 
-// --- संशोधित: लोकल कैश `localLrs` से LR सूची बनाता है ---
 function buildInvoiceLRList() {
   const sel = qs('#inv-lr-link');
-  const items = localLrs; // localStorage के बजाय लोकल कैश का उपयोग करें
+  const items = localLrs;
   sel.innerHTML = `<option value="">Select LR</option>` + items.map(x => `<option>${x.number}</option>`).join('');
   sel.onchange = () => {
     const lr = items.find(i => i.number === sel.value);
     if (lr) { 
       buildInvoiceFromLR(lr);
-      // LR से डेटा मिलने के बाद इनवॉइस प्रिंट को तुरंत री-बिल्ड करें
-      recalcInvoiceTotal(); // सुनिश्चित करें कि टोटल सही है
+      recalcInvoiceTotal();
       const invData = {
           number: qs('#inv-number').value || 'Auto',
           date: qs('#inv-date').value || today(),
@@ -966,15 +1000,13 @@ qs('#inv-amount').addEventListener('input', recalcInvoiceTotal);
 qs('#inv-gst').addEventListener('input', recalcInvoiceTotal);
 
 /* ---------- Reports (Firestore/Local Cache) ---------- */
-
-// --- संशोधित: लोकल कैश `localLrs` से रिपोर्ट बनाता है ---
 function renderLRReport() {
   const t = qs('#r-lr-table');
   if (!t) return;
   const q = (qs('#r-lr-search').value || '').toLowerCase();
   const from = qs('#r-lr-from').value; const to = qs('#r-lr-to').value;
   
-  const items = localLrs.filter(x => { // localStorage के बजाय
+  const items = localLrs.filter(x => {
     const okQ = (x.number + x.consignor.name + x.consignee.name + x.consignor.station + x.consignee.station).toLowerCase().includes(q);
     const okDate = (!from || x.date >= from) && (!to || x.date <= to);
     return okQ && okDate;
@@ -1001,14 +1033,13 @@ function renderLRReport() {
   qs('#r-lr-total').textContent = fmt(total);
 }
 
-// --- संशोधित: लोकल कैश `localInvoices` से रिपोर्ट बनाता है ---
 function renderInvoiceReport() {
   const t = qs('#r-inv-table');
   if (!t) return;
   const q = (qs('#r-inv-search').value || '').toLowerCase();
   const from = qs('#r-inv-from').value; const to = qs('#r-inv-to').value;
   
-  const items = localInvoices.filter(x => { // localStorage के बजाय
+  const items = localInvoices.filter(x => {
     const okQ = (x.number + x.lrNo + x.to).toLowerCase().includes(q);
     const okDate = (!from || x.date >= from) && (!to || x.date <= to);
     return okQ && okDate;
@@ -1034,12 +1065,10 @@ function renderInvoiceReport() {
   qs('#r-inv-total').textContent = fmt(total);
 }
 
-// यह फ़ंक्शंस अब लोकल कैश पर फ़िल्टर लागू करेंगे
 ['#r-lr-search', '#r-lr-from', '#r-lr-to'].forEach(sel => qs(sel)?.addEventListener('input', renderLRReport));
 ['#r-inv-search', '#r-inv-from', '#r-inv-to'].forEach(sel => qs(sel)?.addEventListener('input', renderInvoiceReport));
 
 /* ---------- Settings / Company (Firestore) ---------- */
-// (यह पिछले चरण से अपरिवर्तित है)
 async function fillCompanySettings() {
   if (!CURRENT_CLIENT_ID) return; 
   try {
@@ -1105,7 +1134,6 @@ qs('#cmp-clear').onclick = () => {
 };
 
 /* ---------- Export PDF (html2canvas + jsPDF) ---------- */
-// (यह अपरिवर्तित है)
 async function exportPdf(sel, prefix) {
   const node = qs(sel);
   if (!node || !node.firstElementChild) { return toast('Nothing to export', 'error'); }
@@ -1137,8 +1165,6 @@ async function exportPdf(sel, prefix) {
 }
 
 /* ---------- KPIs (Firestore/Local Cache) ---------- */
-
-// --- संशोधित: लोकल कैश `localLrs` और `localInvoices` से KPI पढ़ता है ---
 function refreshKPIs() {
   qs('#kpi-receipts').textContent = localLrs.length;
   qs('#kpi-invoices').textContent = localInvoices.length;
@@ -1154,11 +1180,4 @@ function refreshKPIs() {
   qs('#inv-date').value = today();
   qs('#inv-due').value = today();
   qs('#lr-terms').value = defaultTerms();
-
-  // ये फ़ंक्शंस अब डेटा लोड होने के बाद `loadAllClientData` द्वारा कॉल किए जाते हैं
-  // if (qs('#r-lr-table')) renderLRReport();
-  // if (qs('#r-inv-table')) renderInvoiceReport();
-
 })();
-
-
