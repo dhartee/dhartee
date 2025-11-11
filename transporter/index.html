@@ -187,12 +187,14 @@
           <div class="box mt-3">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2">
               <div class="box-title mb-0">Goods / Charges</div>
-              <div class="flex items-center gap-2 self-start sm:self-center">
-                  <input type="checkbox" id="goods-tbb" class="h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
-                  <label for="goods-tbb" class="text-sm font-medium text-gray-700">Print "To Be Billed"</label>
+              <div class="flex items-center gap-4"> <div class="flex items-center gap-2"> <input type="checkbox" id="goods-tbb" class="h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                      <label for="goods-tbb" class="text-sm font-medium text-gray-700">Print "To Be Billed"</label>
+                  </div>
+                  <div class="flex items-center gap-2"> <input type="checkbox" id="lr-hide-details" class="h-4 w-4 rounded text-blue-600 focus:ring-blue-500 border-gray-300">
+                      <label for="lr-hide-details" class="text-sm font-medium text-gray-700">Hide Wt/Freight</label>
+                  </div>
               </div>
             </div>
-
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <input id="goods-desc" class="input sm:col-span-2" placeholder="Description / Nature of Goods">
                 <textarea id="goods-details" class="input sm:col-span-2" placeholder="Invoice Details (e.g., Qty, Marks, etc.)" rows="2"></textarea>
@@ -216,12 +218,26 @@
                 <tbody id="goods-rows"></tbody>
                 <tfoot>
                   <tr>
-                    <td colspan="3" class="td text-right font-medium">Total</td>
-                    <td class="td font-semibold" id="goods-total">0.00</td>
+                    <td colspan="3" class="td text-right font-medium">Total Freight</td>
+                    <td class="w-full text-right bg-transparent border-0 focus:ring-0 p-0 font-semibold" id="goods-total">0.00</td>
+                    <td class="td"></td>
+                  </tr>
+
+                 <tr>
+                <td colspan="3" class="td text-right font-medium">Advance</td>
+                <td class="td font-semibold">
+                  <input id="lr-advance" class="w-full text-right bg-transparent border-0 focus:ring-0 p-0 font-semibold" value="0.00" inputmode="decimal">
+                </td>
+                <td class="td"></td>
+              </tr>
+
+                  <tr>
+                    <td colspan="3" class="td text-right font-medium">To Pay</td>
+                    <td class="w-full text-right bg-transparent border-0 focus:ring-0 p-0 font-semibold" id="lr-to-pay">0.00</td>
                     <td class="td"></td>
                   </tr>
                 </tfoot>
-              </table>
+                </table>
             </div>
           </div>
 
