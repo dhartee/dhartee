@@ -423,16 +423,16 @@
   
   <div id="toast-container"></div>
 
-  <script>
+ <script>
     const firebaseConfig = {
-    apiKey: "AIzaSyC9t0cblotC6rYShQtCMuYrz7tTfKiig78",
-    authDomain: "transporterapp-7a769.firebaseapp.com",
-    projectId: "transporterapp-7a769",
-    storageBucket: "transporterapp-7a769.firebasestorage.app",
-    messagingSenderId: "31216416485",
-    appId: "1:31216416485:web:83ca8a4b2fceb5981e060c",
-    measurementId: "G-PV7J5B0DMJ"
-  };
+      apiKey: "AIzaSyC9t0cblotC6rYShQtCMuYrz7tTfKiig78",
+      authDomain: "transporterapp-7a769.firebaseapp.com",
+      projectId: "transporterapp-7a769",
+      storageBucket: "transporterapp-7a769.firebasestorage.app",
+      messagingSenderId: "31216416485",
+      appId: "1:31216416485:web:83ca8a4b2fceb5981e060c",
+      measurementId: "G-PV7J5B0DMJ"
+    };
   </script>
 
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -440,14 +440,14 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
   <script>
-    // Firebase ऐप को प्रारंभ करें
+    // Firebase ऐप को प्रारंभ करें (सिर्फ एक बार)
     firebase.initializeApp(firebaseConfig);
 
     // बाद में उपयोग के लिए सेवाओं को आसान पहुँच दें
+    // (app.js और loadBranding() दोनों इनका उपयोग करेंगे)
     const auth = firebase.auth();
     const db = firebase.firestore();
   </script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
 
   <script>
     // यह ग्लोबल वैरिएबल app.js द्वारा उपयोग किया जाएगा
@@ -473,18 +473,17 @@
         // 2. ग्लोबल वैरिएबल सेट करें
         window.APP_CLIENT_ID = clientId;
 
-        // 3. Firebase को प्रारंभ करें (यह index.html में होना चाहिए)
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // 3. Firebase DB को (जो पहले ही इनिशियलाइज़ हो चुका है) एक्सेस करें
+        //    (यहाँ से firebase.initializeApp() को हटा दिया गया है - यही फिक्स है)
+        const db_local = firebase.firestore(); // 'db' का उपयोग करें (यह पहले से ही ग्लोबल है)
 
         // 4. Firestore से पब्लिक ब्रांडिंग जानकारी लाएँ
-        const docRef = db.collection('publicClients').doc(clientId);
+        const docRef = db_local.collection('publicClients').doc(clientId);
         const doc = await docRef.get();
 
         let companyName = clientId; // डिफ़ॉल्ट
         if (doc.exists) {
           companyName = doc.data().companyName || clientId;
-          // आप यहाँ लोगो URL (doc.data().logoUrl) भी लोड कर सकते हैं
         }
 
         // 5. स्प्लैश और लॉगिन स्क्रीन को ब्रांड करें
@@ -493,17 +492,19 @@
 
       } catch (e) {
         console.warn('Branding failed:', e.message);
-        // यदि कोई त्रुटि होती है, तो भी लॉगिन टाइटल को अपडेट करें (यदि संभव हो)
         if(window.APP_CLIENT_ID) {
            loginTitle.textContent = `${window.APP_CLIENT_ID} Login`;
         }
-       }
+      }
+      // 'finally' ब्लॉक को यहाँ से हटा दिया गया है (app.js इसे हैंडल करेगा)
+      
+    } // <-- यह रहा वह ब्रैकेट '}' जो पहले मिसिंग था
 
     // इस फ़ंक्शन को तुरंत चलाएँ
     loadBranding();
   </script>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
  
 </body>
 </html>
