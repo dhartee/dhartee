@@ -110,15 +110,14 @@ qsa('#mobile-drawer [data-close]').forEach(el => el.addEventListener('click', ()
 }));
 
 function enterApp(user) {
-  qs('#splash-screen').classList.add('hidden');
+  qs('#splash-screen').classList.add('hidden'); // <-- सही जगह
   if (!user) return;
   loginScreen.classList.add('hidden');
   appShell.classList.remove('hidden');
   currentUser.textContent = `User: ${user.email}`; 
   setNav('dashboard');
-  
-  // Firestore फ़ंक्शंस को कॉल करें
-  fillCompanySettings();
+
+  fillCompanySettings(); 
 }
 
 auth.onAuthStateChanged(user => {
@@ -171,11 +170,12 @@ auth.onAuthStateChanged(user => {
     });
 
   } else {
-    qs('#splash-screen').classList.add('hidden');
-    console.log("User is logged out.");
-    loginScreen.classList.remove('hidden');
-    appShell.classList.add('hidden');
-    CURRENT_CLIENT_ID = null;
+    
+      qs('#splash-screen').classList.add('hidden'); 
+      console.log("User is logged out.");
+      loginScreen.classList.remove('hidden');
+      appShell.classList.add('hidden');
+      CURRENT_CLIENT_ID = null;
 
     const loginButton = qs('#login-form button');
     if (loginButton) {
@@ -1182,4 +1182,5 @@ function refreshKPIs() {
   qs('#inv-due').value = today();
   qs('#lr-terms').value = defaultTerms();
 })();
+
 
