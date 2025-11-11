@@ -43,7 +43,7 @@
     </div>
   </section>
 
-  <section id="app-shell" class="hidden min-h-dvh">
+  <section id="app-shell" class="hidden min-h-dvh flex flex-col">
     <header class="bg-white shadow-sm sticky top-0 z-30">
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div class="flex items-center gap-3">
@@ -59,7 +59,7 @@
       </div>
     </header>
 
-    <div class="max-w-7xl mx-auto px-2 md:px-4 py-4 grid md:grid-cols-[240px_1fr] gap-4">
+    <div class="max-w-7xl mx-auto px-2 md:px-4 py-4 grid md:grid-cols-[240px_1fr] gap-4 flex-grow">
       <aside id="sidebar" class="bg-white rounded-2xl shadow md:sticky md:top-20 h-max p-2 md:p-3 hidden md:block">
         <nav class="space-y-1">
           <button data-nav="dashboard" class="nav-btn active">🏠 Dashboard</button>
@@ -414,12 +414,13 @@
           </div>
         </section>
       </main>
+      <footer class="text-center text-xs text-slate-100 py-6 font-medium">
+    © <span id="year"></span> Transporter Web App
+  </footer>
     </div>
   </section>
 
-  <footer class="text-center text-xs text-slate-100 py-6 font-medium">
-    © <span id="year"></span> Transporter Web App
-  </footer>
+  
   
   <div id="toast-container"></div>
 
