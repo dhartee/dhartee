@@ -281,3 +281,41 @@
       from { opacity: 1; transform: translateX(0); }
       to { opacity: 0; transform: translateX(100%); }
     }
+/* === PRINT STYLES === */
+@media print {
+  /* 1. Hide everything on the page */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. Show ONLY the print area and its contents */
+  #lr-print-area, #lr-print-area *,
+  #inv-print-area, #inv-print-area * {
+    visibility: visible;
+  }
+
+  /* 3. Force the print area to take up the whole page */
+  #lr-print-area, #inv-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+  }
+  
+  /* 4. Ensure the printable sheet fits perfectly */
+  .lr-sheet, .a4-landscape {
+     margin: 0 !important;
+     padding: 0 !important;
+     border: none !important;
+     box-shadow: none !important;
+     width: 100% !important;
+     max-width: 100% !important;
+     height: 100% !important;
+  }
+}
+
