@@ -1,11 +1,12 @@
 /* Transporter Web App – Firebase Edition (FINAL) */
-
+document.addEventListener('DOMContentLoaded', () => {
 let CURRENT_CLIENT_ID = null; // लॉग इन क्लाइंट का ID स्टोर करता है
 let localConsignors = []; // Consignors को यहाँ कैश करें
 let localConsignees = []; // Consignees को यहाँ कैश करें
 let localLrs = []; // LRs को यहाँ कैश करें
 let localInvoices = []; // Invoices को यहाँ कैश करें
-
+let localExpenses = []; // Stores fetched expenses
+let localVehicles = []; // <-- MOVED FROM LINE 1354
 let currentlyEditingCgorId = null;
 let currentlyEditingCgeeId = null;
 
@@ -85,7 +86,10 @@ const contentPages = {
   invoice: qs('#page-invoice'),
   masters: qs('#page-masters'),
   reports: qs('#page-reports'),
-  settings: qs('#page-settings')
+  settings: qs('#page-settings'),
+  expenses: qs('#page-expenses'), // If you added expenses previously
+  fleet: qs('#page-fleet'),       // <--- ADD THIS
+  drivers: qs('#page-drivers')    // <--- ADD THIS
 };
 
 function setNav(name) {
@@ -191,7 +195,9 @@ async function loadAllClientData() {
   
   await Promise.all([
     loadAllMasters(),
-    loadAllTransactions()
+    loadAllTransactions(),
+    loadAllExpenses(),
+    loadAllVehicles()
   ]);
   
   console.log("All data loaded. Refreshing UI.");
@@ -347,7 +353,7 @@ qs('#m-cgee-save').onclick = async () => {
   };
   try {
     if (currentlyEditingCgeeId) {
-      const docRef = db.collection('consignees').doc(currentlyEditingCgeeId);
+      const docRef = db.collection('consignees').doc(currentlyEditingCGEEId);
       await docRef.update(data);
       const index = localConsignees.findIndex(x => x.docId === currentlyEditingCgeeId);
       if (index > -1) localConsignees[index] = { ...data, docId: currentlyEditingCgeeId };
@@ -1082,12 +1088,28 @@ async function fillCompanySettings() {
       console.warn("Company profile document does not exist for:", CURRENT_CLIENT_ID);
       toast("No company profile found. Please save one.", "error");
     }
-    qs('#cmp-name').value = c.name || ''; qs('#cmp-email').value = c.email || '';
-    qs('#cmp-contact').value = c.contact || ''; qs('#cmp-pan').value = c.pan || '';
-    qs('#cmp-gst').value = c.gst || ''; qs('#cmp-bank').value = c.bank || '';
-    qs('#cmp-ac').value = c.ac || ''; qs('#cmp-ifsc').value = c.ifsc || '';
-    qs('#cmp-address').value = c.address || '';
-    qs('#bank-name').value = c.bank || ''; qs('#bank-ac').value = c.ac || ''; qs('#bank-ifsc').value = c.ifsc || '';
+    
+    // Safely query elements that might exist
+    const safeSet = (id, val) => {
+      const el = qs(id);
+      if (el) el.value = val || '';
+    };
+
+    safeSet('#cmp-name', c.name);
+    safeSet('#cmp-email', c.email);
+    safeSet('#cmp-contact', c.contact);
+    safeSet('#cmp-pan', c.pan);
+    safeSet('#cmp-gst', c.gst);
+    safeSet('#cmp-bank', c.bank);
+    safeSet('#cmp-ac', c.ac);
+    safeSet('#cmp-ifsc', c.ifsc);
+    safeSet('#cmp-address', c.address);
+
+    // Also update LR bank details
+    safeSet('#bank-name', c.bank);
+    safeSet('#bank-ac', c.ac);
+    safeSet('#bank-ifsc', c.ifsc);
+    
   } catch (error) {
     console.error("Error loading company settings:", error);
     toast("Error loading company data: " + error.message, "error");
@@ -1167,12 +1189,32 @@ async function exportPdf(sel, prefix) {
 
 /* ---------- KPIs (Firestore/Local Cache) ---------- */
 function refreshKPIs() {
-  qs('#kpi-receipts').textContent = localLrs.length;
-  qs('#kpi-invoices').textContent = localInvoices.length;
-  const parties = new Set([...localConsignors, ...localConsignees].map(x => x.gst));
-  qs('#kpi-parties').textContent = parties.size;
-  const stations = new Set([...localConsignors.map(x => x.station), ...localConsignees.map(x => x.station)].filter(Boolean));
-  qs('#kpi-stations').textContent = stations.size;
+  // 1. Update Receipt Count
+  const elReceipts = qs('#kpi-receipts');
+  if (elReceipts) elReceipts.textContent = localLrs.length;
+
+  // 2. Update Invoice Count
+  const elInvoices = qs('#kpi-invoices');
+  if (elInvoices) elInvoices.textContent = localInvoices.length;
+
+  // 3. Update Parties Count
+  const elParties = qs('#kpi-parties');
+  if (elParties) {
+    const parties = new Set([...localConsignors, ...localConsignees].map(x => x.gst));
+    elParties.textContent = parties.size;
+  }
+
+  // 4. Update Stations Count
+  const elStations = qs('#kpi-stations');
+  if (elStations) {
+    const stations = new Set([...localConsignors.map(x => x.station), ...localConsignees.map(x => x.station)].filter(Boolean));
+    elStations.textContent = stations.size;
+  }
+  
+  // 5. Update Compliance Alert (Safety Check)
+  if (typeof checkComplianceAlerts === 'function') {
+    checkComplianceAlerts();
+  }
 }
 
 /* ---------- Initialize some defaults ---------- */
@@ -1183,4 +1225,366 @@ function refreshKPIs() {
   qs('#lr-terms').value = defaultTerms();
 })();
 
+/* =========================================
+   EXPENSE MANAGER MODULE
+   ========================================= */
 
+// 1. Load Expenses from Cloud
+async function loadAllExpenses() {
+  if (!CURRENT_CLIENT_ID) return;
+  try {
+    const q = db.collection("expenses")
+                .where("clientId", "==", CURRENT_CLIENT_ID)
+                .orderBy("date", "desc"); // Show newest first
+                
+    const snapshot = await q.get();
+    
+    // Map and cache the data
+    localExpenses = snapshot.docs.map(doc => ({ 
+      ...doc.data(), 
+      docId: doc.id 
+    }));
+    
+    console.log("Loaded Expenses:", localExpenses.length);
+    renderExpenseTable();
+    
+  } catch (error) {
+    console.error("Error loading expenses:", error);
+    // If indexing error occurs (common in first run with orderBy), fallback to client-side sort
+    if (error.code === 'failed-precondition') {
+       console.warn("Index missing. Please create an index in Firebase Console for 'expenses' (clientId ASC, date DESC).");
+    }
+    toast("Error loading expenses: " + error.message, "error");
+  }
+}
+
+// 2. Render the Table
+function renderExpenseTable() {
+  const tbody = qs('#expense-rows');
+  if (!tbody) return;
+
+  let total = 0;
+  
+  // Generate HTML
+  tbody.innerHTML = localExpenses.map(item => {
+    total += (+item.amount || 0);
+    return `
+      <tr>
+        <td class="td">${fmtDate(item.date)}</td>
+        <td class="td"><span class="badge bg-gray-100 text-gray-800 px-2 py-1 rounded text-xs">${item.category}</span></td>
+        <td class="td">${item.note || '-'}</td>
+        <td class="td text-right font-medium">₹${fmt(item.amount)}</td>
+        <td class="td">
+          <button class="text-red-600 hover:text-red-800 text-xs font-semibold" onclick="deleteExpense('${item.docId}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  // Update Total Footer
+  const totalEl = qs('#exp-total');
+  if (totalEl) totalEl.textContent = fmt(total);
+}
+
+// 3. Add New Expense
+const btnAddExpense = qs('#btn-add-expense');
+if (btnAddExpense) {
+  btnAddExpense.onclick = async () => {
+    const date = qs('#exp-date').value;
+    const category = qs('#exp-category').value;
+    const amount = qs('#exp-amount').value;
+    const note = qs('#exp-note').value.trim();
+
+    // Validation
+    if (!date || !amount) {
+      return toast("Please fill Date and Amount", "error");
+    }
+
+    const btn = qs('#btn-add-expense');
+    btn.disabled = true;
+    btn.textContent = "Saving...";
+
+    const newExpense = {
+      date,
+      category,
+      amount: parseFloat(amount),
+      note,
+      clientId: CURRENT_CLIENT_ID,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    try {
+      // Save to Firestore
+      const docRef = await db.collection('expenses').add(newExpense);
+      
+      // Update Local Cache immediately (UI feels faster)
+      localExpenses.unshift({ ...newExpense, docId: docRef.id });
+      
+      // Sort again by date (optional, keeps list organized)
+      localExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      renderExpenseTable();
+      
+      // Clear Inputs
+      qs('#exp-amount').value = '';
+      qs('#exp-note').value = '';
+      qs('#exp-amount').focus(); // Ready for next entry
+      
+      toast("Expense added successfully", "success");
+
+    } catch (error) {
+      console.error("Error saving expense:", error);
+      toast("Failed to save: " + error.message, "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Add Entry";
+    }
+  };
+}
+
+// 4. Delete Expense
+window.deleteExpense = async (docId) => {
+  if (!confirm("Are you sure you want to delete this entry permanently?")) return;
+
+  try {
+    await db.collection('expenses').doc(docId).delete();
+    
+    // Remove from local cache
+    localExpenses = localExpenses.filter(x => x.docId !== docId);
+    renderExpenseTable();
+    
+    toast("Entry deleted", "success");
+  } catch (error) {
+    console.error("Error deleting:", error);
+    toast("Delete failed: " + error.message, "error");
+  }
+};
+
+// 5. Set Default Date on Load
+const expDateInput = qs('#exp-date');
+if (expDateInput) expDateInput.value = today();
+/* =========================================
+   MODULE 3: FLEET MANAGEMENT & ALERTS
+   ========================================= */
+// let localVehicles = []; // <-- MOVED TO TOP OF FILE
+let editingFleetId = null;
+
+// 1. Load Vehicles
+async function loadAllVehicles() {
+  if (!CURRENT_CLIENT_ID) return;
+  try {
+    const snapshot = await db.collection("vehicles").where("clientId", "==", CURRENT_CLIENT_ID).get();
+    localVehicles = snapshot.docs.map(doc => ({ ...doc.data(), docId: doc.id }));
+    renderFleetTable();
+    checkComplianceAlerts();
+    updateDriverList(); // Update driver dropdown for Module 4
+  } catch (e) { console.error("Fleet Load Error:", e); }
+}
+
+// 2. Helper: Calculate Expiry
+function getExpiryStatus(dateStr) {
+  if (!dateStr) return { cls: '', txt: '-' };
+  const diff = Math.ceil((new Date(dateStr) - new Date()) / (1000 * 60 * 60 * 24));
+  if (diff < 0) return { cls: 'bg-red-100 text-red-800 font-bold', txt: `${fmtDate(dateStr)} (Exp)` };
+  if (diff <= 15) return { cls: 'bg-orange-100 text-orange-800 font-bold', txt: `${fmtDate(dateStr)} (${diff}d)` };
+  return { cls: '', txt: fmtDate(dateStr) };
+}
+
+// 3. Render Fleet Table
+function renderFleetTable() {
+  const tbody = qs('#fleet-rows'); if (!tbody) return;
+  const term = (qs('#fleet-search').value || '').toLowerCase();
+  
+  tbody.innerHTML = localVehicles.filter(v => v.number.toLowerCase().includes(term)).map(v => {
+    const ins = getExpiryStatus(v.ins); const fit = getExpiryStatus(v.fit);
+    const tax = getExpiryStatus(v.tax); const puc = getExpiryStatus(v.puc);
+    const per = getExpiryStatus(v.permit);
+    return `<tr>
+      <td class="td font-bold">${v.number}</td>
+      <td class="td text-xs">${v.driver || '-'}<br>${v.phone || ''}</td>
+      <td class="td ${ins.cls}">${ins.txt}</td><td class="td ${fit.cls}">${fit.txt}</td>
+      <td class="td ${tax.cls}">${tax.txt}</td><td class="td ${puc.cls}">${puc.txt}</td>
+      <td class="td ${per.cls}">${per.txt}</td>
+      <td class="td"><button class="text-blue-600" onclick="editFleet('${v.docId}')">Edit</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// 4. Save/Update Vehicle
+qs('#btn-save-fleet').onclick = async () => {
+  const data = {
+    number: qs('#fleet-no').value.trim().toUpperCase(),
+    driver: qs('#fleet-driver').value.trim(),
+    phone: qs('#fleet-phone').value.trim(),
+    ins: qs('#fleet-ins').value, fit: qs('#fleet-fit').value,
+    tax: qs('#fleet-tax').value, puc: qs('#fleet-puc').value, permit: qs('#fleet-permit').value,
+    clientId: CURRENT_CLIENT_ID
+  };
+  if (!data.number) return toast("Vehicle No required", "error");
+
+  try {
+    if (editingFleetId) {
+      await db.collection('vehicles').doc(editingFleetId).update(data);
+      const i = localVehicles.findIndex(x => x.docId === editingFleetId);
+      if (i > -1) localVehicles[i] = { ...data, docId: editingFleetId };
+    } else {
+      const ref = await db.collection('vehicles').add(data);
+      localVehicles.push({ ...data, docId: ref.id });
+    }
+    toast("Fleet Saved", "success");
+    qs('#btn-clear-fleet').onclick();
+    loadAllVehicles(); // Refresh table & alerts
+  } catch (e) { toast(e.message, "error"); }
+};
+
+window.editFleet = (id) => {
+  const v = localVehicles.find(x => x.docId === id);
+  if (!v) return;
+  editingFleetId = id;
+  qs('#fleet-no').value = v.number; qs('#fleet-driver').value = v.driver; qs('#fleet-phone').value = v.phone;
+  qs('#fleet-ins').value = v.ins; qs('#fleet-fit').value = v.fit;
+  qs('#fleet-tax').value = v.tax; qs('#fleet-puc').value = v.puc; qs('#fleet-permit').value = v.permit;
+  qs('#btn-save-fleet').textContent = "Update";
+};
+
+qs('#btn-clear-fleet').onclick = () => {
+  editingFleetId = null;
+  qs('#btn-save-fleet').textContent = "Save Vehicle";
+  qsa('#page-fleet input').forEach(i => i.value = '');
+};
+qs('#fleet-search').addEventListener('input', renderFleetTable);
+
+// 5. Check Alerts
+function checkComplianceAlerts() {
+  let count = 0;
+  const now = new Date();
+  localVehicles.forEach(v => {
+    [v.ins, v.fit, v.tax, v.puc, v.permit].forEach(d => {
+      if (d && (new Date(d) - now) / (1e3*60*60*24) <= 7) count++;
+    });
+  });
+  qs('#alert-count').textContent = count;
+  qs('#dashboard-alerts').classList.toggle('hidden', count === 0);
+}
+
+
+/* =========================================
+   MODULE 4: DRIVER ACCOUNT (LEDGER)
+   ========================================= */
+let localDriverTx = [];
+
+// 1. Sync Drivers to Dropdown
+function updateDriverList() {
+  const list = qs('#drv-list');
+  if (!list) return;
+  // Extract unique drivers from Vehicles
+  const drivers = [...new Set(localVehicles.map(v => v.driver).filter(Boolean))];
+  list.innerHTML = drivers.map(d => `<option value="${d}">`).join('');
+}
+
+// 2. Load Ledger for Selected Driver
+qs('#btn-load-ledger').onclick = async () => {
+  const name = qs('#drv-select-input').value.trim();
+  if (!name) return toast("Select a driver first", "error");
+  
+  qs('#btn-load-ledger').textContent = "...";
+  try {
+    // Fetch transactions for this driver
+    const q = db.collection('driver_ledger')
+      .where('clientId', '==', CURRENT_CLIENT_ID)
+      .where('driver', '==', name)
+      .orderBy('date', 'asc'); // Oldest first for ledger
+      
+    const snap = await q.get();
+    localDriverTx = snap.docs.map(d => ({...d.data(), docId: d.id}));
+    
+    renderDriverLedger(name);
+  } catch (e) { 
+    console.error(e); 
+    // If index error, handle gracefully
+    if(e.code === 'failed-precondition') toast("System indexing... Try again in 2 mins", "error");
+  } finally {
+    qs('#btn-load-ledger').textContent = "GO";
+  }
+};
+
+function renderDriverLedger(driverName) {
+  const tbody = qs('#drv-ledger-rows');
+  let bal = 0;
+  
+  tbody.innerHTML = localDriverTx.map(tx => {
+    const debit = tx.type === 'Debit' ? (tx.amount || 0) : 0;
+    const credit = tx.type === 'Credit' ? (tx.amount || 0) : 0;
+    bal = bal - debit + credit; // Debit reduces balance (company money gone), Credit increases (driver earned)
+    
+    // Wait... usually:
+    // Debit = Driver took money (Advance). Driver Owes Company (+).
+    // Credit = Driver did work (Salary). Company Owes Driver (-).
+    // Let's standardize: Balance > 0 means Driver Owes Company.
+    
+    return `<tr>
+      <td class="td">${fmtDate(tx.date)}</td>
+      <td class="td">${tx.remark || '-'}</td>
+      <td class="td text-right text-red-600 font-medium">${debit ? '₹'+fmt(debit) : '-'}</td>
+      <td class="td text-right text-green-600 font-medium">${credit ? '₹'+fmt(credit) : '-'}</td>
+      <td class="td text-right"><button class="text-red-500 text-xs" onclick="delDrvTx('${tx.docId}')">✖</button></td>
+    </tr>`;
+  }).join('');
+
+  // Calculate Final Balance Logic
+  // Total Debits (Advances) vs Total Credits (Work Done)
+  const totalDebit = localDriverTx.filter(t=>t.type==='Debit').reduce((s,t)=>s+(+t.amount||0),0);
+  const totalCredit = localDriverTx.filter(t=>t.type==='Credit').reduce((s,t)=>s+(+t.amount||0),0);
+  const net = totalDebit - totalCredit;
+  
+  const disp = qs('#drv-balance-display');
+  const status = qs('#drv-balance-status');
+  
+  if (net > 0) {
+    disp.textContent = `₹${fmt(net)}`;
+    disp.className = "text-2xl font-bold text-red-600";
+    status.textContent = `${driverName} needs to pay Company (Advance Pending)`;
+  } else if (net < 0) {
+    disp.textContent = `₹${fmt(Math.abs(net))}`;
+    disp.className = "text-2xl font-bold text-green-600";
+    status.textContent = `Company needs to pay ${driverName} (Salary/Trip Due)`;
+  } else {
+    disp.textContent = "₹0";
+    disp.className = "text-2xl font-bold text-gray-600";
+    status.textContent = "Account Settled";
+  }
+}
+
+// 3. Add Transaction
+qs('#btn-save-tx').onclick = async () => {
+  const driver = qs('#drv-select-input').value.trim();
+  if (!driver) return toast("Select driver first", "error");
+  
+  const data = {
+    driver,
+    clientId: CURRENT_CLIENT_ID,
+    date: qs('#drv-tx-date').value || today(),
+    type: qs('#drv-tx-type').value,
+    amount: +qs('#drv-tx-amount').value,
+    remark: qs('#drv-tx-remark').value.trim()
+  };
+  
+  if (!data.amount) return toast("Enter Amount", "error");
+
+  try {
+    await db.collection('driver_ledger').add(data);
+    toast("Entry Added", "success");
+    qs('#drv-tx-amount').value = '';
+    qs('#drv-tx-remark').value = '';
+    qs('#btn-load-ledger').click(); // Reload ledger
+  } catch(e) { toast(e.message, "error"); }
+};
+
+window.delDrvTx = async (id) => {
+  if(!confirm("Delete this entry?")) return;
+  await db.collection('driver_ledger').doc(id).delete();
+  qs('#btn-load-ledger').click(); // Reload
+};
+}); // End of DOMContentLoaded
