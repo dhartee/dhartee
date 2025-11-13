@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Booking | Panna Tiger Safari</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#2e4a33', // Deep Jungle Green
+                            gold: '#d4af37',  // Safari Gold
+                            orange: '#e65100', // Tiger Orange
+                            light: '#f9fafb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Inter', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Hero Section for Booking Page */
+        .hero-booking {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1500660653062-8d9210039b65?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Table Styling */
+        .table-custom th {
+            background-color: #2e4a33;
+            color: white;
+            font-weight: 600;
+        }
+        .table-custom tr:nth-child(even) {
+            background-color: #f3f4f6;
+        }
+        .table-custom tr:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Form Input Styling */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            margin-top: 0.25rem;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #e65100;
+            box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.2); /* ✅ CORRECT CSS */
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800 antialiased flex flex-col min-h-screen text-lg">
+
+    <div class="bg-brand-green text-white py-3 hidden md:block text-base">
+        <div class="container mx-auto px-4 flex justify-between items-center font-medium">
+            <div class="flex items-center gap-6">
+                <a href="tel:+917557388388" class="flex items-center hover:text-brand-gold transition">
+                    <i class="fa-solid fa-phone mr-2"></i> +91 75573 88388
+                </a>
+                <a href="mailto:booking@pannatigersafari.com" class="flex items-center hover:text-brand-gold transition">
+                    <i class="fa-solid fa-envelope mr-2"></i> booking@pannatigersafari.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="https://www.pannatigersafari.com/wp-content/uploads/2025/08/PANNA-TIGER-LOGO-1.png" alt="Logo" class="h-14 w-14 object-contain group-hover:scale-105 transition">
+                    <div class="leading-tight">
+                        <h1 class="text-2xl font-bold text-brand-green">Panna Tiger Safari</h1>
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8 font-medium text-gray-700 text-base">
+                    <a href="index.html" class="hover:text-brand-orange transition">Home</a>
+                    <a href="services.html" class="hover:text-brand-orange transition">Services</a>
+                    <a href="safari-booking.html" class="text-brand-orange">Safari Booking</a>
+                    <a href="#" class="hover:text-brand-orange transition">Tour Packages</a>
+                    <a href="index.html#hotels" class="hover:text-brand-orange transition">Hotels</a>
+                    <a href="safari-booking.html" class="bg-brand-orange text-white px-6 py-2 rounded-md hover:bg-orange-700 transition shadow-md">Book Now</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-brand-green text-3xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t text-base">
+            <div class="flex flex-col p-4 space-y-4 font-medium">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="safari-booking.html" class="text-brand-orange">Safari Booking</a>
+                <a href="#">Tour Packages</a>
+                <a href="index.html#hotels">Hotels</a>
+                <a href="safari-booking.html" class="bg-brand-orange text-white text-center py-2 rounded">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-booking h-[400px] md:h-[500px] flex items-center justify-center text-center px-4">
+        <div class="bg-black/40 p-8 md:p-12 rounded-xl backdrop-blur-sm max-w-4xl mx-auto text-white" data-aos="zoom-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                Book Your Safari
+            </h1>
+            <div class="h-1 w-24 bg-brand-orange mx-auto mb-6"></div>
+            <p class="text-xl md:text-2xl font-light text-gray-100">
+                Reserve your spot for an unforgettable wildlife adventure in Panna National Park
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-12">
+                
+                <div class="lg:w-2/3 order-2 lg:order-1">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100" data-aos="fade-up">
+                        <h2 class="text-2xl font-bold text-brand-green mb-6 border-b pb-4">Panna Tiger Safari Booking Form</h2>
+                        
+                        <form action="#" method="POST">
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Full Name *</label>
+                                    <input type="text" required class="form-input" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Email Address *</label>
+                                    <input type="email" required class="form-input" placeholder="Enter your email">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Phone Number *</label>
+                                    <input type="tel" required class="form-input" placeholder="+91 XXXXX XXXXX">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Nationality *</label>
+                                    <select class="form-input bg-white">
+                                        <option>Indian</option>
+                                        <option>Foreigner</option>
+                                        <option>Mixed Group</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-3 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Adults</label>
+                                    <select class="form-input bg-white">
+                                        <option>1 Adult</option>
+                                        <option>2 Adults</option>
+                                        <option>3 Adults</option>
+                                        <option>4 Adults</option>
+                                        <option>5 Adults</option>
+                                        <option>6 Adults</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Children (5-12 yrs)</label>
+                                    <select class="form-input bg-white">
+                                        <option>0 Children</option>
+                                        <option>1 Child</option>
+                                        <option>2 Children</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">ID Proof Type</label>
+                                    <select class="form-input bg-white">
+                                        <option>Aadhaar Card</option>
+                                        <option>Passport</option>
+                                        <option>Voter ID</option>
+                                        <option>Driving License</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Select Safari Type *</label>
+                                    <select class="form-input bg-white">
+                                        <option>Core Zone (Sharing Jeep): Madla/Hinouta</option>
+                                        <option>Buffer Zone (Full Jeep): Akola/Jinna</option>
+                                        <option>Core Zone (Full Jeep): Madla/Hinouta</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700">Preferred Date *</label>
+                                    <input type="date" required class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Preferred Time Slot</label>
+                                <div class="flex gap-4">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="slot" class="text-brand-orange focus:ring-brand-orange"> Morning Safari
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="slot" class="text-brand-orange focus:ring-brand-orange"> Evening Safari
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="slot" class="text-brand-orange focus:ring-brand-orange"> Night Safari
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-8">
+                                <label class="block text-sm font-semibold text-gray-700">Special Requests</label>
+                                <textarea rows="3" class="form-input" placeholder="Any specific requirements..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-orange text-white font-bold py-4 rounded-lg hover:bg-orange-700 transition shadow-lg text-lg">
+                                Submit Booking Request
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="mt-12 bg-white rounded-xl shadow border border-gray-200 overflow-hidden" data-aos="fade-up">
+                        <div class="bg-brand-green text-white p-4">
+                            <h3 class="font-bold text-xl">Panna National Park Safari Booking Tariff</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-600 table-custom">
+                                <thead>
+                                    <tr>
+                                        <th class="px-6 py-4">Safari Type</th>
+                                        <th class="px-6 py-4">Indian Rate</th>
+                                        <th class="px-6 py-4">Foreigner Rate</th>
+                                        <th class="px-6 py-4">Zone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b bg-white">
+                                        <td class="px-6 py-4 font-bold">Weekdays Core (Full Jeep)</td>
+                                        <td class="px-6 py-4">INR 8500</td>
+                                        <td class="px-6 py-4">INR 15000</td>
+                                        <td class="px-6 py-4">Madla / Hinouta</td>
+                                    </tr>
+                                    <tr class="border-b bg-white">
+                                        <td class="px-6 py-4 font-bold">Weekends Core (Full Jeep)</td>
+                                        <td class="px-6 py-4">INR 8500</td>
+                                        <td class="px-6 py-4">INR 15000</td>
+                                        <td class="px-6 py-4">Madla / Hinouta</td>
+                                    </tr>
+                                    <tr class="border-b bg-white">
+                                        <td class="px-6 py-4 font-bold">Buffer Zones (Full Jeep)</td>
+                                        <td class="px-6 py-4">INR 6500</td>
+                                        <td class="px-6 py-4">INR 6500</td>
+                                        <td class="px-6 py-4">Akola / Jinna</td>
+                                    </tr>
+                                    <tr class="border-b bg-white">
+                                        <td class="px-6 py-4 font-bold">Sharing (Per Person)</td>
+                                        <td class="px-6 py-4">INR 2000-2300</td>
+                                        <td class="px-6 py-4">INR 3000-4000</td>
+                                        <td class="px-6 py-4">Madla / Hinouta</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mt-12 bg-white p-8 rounded-xl shadow border border-gray-100" data-aos="fade-up">
+                        <h3 class="text-2xl font-bold text-brand-green mb-4">Terms & Conditions</h3>
+                        <ul class="list-disc pl-5 space-y-3 text-gray-700 text-base">
+                            <li>Jeep safari at Panna is conducted in two shifts – Morning (05:30 AM - 11:30 AM) and Evening (02:30 PM - 05:30 PM).</li>
+                            <li>Visitors are required to send their valid ID proof number (Aadhar/Passport/Voter ID/Driving License) for booking.</li>
+                            <li>The number of visitors on a safari vehicle should not exceed the limit; strict checking is done at the entry gate.</li>
+                            <li>Tourists are responsible for their own luggage; no driver or guide is liable for loss or damage.</li>
+                            <li>We act as a travel agent for booking; we are not responsible for accidents, injuries, or theft during the excursion.</li>
+                            <li><strong>Refund Policy:</strong> If a safari is not booked due to technical errors or seat unavailability, a full refund will be processed.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3 order-1 lg:order-2">
+                    <div class="bg-brand-light p-6 rounded-xl shadow-md border border-brand-green/20 mb-8 sticky top-28">
+                        <h3 class="text-xl font-bold text-brand-green mb-4">Need Help?</h3>
+                        <p class="text-gray-600 mb-4">Have questions about your booking? Contact us directly:</p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-phone text-brand-orange"></i> 
+                                <span class="font-semibold">+91 75573 88388</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-brands fa-whatsapp text-green-600 text-xl"></i> 
+                                <span class="font-semibold">+91 75573 88388</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-envelope text-brand-orange"></i> 
+                                <span>booking@pannasafari.com</span>
+                            </li>
+                        </ul>
+                        <a href="https://wa.me/917557388388" class="block w-full bg-green-600 text-white text-center py-3 rounded-lg font-bold hover:bg-green-700 transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-xl border-l-4 border-red-500 mb-8">
+                        <h3 class="text-xl font-bold text-red-800 mb-3"><i class="fa-solid fa-circle-info mr-2"></i>Important Notes</h3>
+                        <ul class="space-y-2 text-sm text-red-700">
+                            <li>• Park is closed during monsoon (July-Sept).</li>
+                            <li>• Advance booking recommended for peak season.</li>
+                            <li>• Children below 5 years enter free.</li>
+                            <li>• Valid ID proof (original) required at entry.</li>
+                            <li>• Cancellation allowed up to 48 hours prior.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-800 text-white p-4">
+                            <h3 class="font-bold text-lg">Safari Timing Table</h3>
+                        </div>
+                        <table class="w-full text-xs text-left text-gray-600">
+                            <thead class="bg-gray-100 border-b">
+                                <tr>
+                                    <th class="px-3 py-2">Month</th>
+                                    <th class="px-3 py-2">Morning</th>
+                                    <th class="px-3 py-2">Evening</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y">
+                                <tr><td class="px-3 py-2 font-bold">Oct</td><td>06:00-11:30</td><td>15:00-18:00</td></tr>
+                                <tr><td class="px-3 py-2 font-bold">Nov</td><td>06:15-11:30</td><td>15:00-17:45</td></tr>
+                                <tr><td class="px-3 py-2 font-bold">Dec-Jan</td><td>06:30-11:30</td><td>15:00-17:30</td></tr>
+                                <tr><td class="px-3 py-2 font-bold">Feb</td><td>06:30-11:30</td><td>15:00-18:15</td></tr>
+                                <tr><td class="px-3 py-2 font-bold">Mar-Jun</td><td>05:30-11:30</td><td>16:00-19:00</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-brand-green text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Advance Booking Procedure</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 text-lg leading-relaxed">
+                <div>
+                    <ul class="space-y-4 list-disc pl-5">
+                        <li>Provide full name, age, and gender as per ID proof.</li>
+                        <li>Choose preferred travel date & safari timing (Morning/Afternoon).</li>
+                        <li>Provide specific ID card number (Voter ID, Aadhar, Passport, etc.).</li>
+                        <li>Carry the SAME ID card submitted during online booking.</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="space-y-4 list-disc pl-5">
+                        <li>Indian nationals: Intimate 45 days in advance.</li>
+                        <li>Foreign nationals: Can book 90 days in advance.</li>
+                        <li>Passport details mandatory for foreigners.</li>
+                        <li>Safari Entry fees must be paid in advance.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 pt-20 pb-10 text-base">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Panna Tiger Safari</h3>
+                    <p class="leading-relaxed mb-6 text-gray-400">
+                        This is a Registered Tour & Travel Agency under the name of "Reserve India Tours" organizing premium Panna National Park packages.
+                    </p>
+                    <div class="flex space-x-5 text-white text-xl">
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-brand-orange transition block hover:translate-x-1">Home</a></li>
+                        <li><a href="services.html" class="hover:text-brand-orange transition block hover:translate-x-1">Services</a></li>
+                        <li><a href="safari-booking.html" class="hover:text-brand-orange transition block hover:translate-x-1">Safari Booking</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Information</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Booking Charges</a></li>
+                        <li><a href="index.html#hotels" class="hover:text-brand-orange transition block hover:translate-x-1">Hotels & Resorts</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Contact Us</h4>
+                    <ul class="space-y-5">
+                        <li class="flex items-start gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-location-dot text-brand-orange"></i></div>
+                            <span>Panna National Park, Madhya Pradesh, India</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-phone text-brand-orange"></i></div>
+                            <span>+91 75573 88388</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-envelope text-brand-orange"></i></div>
+                            <span>booking@pannatigersafari.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>Copyright © 2025-2026 By Panna Tiger Safari (Reserve India Tours)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

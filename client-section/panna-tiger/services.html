@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Panna Tiger Safari</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#2e4a33', // Deep Jungle Green
+                            gold: '#d4af37',  // Safari Gold
+                            orange: '#e65100', // Tiger Orange
+                            light: '#f9fafb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'Inter', 'sans-serif'],
+                        serif: ['Georgia', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Hero Overlay for Services Page */
+        .hero-services {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1500660653062-8d9210039b65?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Card Hover Effects */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased flex flex-col min-h-screen text-lg">
+
+    <div class="bg-brand-green text-white py-3 hidden md:block text-base">
+        <div class="container mx-auto px-4 flex justify-between items-center font-medium">
+            <div class="flex items-center gap-6">
+                <a href="tel:+917557388388" class="flex items-center hover:text-brand-gold transition">
+                    <i class="fa-solid fa-phone mr-2"></i> +91 75573 88388
+                </a>
+                <a href="mailto:booking@pannatigersafari.com" class="flex items-center hover:text-brand-gold transition">
+                    <i class="fa-solid fa-envelope mr-2"></i> booking@pannatigersafari.com
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img src="https://www.pannatigersafari.com/wp-content/uploads/2025/08/PANNA-TIGER-LOGO-1.png" alt="Logo" class="h-14 w-14 object-contain group-hover:scale-105 transition">
+                    <div class="leading-tight">
+                        <h1 class="text-2xl font-bold text-brand-green">Panna Tiger Safari</h1>
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8 font-medium text-gray-700 text-base">
+                    <a href="index.html" class="hover:text-brand-orange transition">Home</a>
+                    <a href="services.html" class="text-brand-orange">Services</a>
+                    <a href="index.html#booking" class="hover:text-brand-orange transition">Safari Booking</a>
+                    <a href="#" class="hover:text-brand-orange transition">Tour Packages</a>
+                    <a href="index.html#hotels" class="hover:text-brand-orange transition">Hotels</a>
+                    <a href="index.html#booking" class="bg-brand-orange text-white px-6 py-2 rounded-md hover:bg-orange-700 transition shadow-md">Book Now</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="lg:hidden text-brand-green text-3xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t text-base">
+            <div class="flex flex-col p-4 space-y-4 font-medium">
+                <a href="index.html">Home</a>
+                <a href="services.html" class="text-brand-orange">Services</a>
+                <a href="index.html#booking">Safari Booking</a>
+                <a href="#">Tour Packages</a>
+                <a href="index.html#hotels">Hotels</a>
+                <a href="index.html#booking" class="bg-brand-orange text-white text-center py-2 rounded">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-services h-[400px] md:h-[500px] flex items-center justify-center text-center px-4">
+        <div class="bg-black/40 p-8 md:p-12 rounded-xl backdrop-blur-sm max-w-4xl mx-auto text-white" data-aos="zoom-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
+                Our Safari Services
+            </h1>
+            <div class="h-1 w-24 bg-brand-orange mx-auto mb-6"></div>
+            <p class="text-xl md:text-2xl font-light text-gray-100">
+                Choose from our comprehensive range of wildlife experiences designed to bring you closer to nature.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 bg-stone-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-brand-green mb-4">Safari Experiences</h2>
+                <p class="text-gray-600 text-xl">Professional wildlife tours tailored to your interests</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-gray-100 flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-56 bg-gray-200 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tiger Safari" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                        <div class="absolute top-4 right-4 bg-brand-orange text-white text-sm font-bold px-3 py-1 rounded-full">Most Popular</div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Tiger Safari Tours</h3>
+                        <p class="text-gray-600 mb-6 text-base">Experience the thrill of spotting magnificent Bengal tigers in their natural habitat with our expert guides.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> 4x4 Safari Vehicles</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Expert Naturalist Guides</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Morning & Evening Slots</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-green">₹2,500</span>
+                                    <span class="text-sm text-gray-500">Per Person / 3-4 hours</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-green text-white rounded hover:bg-green-900 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-gray-100 flex flex-col" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-56 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1554425788-56b9964407b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Photography Tour" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Wildlife Photography</h3>
+                        <p class="text-gray-600 mb-6 text-base">Specialized tours for enthusiasts with dedicated guides and optimal timing for wildlife shots.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Professional Photo Guide</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Extended Safari Hours</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Best Spot Guidance</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-green">₹3,500</span>
+                                    <span class="text-sm text-gray-500">Per Person / 5-6 hours</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-green text-white rounded hover:bg-green-900 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-gray-100 flex flex-col" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-56 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bird Watching" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Bird Watching Tours</h3>
+                        <p class="text-gray-600 mb-6 text-base">Discover over 200 bird species in Panna with our ornithology experts and specialized equipment.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Binoculars Provided</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Bird Species Guide</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Seasonal Migration Info</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-green">₹1,800</span>
+                                    <span class="text-sm text-gray-500">Per Person / 3 hours</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-green text-white rounded hover:bg-green-900 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-gray-100 flex flex-col" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-56 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1445307806294-bff7f67ff225?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nature Walk" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Nature Walks</h3>
+                        <p class="text-gray-600 mb-6 text-base">Guided walking tours through the buffer zones to explore flora, fauna, and local tribal culture.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Local Tribal Guides</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Flora & Fauna Education</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Medicinal Plant Tours</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-green">₹1,200</span>
+                                    <span class="text-sm text-gray-500">Per Person / 2-3 hours</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-green text-white rounded hover:bg-green-900 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-gray-100 flex flex-col" data-aos="fade-up" data-aos-delay="500">
+                    <div class="h-56 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group Tours" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Group Tours</h3>
+                        <p class="text-gray-600 mb-6 text-base">Customized safari experiences for families, corporate groups, and educational institutions.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Customized Itinerary</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Group Discounts</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-green"></i> Team Building Activities</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-green">₹2,000</span>
+                                    <span class="text-sm text-gray-500">Per Person / Full Day</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-green text-white rounded hover:bg-green-900 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden service-card border border-brand-gold/50 flex flex-col relative" data-aos="fade-up" data-aos-delay="600">
+                    <div class="absolute top-0 inset-x-0 h-1 bg-brand-gold"></div>
+                    <div class="h-56 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534234828569-98f343cc6733?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Safari" class="w-full h-full object-cover hover:scale-110 transition duration-700">
+                        <div class="absolute top-4 right-4 bg-brand-gold text-white text-sm font-bold px-3 py-1 rounded-full">Luxury</div>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-bold text-brand-green mb-3">Premium Experience</h3>
+                        <p class="text-gray-600 mb-6 text-base">Luxury safari experience with exclusive access, gourmet meals, and premium accommodations.</p>
+                        
+                        <div class="mt-auto">
+                            <ul class="space-y-2 text-base text-gray-700 mb-6">
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Private Luxury Vehicle</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Gourmet Picnic Lunch</li>
+                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-gold"></i> Dedicated Senior Naturalist</li>
+                            </ul>
+                            <div class="flex items-center justify-between border-t pt-6">
+                                <div>
+                                    <span class="block text-2xl font-bold text-brand-gold">₹8,500</span>
+                                    <span class="text-sm text-gray-500">Per Person / Full Day</span>
+                                </div>
+                                <a href="index.html#booking" class="px-5 py-2 bg-brand-gold text-white rounded hover:bg-yellow-700 transition">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-brand-green mb-12">Additional Services</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-8 border rounded-xl hover:shadow-lg transition group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-green transition duration-300">
+                        <i class="fa-solid fa-shield-heart text-2xl text-brand-green group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Safety & Insurance</h3>
+                    <p class="text-gray-600">Comprehensive safety measures and insurance coverage included for all safari activities.</p>
+                </div>
+
+                <div class="text-center p-8 border rounded-xl hover:shadow-lg transition group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-green transition duration-300">
+                        <i class="fa-solid fa-car text-2xl text-brand-green group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Transportation</h3>
+                    <p class="text-gray-600">Hassle-free pick-up and drop-off services from nearby railway stations and airports.</p>
+                </div>
+
+                <div class="text-center p-8 border rounded-xl hover:shadow-lg transition group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-brand-green transition duration-300">
+                        <i class="fa-solid fa-calendar-check text-2xl text-brand-green group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Custom Itineraries</h3>
+                    <p class="text-gray-600">Personalized tour planning based on your specific interests and duration of stay.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-green text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Best Time to Visit</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 p-8 rounded-xl backdrop-blur hover:bg-white/20 transition">
+                    <div class="text-brand-gold text-xl font-bold mb-2">October - February</div>
+                    <h3 class="text-2xl font-bold mb-4">Winter Season</h3>
+                    <ul class="space-y-3 text-gray-200">
+                        <li><i class="fa-solid fa-temperature-half mr-2"></i> 10°C - 25°C</li>
+                        <li><i class="fa-solid fa-eye mr-2"></i> Best for Tiger Spotting</li>
+                        <li><i class="fa-solid fa-camera mr-2"></i> Excellent for Photography</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/10 p-8 rounded-xl backdrop-blur hover:bg-white/20 transition border border-brand-gold/30">
+                    <div class="text-brand-gold text-xl font-bold mb-2">March - June</div>
+                    <h3 class="text-2xl font-bold mb-4">Summer Season</h3>
+                    <ul class="space-y-3 text-gray-200">
+                        <li><i class="fa-solid fa-temperature-half mr-2"></i> 25°C - 45°C</li>
+                        <li><i class="fa-solid fa-paw mr-2"></i> High sightings at Water Holes</li>
+                        <li><i class="fa-solid fa-sun mr-2"></i> Best for Serious Wildlife Fans</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/5 p-8 rounded-xl backdrop-blur opacity-80">
+                    <div class="text-red-300 text-xl font-bold mb-2">July - September</div>
+                    <h3 class="text-2xl font-bold mb-4">Monsoon Season</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><i class="fa-solid fa-cloud-rain mr-2"></i> Heavy Rainfall</li>
+                        <li><i class="fa-solid fa-lock mr-2"></i> Park Closed for Visitors</li>
+                        <li><i class="fa-solid fa-leaf mr-2"></i> Breeding Season</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-stone-50 text-center relative overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl font-bold text-brand-green mb-6">Ready for Your Adventure?</h2>
+            <p class="text-xl text-gray-600 mb-10">Book your tiger safari today and create memories that will last a lifetime</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="index.html#booking" class="bg-brand-orange text-white px-10 py-4 rounded-lg font-bold hover:bg-orange-600 transition shadow-xl text-lg">Book Your Safari</a>
+                <a href="tel:+917557388388" class="bg-white text-brand-green border border-brand-green px-10 py-4 rounded-lg font-bold hover:bg-gray-100 transition shadow-xl text-lg">Call Now: +91 75573 88388</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 pt-20 pb-10 text-base">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-6">Panna Tiger Safari</h3>
+                    <p class="leading-relaxed mb-6 text-gray-400">
+                        This is a Registered Tour & Travel Agency under the name of "Reserve India Tours" organizing premium Panna National Park packages.
+                    </p>
+                    <div class="flex space-x-5 text-white text-xl">
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-brand-orange transition transform hover:scale-110"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-brand-orange transition block hover:translate-x-1">Home</a></li>
+                        <li><a href="services.html" class="hover:text-brand-orange transition block hover:translate-x-1">Services</a></li>
+                        <li><a href="index.html#booking" class="hover:text-brand-orange transition block hover:translate-x-1">Safari Booking</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Information</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#booking" class="hover:text-brand-orange transition block hover:translate-x-1">Booking Charges</a></li>
+                        <li><a href="index.html#hotels" class="hover:text-brand-orange transition block hover:translate-x-1">Hotels & Resorts</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Refund Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition block hover:translate-x-1">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold text-white mb-6 border-b border-gray-700 inline-block pb-2">Contact Us</h4>
+                    <ul class="space-y-5">
+                        <li class="flex items-start gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-location-dot text-brand-orange"></i></div>
+                            <span>Panna National Park, Madhya Pradesh, India</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-phone text-brand-orange"></i></div>
+                            <span>+91 75573 88388</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <div class="bg-gray-800 p-2 rounded"><i class="fa-solid fa-envelope text-brand-orange"></i></div>
+                            <span>booking@pannatigersafari.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>Copyright © 2025-2026 By Panna Tiger Safari (Reserve India Tours)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
