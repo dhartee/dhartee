@@ -15,14 +15,21 @@
 </head>
 <body class="bg-slate-100 text-slate-800">
 
-<section id="splash-screen" class="min-h-dvh flex items-center justify-center p-4">
+<section id="splash-screen" class="fixed inset-0 bg-white flex flex-col items-center justify-center z-50">
     <div class="text-center">
-      <h1 id="splash-title" class="text-3xl font-semibold text-gray-700 mb-4">
-        Loading ......
-      </h1>
-      <p class="text-gray-500">(Loading...)</p>
+      <div class="text-6xl mb-6 animate-bounce">
+        🚚
       </div>
-  </section>
+      
+      <h1 class="text-2xl md:text-3xl font-bold text-slate-800 min-h-[40px] flex items-center justify-center gap-1">
+        <span id="typewriter-text"></span>
+        <span class="w-1 h-8 bg-blue-600 animate-pulse"></span> </h1>
+      
+      <p class="text-slate-400 text-sm mt-4 animate-pulse">
+        Connecting to secure server...
+      </p>
+    </div>
+</section>
 
   <section id="login-screen" class="hidden min-h-dvh flex items-center justify-center p-4">
   <div class="w-full max-w-sm card">
@@ -59,13 +66,16 @@
       </div>
     </header>
 
-    <div class="max-w-7xl mx-auto px-2 md:px-4 py-4 grid md:grid-cols-[240px_1fr] gap-4 flex-grow">
+    <div class="w-full px-2 md:px-4 py-4 grid md:grid-cols-[240px_1fr] gap-4 flex-grow">
       <aside id="sidebar" class="bg-white rounded-2xl shadow md:sticky md:top-20 h-max p-2 md:p-3 hidden md:block">
         <nav class="space-y-1">
           <button data-nav="dashboard" class="nav-btn active">🏠 Dashboard</button>
           <button data-nav="lr" class="nav-btn">📋 Lorry Receipt</button>
           <button data-nav="invoice" class="nav-btn">🧾 Invoice</button>
           <button data-nav="masters" class="nav-btn">👥 Masters</button>
+          <button data-nav="expenses" class="nav-btn">💰 Expenses</button>
+          <button data-nav="fleet" class="nav-btn">🚛 Fleet Master</button>
+          <button data-nav="drivers" class="nav-btn">👨‍✈️ Driver Ledger</button>
           <button data-nav="reports" class="nav-btn">📊 Reports</button>
           <button data-nav="settings" class="nav-btn">⚙️ Settings</button>
         </nav>
@@ -84,21 +94,61 @@
               <button data-nav="lr" class="nav-btn w-full text-left">📋 Lorry Receipt</button>
               <button data-nav="invoice" class="nav-btn w-full text-left">🧾 Invoice</button>
               <button data-nav="masters" class="nav-btn w-full text-left">👥 Masters</button>
+              <button data-nav="expenses" class="nav-btn w-full text-left">💰 Expenses</button>
+              <button data-nav="fleet" class="nav-btn w-full text-left">🚛 Fleet Master</button>
+              <button data-nav="drivers" class="nav-btn w-full text-left">👨‍✈️ Driver Ledger</button>
               <button data-nav="reports" class="nav-btn w-full text-left">📊 Reports</button>
               <button data-nav="settings" class="nav-btn w-full text-left">⚙️ Settings</button>
             </nav>
           </div>
         </div>
 
-        <section id="page-dashboard" class="card">
-          <h2 class="card-title">Dashboard</h2>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div class="kpi">Total Receipts <span id="kpi-receipts" class="kpi-value">0</span></div>
-            <div class="kpi">Total Invoices <span id="kpi-invoices" class="kpi-value">0</span></div>
-            <div class="kpi">Total Parties <span id="kpi-parties" class="kpi-value">0</span></div>
-            <div class="kpi">Total Stations <span id="kpi-stations" class="kpi-value">0</span></div>
-          </div>
-        </section>
+<section id="page-dashboard" class="card">
+  <div id="dashboard-alerts" class="hidden mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 flex flex-col gap-2 shadow-sm">
+    <div>
+      <h3 class="font-bold flex items-center gap-2">⚠️ Compliance Alert</h3>
+      <p class="text-sm mt-1"><span id="alert-count" class="font-bold">0</span> vehicle documents expiring!</p>
+    </div>
+    <button onclick="setNav('fleet')" class="btn-outline w-full bg-white border-red-200 text-red-700 py-2">Check Now</button>
+  </div>
+
+  <h2 class="card-title mb-4 text-xl">Dashboard Overview</h2>
+  
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    
+    <div class="box bg-blue-50 border-blue-200 p-4 rounded-lg shadow-sm">
+      <div class="text-slate-500 text-sm font-medium uppercase">Total Receipts</div>
+      <div class="flex items-baseline gap-1 mt-2">
+        <span id="kpi-receipts" class="text-3xl font-bold text-blue-700">0</span>
+        <span class="text-sm text-blue-500">LRs</span>
+      </div>
+    </div>
+
+    <div class="box bg-green-50 border-green-200 p-4 rounded-lg shadow-sm">
+      <div class="text-slate-500 text-sm font-medium uppercase">Total Invoices</div>
+      <div class="flex items-baseline gap-1 mt-2">
+        <span id="kpi-invoices" class="text-3xl font-bold text-green-700">0</span>
+        <span class="text-sm text-green-500">Generated</span>
+      </div>
+    </div>
+
+    <div class="box bg-purple-50 border-purple-200 p-4 rounded-lg shadow-sm">
+      <div class="text-slate-500 text-sm font-medium uppercase">Active Parties</div>
+      <div class="flex items-baseline gap-1 mt-2">
+        <span id="kpi-parties" class="text-3xl font-bold text-purple-700">0</span>
+        <span class="text-sm text-purple-500">Clients</span>
+      </div>
+    </div>
+
+    <div class="box bg-orange-50 border-orange-200 p-4 rounded-lg shadow-sm">
+      <div class="text-slate-500 text-sm font-medium uppercase">Stations</div>
+      <div class="flex items-baseline gap-1 mt-2">
+        <span id="kpi-stations" class="text-3xl font-bold text-orange-700">0</span>
+        <span class="text-sm text-orange-500">Covered</span>
+      </div>
+    </div>
+  </div>
+</section>
 
         <section id="page-lr" class="card hidden">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -369,6 +419,157 @@
           </div>
         </section>
 
+    <section id="page-expenses" class="card hidden">
+  <h2 class="card-title">Daily Expense / Cash Book</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+    <input id="exp-date" type="date" class="input">
+    <select id="exp-category" class="input">
+      <option value="Diesel">Diesel</option>
+      <option value="Driver Advance">Driver Advance / Bhatta</option>
+      <option value="Toll/Tax">Toll / RTO / Tax</option>
+      <option value="Repair">Vehicle Repair / Maintenance</option>
+      <option value="Office">Office Rent / Staff Salary</option>
+      <option value="Other">Other / Misc</option>
+    </select>
+    <input id="exp-amount" type="number" class="input" placeholder="Amount (₹)" inputmode="decimal">
+    <input id="exp-note" class="input" placeholder="Remarks (e.g., Vehicle No)">
+    <button id="btn-add-expense" class="btn-primary md:col-span-4">Add Entry</button>
+  </div>
+
+  <div class="overflow-auto border rounded-lg">
+    <table class="w-full text-sm border text-left">
+      <thead class="bg-slate-50">
+        <tr>
+          <th class="th">Date</th>
+          <th class="th">Category</th>
+          <th class="th">Note</th>
+          <th class="th text-right">Amount</th>
+          <th class="th">Action</th>
+        </tr>
+      </thead>
+      <tbody id="expense-rows"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="td text-right font-bold bg-gray-50">Total Expenses</td>
+          <td class="td text-right font-bold bg-gray-50" id="exp-total">0.00</td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+  <section id="page-fleet" class="card hidden">
+  <h2 class="card-title mb-4 text-xl">Fleet Manager</h2>
+  
+  <div class="box mb-4 border-l-4 border-blue-500 p-4">
+    <div class="box-title mb-3">Add New Vehicle</div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div><label class="lbl">Vehicle No *</label><input id="fleet-no" class="input uppercase font-bold" placeholder="GJ01AA1234"></div>
+      <div><label class="lbl">Driver Name</label><input id="fleet-driver" class="input"></div>
+      <div><label class="lbl">Driver Phone</label><input id="fleet-phone" class="input"></div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+      <div><label class="lbl text-xs">Insurance</label><input id="fleet-ins" type="date" class="input text-sm"></div>
+      <div><label class="lbl text-xs">Fitness</label><input id="fleet-fit" type="date" class="input text-sm"></div>
+      <div><label class="lbl text-xs">Tax</label><input id="fleet-tax" type="date" class="input text-sm"></div>
+      <div><label class="lbl text-xs">PUC</label><input id="fleet-puc" type="date" class="input text-sm"></div>
+      <div><label class="lbl text-xs">Permit</label><input id="fleet-permit" type="date" class="input text-sm"></div>
+    </div>
+
+    <div class="flex gap-3 mt-4 justify-end">
+      <button id="btn-save-fleet" class="btn-primary px-6">Save Vehicle</button>
+      <button id="btn-clear-fleet" class="btn-ghost">Clear</button>
+    </div>
+  </div>
+
+  <input id="fleet-search" class="input mb-3" placeholder="Search Vehicle No...">
+  <div class="overflow-auto border rounded">
+    <table class="w-full text-sm text-left">
+      <thead class="bg-slate-50 border-b">
+        <tr>
+          <th class="th">Vehicle</th>
+          <th class="th">Driver</th>
+          <th class="th">Status</th>
+          <th class="th">Action</th>
+        </tr>
+      </thead>
+      <tbody id="fleet-rows" class="divide-y"></tbody>
+    </table>
+  </div>
+</section>
+
+    <section id="page-drivers" class="card hidden">
+  <h2 class="card-title">Driver Account (Khata)</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+    <div class="md:col-span-1 space-y-4">
+      <div>
+        <label class="lbl">Select Driver</label>
+        <div class="flex gap-2">
+          <input id="drv-select-input" list="drv-list" class="input" placeholder="Type Name...">
+          <datalist id="drv-list"></datalist>
+          <button id="btn-load-ledger" class="btn-primary px-4">GO</button>
+        </div>
+      </div>
+      
+      <div class="p-4 bg-slate-50 rounded border text-center shadow-sm">
+        <div class="text-xs text-slate-500 uppercase tracking-wider">Current Balance</div>
+        <div id="drv-balance-display" class="text-3xl font-bold text-slate-800 my-1">₹0</div>
+        <div id="drv-balance-status" class="text-xs font-medium text-slate-500">(Select a driver)</div>
+      </div>
+    </div>
+
+    <div class="md:col-span-2 box border-l-4 border-green-500">
+      <div class="box-title">Add Transaction</div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="lbl">Date</label>
+          <input id="drv-tx-date" type="date" class="input">
+        </div>
+        <div>
+          <label class="lbl">Type</label>
+          <select id="drv-tx-type" class="input">
+            <option value="Debit">Debit (Advance Given)</option>
+            <option value="Credit">Credit (Salary/Trip Work)</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="lbl">Amount (₹)</label>
+          <input id="drv-tx-amount" type="number" class="input text-lg font-semibold" placeholder="0.00">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="lbl">Remark / Note</label>
+          <input id="drv-tx-remark" class="input" placeholder="e.g. Trip Advance, Diesel, Salary">
+        </div>
+      </div>
+
+      <div class="mt-4 text-right">
+        <button id="btn-save-tx" class="btn-primary w-full sm:w-auto">Add Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overflow-auto border rounded-lg">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 border-b">
+        <tr>
+          <th class="th whitespace-nowrap">Date</th>
+          <th class="th min-w-[150px]">Particulars</th>
+          <th class="th text-right text-red-600">Debit</th>
+          <th class="th text-right text-green-600">Credit</th>
+          <th class="th text-right">Action</th>
+        </tr>
+      </thead>
+      <tbody id="drv-ledger-rows" class="divide-y"></tbody>
+    </table>
+  </div>
+</section>
+
         <section id="page-reports" class="card hidden">
           <h2 class="card-title">Reports</h2>
 
@@ -395,24 +596,77 @@
           </div>
         </section>
 
+     <!-- ======================================= -->
         <section id="page-settings" class="card hidden">
-          <h2 class="card-title">Settings / Company Profile</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input id="cmp-name" class="input" placeholder="Company Name">
-            <input id="cmp-email" class="input" placeholder="Email">
-            <input id="cmp-contact" class="input" placeholder="Contact numbers">
-            <input id="cmp-pan" class="input" placeholder="PAN">
-            <input id="cmp-gst" class="input" placeholder="GSTIN">
-            <input id="cmp-bank" class="input" placeholder="Bank Name">
-            <input id="cmp-ac" class="input" placeholder="Account No">
-            <input id="cmp-ifsc" class="input" placeholder="IFSC">
-            <textarea id="cmp-address" class="input md:col-span-2" rows="3" placeholder="Address (for header)"></textarea>
+          <h2 class="card-title mb-4 text-lg">Settings</h2>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            
+            <!-- Box 1: Company Info -->
+            <div class="box p-3 border rounded-lg">
+              <div class="box-title text-blue-600 mb-2 text-sm">🏢 Company Details</div>
+              <div class="space-y-2">
+                <div>
+                  <label class="lbl text-xs">Company Name</label>
+                  <input id="cmp-name" class="input font-bold text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                   <div>
+                     <label class="lbl text-xs">Mobile</label>
+                     <input id="cmp-contact" class="input text-sm">
+                   </div>
+                   <div>
+                     <label class="lbl text-xs">Email</label>
+                     <input id="cmp-email" class="input text-sm">
+                   </div>
+                </div>
+                <div>
+                  <label class="lbl text-xs">Address</label>
+                  <textarea id="cmp-address" class="input h-16 text-sm"></textarea>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Box 2: Tax & Bank Info -->
+            <div class="box p-3 border rounded-lg">
+              <div class="box-title text-blue-600 mb-2 text-sm">📍 Tax & Bank Details</div>
+              <div class="space-y-2">
+                <div class="grid grid-cols-2 gap-2">
+                   <div>
+                     <label class="lbl text-xs">GSTIN</label>
+                     <input id="cmp-gst" class="input uppercase font-mono text-sm">
+                   </div>
+                   <div>
+                     <label class="lbl text-xs">PAN</label>
+                     <input id="cmp-pan" class="input uppercase font-mono text-sm">
+                   </div>
+                </div>
+                <div>
+                  <label class="lbl text-xs">Bank Name</label>
+                  <input id="cmp-bank" class="input text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                   <div>
+                     <label class="lbl text-xs">A/C No</label>
+                     <input id="cmp-ac" class="input text-sm">
+                   </div>
+                   <div>
+                     <label class="lbl text-xs">IFSC Code</label>
+                     <input id="cmp-ifsc" class="input uppercase text-sm">
+                   </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="flex gap-2 mt-3">
-            <button id="cmp-save" class="btn-primary">Save Profile</button>
+        
+          <!-- Save/Clear Buttons -->
+          <div class="mt-4 text-right border-t pt-3 flex justify-end gap-2">
             <button id="cmp-clear" class="btn-ghost">Clear</button>
+            <button id="cmp-save" class="btn-primary w-full sm:w-auto">Save Profile</button>
           </div>
         </section>
+
       </main>
      <footer class="text-center text-xs text-slate-800 py-6 font-medium">
     © <span id="year"></span> DharTee 8264604505
@@ -450,58 +704,72 @@
     const db = firebase.firestore();
   </script>
 
-  <script>
-    // यह ग्लोबल वैरिएबल app.js द्वारा उपयोग किया जाएगा
+ <script>
+    // Global variable for app.js
     window.APP_CLIENT_ID = null; 
 
+    // Typewriter Effect Function
+    function typeWriter(text, elementId, speed = 50) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.textContent = ''; 
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      type();
+    }
+
     async function loadBranding() {
-      const splashScreen = document.getElementById('splash-screen');
-      const loginScreen = document.getElementById('login-screen');
-      const splashTitle = document.getElementById('splash-title');
+      const splashTitle = document.getElementById('splash-title'); // Old ID support
       const loginTitle = document.getElementById('login-title');
+      const typeTarget = 'typewriter-text'; // New target
 
       try {
-        // 1. URL से क्लाइंट ID प्राप्त करें
+        // 1. Get Client ID
         const params = new URLSearchParams(window.location.search);
         const clientId = params.get('client') ? params.get('client').trim() : null;
 
         if (!clientId) {
-          // कोई ?client=... नहीं मिला, बस सामान्य लॉगिन दिखाएँ
-          splashTitle.textContent = 'Login Required';
-          throw new Error('No client ID in URL.');
+           typeWriter("Welcome to Transporter App", typeTarget);
+           throw new Error('No client ID in URL.');
         }
 
-        // 2. ग्लोबल वैरिएबल सेट करें
         window.APP_CLIENT_ID = clientId;
 
-        // 3. Firebase DB को (जो पहले ही इनिशियलाइज़ हो चुका है) एक्सेस करें
-        //    (यहाँ से firebase.initializeApp() को हटा दिया गया है - यही फिक्स है)
-        const db_local = firebase.firestore(); // 'db' का उपयोग करें (यह पहले से ही ग्लोबल है)
-
-        // 4. Firestore से पब्लिक ब्रांडिंग जानकारी लाएँ
+        // 2. Fetch Branding
+        const db_local = firebase.firestore(); 
         const docRef = db_local.collection('publicClients').doc(clientId);
         const doc = await docRef.get();
 
-        let companyName = clientId; // डिफ़ॉल्ट
+        let companyName = clientId;
         if (doc.exists) {
           companyName = doc.data().companyName || clientId;
         }
 
-        // 5. स्प्लैश और लॉगिन स्क्रीन को ब्रांड करें
-        splashTitle.textContent = `Loading ${companyName}...`;
-        loginTitle.textContent = `${companyName} Login`;
+        // 3. START TYPING ANIMATION (The "Welcome" Effect)
+        const welcomeMsg = `Welcome to ${companyName}`;
+        typeWriter(welcomeMsg, typeTarget, 40); // 40ms speed per letter
+
+        // Update Login Screen Title in background
+        if(loginTitle) loginTitle.textContent = `${companyName} Login`;
 
       } catch (e) {
-        console.warn('Branding failed:', e.message);
+        console.warn('Branding loading issue:', e.message);
         if(window.APP_CLIENT_ID) {
-           loginTitle.textContent = `${window.APP_CLIENT_ID} Login`;
+           typeWriter(`Welcome to ${window.APP_CLIENT_ID}`, typeTarget);
+           if(loginTitle) loginTitle.textContent = `${window.APP_CLIENT_ID} Login`;
+        } else {
+           typeWriter("Welcome to Transporter App", typeTarget);
         }
       }
-      // 'finally' ब्लॉक को यहाँ से हटा दिया गया है (app.js इसे हैंडल करेगा)
-      
-    } // <-- यह रहा वह ब्रैकेट '}' जो पहले मिसिंग था
+    }
 
-    // इस फ़ंक्शन को तुरंत चलाएँ
+    // Run immediately
     loadBranding();
   </script>
 
