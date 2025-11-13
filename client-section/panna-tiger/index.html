@@ -551,49 +551,12 @@
             </div>
 
             <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>Copyright © 2025-2026 By Panna Tiger Safari (Reserve India Tours)</p>
+                <p>Copyright © 2025-2026 By Panna Tiger Safari (Reserve India Tours) Developed By <a href="https://dhartee.in">DharTee</a></p>
             </div>
         </div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize Animate On Scroll
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
-
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-    </script>
-    <script>
-    
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-   
-    document.onkeydown = function(e) {
-        if (e.keyCode == 123) { // F12
-            return false;
-        }
-        if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) {
-            return false;
-        }
-        if (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0))) {
-            return false;
-        }
-    }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
